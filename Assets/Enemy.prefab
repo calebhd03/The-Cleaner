@@ -42,7 +42,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 705481135547910613}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e7743e8cd613df3468e1e82f812232f5, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.34, y: 0.31}
   m_EdgeRadius: 0
 --- !u!1 &8546638308654476050
 GameObject:
