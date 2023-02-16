@@ -46,10 +46,10 @@ public class HandgunController : MonoBehaviour
 
     void Update() {
 
-        if(Input.GetAxis("Fire1"))
-            Shoot();
-        if(Input.GetAxis("Reload"))
-            Reload();
+        //if(Input.GetAxis("Fire1"))
+            //Shoot();
+        //if(Input.GetAxis("Reload"))
+            //Reload();
 
         switch(shootState) {
             case ShootState.Shooting:
@@ -71,6 +71,7 @@ public class HandgunController : MonoBehaviour
     /// Attempts to fire the gun
     public void Shoot() {
         // Checks that the gun is ready to shoot
+        Debug.Log("FIRE");
         if(shootState == ShootState.Ready) {
             for(int i = 0; i < bulletsPerShot; i++) {
                 // Instantiates the bullet at the muzzle position
@@ -79,7 +80,7 @@ public class HandgunController : MonoBehaviour
                 // Add a random variation to the bullet's direction
                 spawnedbullet.transform.Rotate(new Vector3(Random.Range(-1f, 1f) * maxbulletVariation, Random.Range(-1f, 1f) * maxbulletVariation, 0));
 
-                Rigidbody rb = spawnedbullet.GetComponent<Rigidbody>();
+                Rigidbody2D rb = spawnedbullet.GetComponent<Rigidbody2D>();
                 rb.velocity = spawnedbullet.transform.forward * bulletSpeed;
             }
 
@@ -96,6 +97,7 @@ public class HandgunController : MonoBehaviour
     /// Attempts to reload the gun
     public void Reload() {
         // Checks that the gun is ready to be reloaded
+        Debug.Log("Reload");
         if(shootState == ShootState.Ready) {
             nextShootTime = Time.time + reloadTime;
             shootState = ShootState.Reloading;
