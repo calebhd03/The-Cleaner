@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class HandgunController : MonoBehaviour
 {
@@ -15,11 +17,12 @@ public class HandgunController : MonoBehaviour
 
     [Header("Magazine")]
     public GameObject bullet;
+    public GameObject muzzle;
     public int ammunition;
 
     [Range(0.5f, 10)] public float reloadTime;
 
-    private int remainingAmmunition;
+    public int remainingAmmunition;
 
     [Header("Shooting")]
     // How many shots the gun can make per second
@@ -30,6 +33,7 @@ public class HandgunController : MonoBehaviour
 
     [Range(0.5f, 100)] public float bulletSpeed;
 
+    public int damage;
     // The maximum angle that the bullet's direction can vary,
     // in both the horizontal and vertical axes
     [Range(0, 45)] public float maxbulletVariation;
@@ -45,12 +49,6 @@ public class HandgunController : MonoBehaviour
     }
 
     void Update() {
-
-        //if(Input.GetAxis("Fire1"))
-            //Shoot();
-        //if(Input.GetAxis("Reload"))
-            //Reload();
-
         switch(shootState) {
             case ShootState.Shooting:
                 // If the gun is ready to shoot again...
@@ -66,6 +64,13 @@ public class HandgunController : MonoBehaviour
                 }
                 break;
         }
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        worldMousePos.z = 0;
+        Quaternion rotation = Quaternion.Euler( 0, 0, Mathf.Atan2 ( worldMousePos.y, worldMousePos.x ) * Mathf.Rad2Deg );
+                
+        transform.rotation = rotation;
+        //transform.rotation = Quaternion.SetLookRotation(rotation);
+
     }
 
     /// Attempts to fire the gun
@@ -75,13 +80,15 @@ public class HandgunController : MonoBehaviour
         if(shootState == ShootState.Ready) {
             for(int i = 0; i < bulletsPerShot; i++) {
                 // Instantiates the bullet at the muzzle position
-                GameObject spawnedbullet = Instantiate(bullet, transform.position + transform.forward * muzzleOffset, transform.rotation);
+                
+                Vector3 shootDir = (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - muzzle.transform.position).normalized;
 
-                // Add a random variation to the bullet's direction
-                spawnedbullet.transform.Rotate(new Vector3(Random.Range(-1f, 1f) * maxbulletVariation, Random.Range(-1f, 1f) * maxbulletVariation, 0));
+                GameObject spawnedbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.identity);
+                
+                spawnedbullet.GetComponent<bullet>().damage = damage;
 
                 Rigidbody2D rb = spawnedbullet.GetComponent<Rigidbody2D>();
-                rb.velocity = spawnedbullet.transform.forward * bulletSpeed;
+                rb.velocity = shootDir * bulletSpeed;
             }
 
             remainingAmmunition--;

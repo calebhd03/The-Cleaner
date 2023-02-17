@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003108507138994424, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.205
+      value: -0.021
       objectReference: {fileID: 0}
     - target: {fileID: 1003108507138994424, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -319,9 +319,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4582186708152265575, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.377
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: damage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 3679144926493699206}
+    - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: fireRate
+      value: 15.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: reloadTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
       propertyPath: bulletSpeed
-      value: 66
+      value: 18.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683345791520715171, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+      propertyPath: maxbulletVariation
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -336,5 +360,10 @@ Transform:
 --- !u!1 &3433150988342734172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 760068920267320905, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
+  m_PrefabInstance: {fileID: 2677757239198614293}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3679144926493699206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596452215302418323, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
   m_PrefabInstance: {fileID: 2677757239198614293}
   m_PrefabAsset: {fileID: 0}
