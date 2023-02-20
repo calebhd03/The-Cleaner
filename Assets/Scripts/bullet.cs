@@ -13,12 +13,12 @@ public class bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        Target target = other.gameObject.GetComponent<Target>();
         // Only attempts to inflict damage if the other game object has
         // the 'Target' component
         if(other.CompareTag("Enemy")) 
         {
-            Debug.Log("HIT");
+            Debug.Log("HIT"); 
+            Target target = other.gameObject.GetComponent<Target>();
             target.Hit(damage);
             Destroy(gameObject); // Deletes the round
         }

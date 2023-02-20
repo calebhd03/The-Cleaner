@@ -12,30 +12,19 @@ public class HandgunController : MonoBehaviour
         Reloading
     }
 
-    // How far forward the muzzle is from the centre of the gun
-    private float muzzleOffset;
-
     [Header("Magazine")]
     public GameObject bullet;
     public GameObject muzzle;
     public int ammunition;
-
     [Range(0.5f, 10)] public float reloadTime;
-
     public int remainingAmmunition;
 
     [Header("Shooting")]
     // How many shots the gun can make per second
     [Range(0.25f, 25)] public float fireRate;
-
-    // The number of bullets fired each shot
     public int bulletsPerShot;
-
     [Range(0.5f, 100)] public float bulletSpeed;
-
     public int damage;
-    // The maximum angle that the bullet's direction can vary,
-    // in both the horizontal and vertical axes
     [Range(0, 45)] public float maxbulletVariation;
 
     private ShootState shootState = ShootState.Ready;
@@ -44,7 +33,6 @@ public class HandgunController : MonoBehaviour
     private float nextShootTime = 0;
 
     void Start() {
-        muzzleOffset = GetComponent<Renderer>().bounds.extents.z;
         remainingAmmunition = ammunition;
     }
 
@@ -64,13 +52,18 @@ public class HandgunController : MonoBehaviour
                 }
                 break;
         }
+
+        pointGunAtMouse();
+    }
+
+    ///Points gun at mouse world position
+    public void pointGunAtMouse()
+    {
         Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         worldMousePos.z = 0;
-        Quaternion rotation = Quaternion.Euler( 0, 0, Mathf.Atan2 ( worldMousePos.y, worldMousePos.x ) * Mathf.Rad2Deg );
-                
-        transform.rotation = rotation;
-        //transform.rotation = Quaternion.SetLookRotation(rotation);
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(worldMousePos.y, worldMousePos.x) * Mathf.Rad2Deg);
 
+        transform.rotation = rotation;
     }
 
     /// Attempts to fire the gun

@@ -57,7 +57,6 @@ public class Character : MonoBehaviour
 
     void TookDamage()
     {
-        Debug.Log("Damage Taken");
         //Update UI
 
         //Cheack if Dead
