@@ -5822,8 +5822,8 @@ TextureImporter:
       name: TestTileMap_272
       rect:
         serializedVersion: 2
-        x: 865
-        y: 354
+        x: 864
+        y: 353
         width: 32
         height: 32
       alignment: 0
@@ -6683,8 +6683,8 @@ TextureImporter:
       name: TestTileMap_313
       rect:
         serializedVersion: 2
-        x: 1057
-        y: 322
+        x: 1065
+        y: 321
         width: 32
         height: 32
       alignment: 0
@@ -6704,8 +6704,8 @@ TextureImporter:
       name: TestTileMap_314
       rect:
         serializedVersion: 2
-        x: 1089
-        y: 322
+        x: 1099
+        y: 321
         width: 32
         height: 32
       alignment: 0
@@ -13025,7 +13025,7 @@ TextureImporter:
       name: TestTileMap_615
       rect:
         serializedVersion: 2
-        x: 641
+        x: 640
         y: 34
         width: 32
         height: 32
@@ -13761,7 +13761,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 641
-        y: 2
+        y: 1
         width: 32
         height: 32
       alignment: 0
