@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Secondary
   - Water
   - UI
-  - 
-  - 
+  - FogOfWar
+  - FOV
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Secondary
+    uniqueID: 2940280687
     locked: 0

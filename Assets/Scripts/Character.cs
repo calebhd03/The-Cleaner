@@ -12,7 +12,14 @@ public class Character : MonoBehaviour
     public float invincibilityDeltaTime;
     public GameObject Gun;
     public GameObject Model;
-    
+
+    [Header("FogOfWar")]
+    //public FogOfWar fogOfWar;
+    //public Transform secondaryFogOfWar;
+    [Range(0, 5)] public float sightDistance;
+    public GameObject FOVMesh;
+    public float checkInterval;
+
     private Vector2 moveInput;
     private bool isInvincible;
     private Rigidbody2D rb2d;
@@ -22,6 +29,17 @@ public class Character : MonoBehaviour
     {
         isInvincible = false;
         rb2d = GetComponent<Rigidbody2D> ();
+        //StartCoroutine(CheckFogOfWar(checkInterval));
+        //secondaryFogOfWar.localScale = new Vector2(sightDistance, sightDistance) * 10f;
+        FOVMesh.transform.localScale = new Vector3(sightDistance, sightDistance, 0);
+    }
+    private IEnumerator CheckFogOfWar(float checkInterval)
+    {
+        while (true)
+        {
+            //fogOfWar.MakeHole(transform.position, sightDistance);
+            yield return new WaitForSeconds(checkInterval);
+        }
     }
 
     // Update is called once per frame
