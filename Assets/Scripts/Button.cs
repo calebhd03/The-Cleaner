@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public float health;
-    public GameObject door;
+    private doorManager doorManager;
 
-    private Interactable interactable;
-
-    public void OnAwake()
+    public void Start()
     {
-        Interactable interactable = door.GetComponent<Interactable>();
+        doorManager = GetComponentInParent<doorManager>();
     }
 
     public void Hit(float damage)
     {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            interactable.Activate();
-        }
+        if (!doorManager.doorCanBeToggled)
+            if (!doorManager.Open)
+                doorManager.buttonHit();
+            else { }
+        else
+            doorManager.buttonHit();
     }
 }

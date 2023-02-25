@@ -1,29 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Interactable : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject endingPositionObject;
-    public float duration;
 
-    private Vector3 startingPosition;
+    private doorManager doorManager;
     private Vector3 endingPosition;
-
-    public void OnAwake()
+    private Vector3 startingPosition;
+    
+    void Start()
     {
+        doorManager = GetComponentInParent<doorManager>();
         startingPosition = transform.position;
-        endingPosition = endingPositionObject.transform.position;
+        endingPosition = doorManager.endingPositionObject.transform.position;
     }
 
-    /// 'Hits' the target for a certain amount of damage
-    
-
-    public void Activate()
+    //Toggles the door
+    public IEnumerator OpenDoor()
     {
-        Debug.Log(this + "Activated");
-        //Move door 
-        this.transform.position = Vector3.Lerp(startingPosition, endingPosition, duration);
+        doorManager.Open = !doorManager.Open;
+        Vector3 targetPosition;
+        Vector3 currentPosition = transform.position;
+
+        if (doorManager.Open)
+            targetPosition = endingPosition;
+        else 
+            targetPosition = startingPosition;
+
+        float elapsedTime = 0;
+        while (elapsedTime < doorManager.duration)
+        {
+            transform.position = Vector3.Lerp(currentPosition, targetPosition, elapsedTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
     }
 }

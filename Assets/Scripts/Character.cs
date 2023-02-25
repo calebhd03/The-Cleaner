@@ -20,42 +20,34 @@ public class Character : MonoBehaviour
     public GameObject FOVMesh;
     public float checkInterval;
 
-    private Vector2 moveInput;
+    private Vector3 moveInput3D;
     private bool isInvincible;
-    private Rigidbody2D rb2d;
+    private Rigidbody rb;
 
     // Start is called before the first frame update
     void Awake()
     {
         isInvincible = false;
-        rb2d = GetComponent<Rigidbody2D> ();
-        //StartCoroutine(CheckFogOfWar(checkInterval));
-        //secondaryFogOfWar.localScale = new Vector2(sightDistance, sightDistance) * 10f;
+        rb = GetComponent<Rigidbody> ();
+        FOVMesh.SetActive(true);
         FOVMesh.transform.localScale = new Vector3(sightDistance, sightDistance, 0);
-    }
-    private IEnumerator CheckFogOfWar(float checkInterval)
-    {
-        while (true)
-        {
-            //fogOfWar.MakeHole(transform.position, sightDistance);
-            yield return new WaitForSeconds(checkInterval);
-        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb2d.MovePosition(rb2d.position + moveInput * MovementSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+        //rb.velocity = moveInput3D;
     }
 
     void OnMove(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
+        Vector2 moveInput = value.Get<Vector2>();
+        moveInput3D = new Vector3(moveInput.x, moveInput.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D other) 
     {
-        Debug.Log("TRIGGER");
         GameObject target = other.gameObject;
         if(target.CompareTag("Enemy"))
         {
@@ -69,7 +61,6 @@ public class Character : MonoBehaviour
     }
     void OnFire()
     {
-        Debug.Log("PlayerFire");
         Gun.GetComponent<HandgunController>().Shoot();
     }
 

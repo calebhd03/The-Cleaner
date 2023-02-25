@@ -69,7 +69,6 @@ public class HandgunController : MonoBehaviour
     /// Attempts to fire the gun
     public void Shoot() {
         // Checks that the gun is ready to shoot
-        Debug.Log("FIRE");
         if(shootState == ShootState.Ready) {
             for(int i = 0; i < bulletsPerShot; i++) {
                 // Instantiates the bullet at the muzzle position
@@ -80,7 +79,7 @@ public class HandgunController : MonoBehaviour
                 
                 spawnedbullet.GetComponent<bullet>().damage = damage;
 
-                Rigidbody2D rb = spawnedbullet.GetComponent<Rigidbody2D>();
+                Rigidbody rb = spawnedbullet.GetComponent<Rigidbody>();
                 rb.velocity = shootDir * bulletSpeed;
             }
 
@@ -97,7 +96,6 @@ public class HandgunController : MonoBehaviour
     /// Attempts to reload the gun
     public void Reload() {
         // Checks that the gun is ready to be reloaded
-        Debug.Log("Reload");
         if(shootState == ShootState.Ready) {
             nextShootTime = Time.time + reloadTime;
             shootState = ShootState.Reloading;
