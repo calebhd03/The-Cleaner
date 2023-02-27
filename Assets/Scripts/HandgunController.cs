@@ -14,6 +14,7 @@ public class HandgunController : MonoBehaviour
 
     [Header("Magazine")]
     public GameObject bullet;
+    public GameObject Player;
     public GameObject muzzle;
     public int ammunition;
     [Range(0.5f, 10)] public float reloadTime;
@@ -28,15 +29,19 @@ public class HandgunController : MonoBehaviour
     [Range(0, 45)] public float maxbulletVariation;
 
     private ShootState shootState = ShootState.Ready;
+    public Vector3 worldPosition;
+    Plane plane = new Plane(Vector3.up, 0);
 
     // The next time that the gun is able to shoot at
     private float nextShootTime = 0;
 
-    void Start() {
+    void Start() 
+    {
         remainingAmmunition = ammunition;
     }
 
-    void Update() {
+    void Update() 
+    {
         switch(shootState) {
             case ShootState.Shooting:
                 // If the gun is ready to shoot again...
@@ -59,11 +64,14 @@ public class HandgunController : MonoBehaviour
     ///Points gun at mouse world position
     public void pointGunAtMouse()
     {
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        worldMousePos.z = 0;
-        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(worldMousePos.y, worldMousePos.x) * Mathf.Rad2Deg);
+        float distance;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (plane.Raycast(ray, out distance))
+        {
+            worldPosition = ray.GetPoint(distance);
+        }
 
-        transform.rotation = rotation;
+        transform.LookAt(worldPosition, Vector3.up);
     }
 
     /// Attempts to fire the gun

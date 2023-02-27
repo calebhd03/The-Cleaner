@@ -14,8 +14,6 @@ public class Character : MonoBehaviour
     public GameObject Model;
 
     [Header("FogOfWar")]
-    //public FogOfWar fogOfWar;
-    //public Transform secondaryFogOfWar;
     [Range(0, 5)] public float sightDistance;
     public GameObject FOVMesh;
     public float checkInterval;
@@ -37,13 +35,12 @@ public class Character : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
-        //rb.velocity = moveInput3D;
     }
 
     void OnMove(InputValue value)
     {
         Vector2 moveInput = value.Get<Vector2>();
-        moveInput3D = new Vector3(moveInput.x, moveInput.y, 0);
+        moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
     }
 
     void OnTriggerEnter2D(Collider2D other) 
