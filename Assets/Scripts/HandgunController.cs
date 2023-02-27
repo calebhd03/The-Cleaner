@@ -29,7 +29,7 @@ public class HandgunController : MonoBehaviour
     [Range(0, 45)] public float maxbulletVariation;
 
     private ShootState shootState = ShootState.Ready;
-    public Vector3 worldPosition;
+    private Vector3 worldPosition;
     Plane plane = new Plane(Vector3.up, 0);
 
     // The next time that the gun is able to shoot at
