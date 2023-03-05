@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2135623473755161065, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 2576128988605569679, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.26661396
@@ -185,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3764912373116673347, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15869904
+      value: -0.153
       objectReference: {fileID: 0}
     - target: {fileID: 3764912373116673347, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1192,8 +1196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24bc809ac36ec643b12ae9208cf1df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightDistance: 10
+  sightDistance: 3
   precision: 10
+  material: {fileID: 2100000, guid: 08afa18f7b8d4ab4193b6d7f3a010468, type: 2}
+  cube: {fileID: 9154404633913816975, guid: c1c2a1e3025eeff45af0598b6fb3a32d, type: 3}
 --- !u!1 &475354214
 GameObject:
   m_ObjectHideFlags: 0
