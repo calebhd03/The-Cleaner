@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
     {
         isInvincible = false;
         rb = GetComponent<Rigidbody> ();
-        FOVMesh.SetActive(true);
+        //FOVMesh.SetActive(true);
         FOVMesh.transform.localScale = new Vector3(sightDistance, sightDistance, 0);
     }
 
