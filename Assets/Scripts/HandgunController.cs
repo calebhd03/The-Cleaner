@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.UIElements;
 
 public class HandgunController : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class HandgunController : MonoBehaviour
         {
             worldPosition = ray.GetPoint(distance);
         }
-
+        worldPosition.y = Player.transform.position.y;
         transform.LookAt(worldPosition, Vector3.up);
     }
 
@@ -80,15 +81,13 @@ public class HandgunController : MonoBehaviour
         if(shootState == ShootState.Ready) {
             for(int i = 0; i < bulletsPerShot; i++) {
                 // Instantiates the bullet at the muzzle position
-                
-                Vector3 shootDir = (Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - muzzle.transform.position).normalized;
+                GameObject spawnedbullet = Instantiate(bullet, muzzle.transform.position, muzzle.transform.rotation);
 
-                GameObject spawnedbullet = Instantiate(bullet, muzzle.transform.position, Quaternion.identity);
-                
-                spawnedbullet.GetComponent<bullet>().damage = damage;
+                spawnedbullet.GetComponent<bullet>().bulletSpeed = bulletSpeed;
+                spawnedbullet.GetComponent<bullet>().damage = damage; 
+                var localDirection = spawnedbullet.transform.rotation * Vector3.right;
+                spawnedbullet.GetComponent<Rigidbody>().velocity = localDirection * bulletSpeed;
 
-                Rigidbody rb = spawnedbullet.GetComponent<Rigidbody>();
-                rb.velocity = shootDir * bulletSpeed;
             }
 
             remainingAmmunition--;

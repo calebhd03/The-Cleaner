@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    public float damage;
+    public float damage; 
+    public float bulletSpeed;
 
     void Awake()
     {
+        Debug.Log("bulletSpeed = " + bulletSpeed);
         Destroy(gameObject, 5f);
+    }
+
+    public void MoveBullet()
+    {
+        this.GetComponent<Rigidbody>().velocity = Vector3.forward * bulletSpeed;
     }
 
     void OnTriggerEnter(Collider other) 
