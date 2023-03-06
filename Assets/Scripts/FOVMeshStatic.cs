@@ -4,24 +4,16 @@ using UnityEngine;
 
 public class FOVMeshStatic : MonoBehaviour
 {
-    public int sightDistance;
+    public float sightDistance;
     public int precision;
 
     private GameObject FOVMesh;
 
     void Start()
     {
-
-        // Set up game object with mesh;
-        FOVMesh = new GameObject("FOVMesh", typeof(MeshFilter), typeof(MeshRenderer));
-        transform.parent = FOVMesh.transform;
-        FOVMesh.layer = 7;
-        
-
-        UpdateFOVMeshValues();
     }
 
-    void UpdateFOVMeshValues()
+    public void UpdateFOVMeshValues()
     {
         //Create the Vector3 vertices
         Vector3[] vertices3D = new Vector3[precision+1];
@@ -76,7 +68,7 @@ public class FOVMeshStatic : MonoBehaviour
         int nextVertice = 0;
         for(int i=0; i < triangles.Length; i+=3)
         {
-            if (i <= triangles.Length - 3)
+            if (i < triangles.Length - 3)
             {
                 triangles[i + 2] = nextVertice;
                 triangles[i + 1] = nextVertice + 1;
@@ -84,20 +76,26 @@ public class FOVMeshStatic : MonoBehaviour
             }
             else
             {
-                triangles[i + 2] = 0;
-                triangles[i + 1] = nextVertice + 1;
+                triangles[i + 2] = nextVertice;
+                triangles[i + 1] = 0;
                 triangles[i] = vertices3D.Length - 1;
             }
-                //Debug.Log(triangles[i] + " triangles0 " + i);
-                //Debug.Log(triangles[i + 1] + " triangles1 " + i + 1);
-                //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
-                nextVertice += 1;
+
+            //Debug.Log(triangles[i] + " triangles0 " + i);
+            //Debug.Log(triangles[i + 1] + " triangles1 " + i + 1);
+            //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
+            nextVertice += 1;
         }
 
         // Create the mesh
+        // Set up game object with mesh;
+        FOVMesh = new GameObject("StaticFOVMesh", typeof(MeshFilter), typeof(MeshRenderer));
+        FOVMesh.layer = 7;
+
         FOVMesh.GetComponent<MeshFilter>().mesh.vertices = vertices3D;
         FOVMesh.GetComponent<MeshFilter>().mesh.triangles = triangles;
         FOVMesh.GetComponent<MeshFilter>().mesh.uv = uv;
+        FOVMesh.transform.parent = transform;
 
     }
 }

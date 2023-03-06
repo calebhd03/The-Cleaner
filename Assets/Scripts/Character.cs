@@ -17,22 +17,28 @@ public class Character : MonoBehaviour
     public int Health;
     public float InvincibleTime;
     public float invincibilityDeltaTime;
+
+    [Header("Glow Charges")]
     public int MaxGlowCharges;
     public float ThrowDistance;
-    public float ThrowTime;
+    public float ThrowDuration;
+    public float GlowChargeRechargeDelay;
 
     private Vector3 moveInput3D;
     private bool isInvincible;
     private Rigidbody rb;
     private int CurrentGlowCharges;
+    private int MaxHealth;
     private CameraMainScript PivotScript;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         isInvincible = false;
-        rb = GetComponent<Rigidbody>();
+        MaxHealth = Health;
         CurrentGlowCharges = MaxGlowCharges;
+
+        rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
     }
 
@@ -48,64 +54,66 @@ public class Character : MonoBehaviour
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter(Collider other) 
     {
         GameObject target = other.gameObject;
         if(target.CompareTag("Enemy"))
         {
             if(!isInvincible)
             {
-                
                 Health--;
                 TookDamage();
             }
         }
     }
+
     void OnFire()
     {
         Gun.GetComponent<HandgunController>().Shoot();
     }
+
     void OnThrowGlowCharge()
     {
-        if(CurrentGlowCharges > 0)
+        if (CurrentGlowCharges > 0)
         {
-            //CurrentGlowCharges--;
+            if (CurrentGlowCharges >= MaxGlowCharges)
+                StartCoroutine(GlowChargeRecharge());
+
+            CurrentGlowCharges--;
+
 
             GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
-            StartCoroutine(ThrowCharge(spawnedGlowCharge));
+
+            Ray r = new Ray(transform.position, PivotScript.getMousePostition() - transform.position);
+            RaycastHit hit;
+            Vector3 EndingPosition;
+
+            int layerMask = ~LayerMask.GetMask("IgnoreRaycast");
+            if (Physics.Raycast(r, out hit, ThrowDistance, layerMask))
+            {
+                EndingPosition = hit.transform.position;
+            }
+            else
+            {
+                EndingPosition = r.GetPoint(ThrowDistance);
+            }
+
+            EndingPosition.y = transform.position.y;
+            Transform startingPosition = spawnedGlowCharge.transform;
+
+            spawnedGlowCharge.GetComponent<GlowCharge>().CreateGlowCharge(EndingPosition, ThrowDuration);
         }
     }
-    IEnumerator ThrowCharge(GameObject glowCharge)
+
+    IEnumerator GlowChargeRecharge()
     {
-        Debug.Log("ThrowingCharge!!!!!!!");
-        Ray r = new Ray(transform.position, PivotScript.getMousePostition() - transform.position);
-        Debug.DrawRay(transform.position, transform.position - PivotScript.getMousePostition(), Color.yellow, 20f);
-        RaycastHit hit;
-        Vector3 EndingPosition;
-        int layerMask =~ LayerMask.GetMask("IgnoreRaycast");
-        if (Physics.Raycast(r, out hit, ThrowDistance, layerMask))
-        {
-            EndingPosition = hit.transform.position;
-        }
-        else
-        {
-            EndingPosition = r.GetPoint(ThrowDistance);
-        }
-        EndingPosition.y = transform.position.y; 
-        Debug.Log("EndingPosition" + EndingPosition);
-        Debug.Log("MousePosition" + PivotScript.getMousePostition());
-
-        float elapsedTime = 0;
-        Vector3 startingPosition = glowCharge.transform.position;
-        while (elapsedTime < ThrowTime)
-        {
-            glowCharge.transform.position = Vector3.Lerp(startingPosition, EndingPosition, elapsedTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(GlowChargeRechargeDelay);
+        CurrentGlowCharges++;
+        if(CurrentGlowCharges != MaxGlowCharges)
+            StartCoroutine(GlowChargeRecharge());
     }
 
-        void TookDamage()
+    void TookDamage()
     {
         //Update UI
 

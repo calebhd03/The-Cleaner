@@ -104,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4513256501509852636}
   - component: {fileID: 4513256501509852611}
+  - component: {fileID: 3740948222551738931}
   m_Layer: 0
   m_Name: GlowCharge
   m_TagString: Untagged
@@ -126,7 +127,7 @@ Transform:
   - {fileID: 4513256501107404389}
   - {fileID: 4513256502529880253}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4513256501509852611
 MonoBehaviour:
@@ -143,7 +144,23 @@ MonoBehaviour:
   TimeAtFullCharge: 120
   TimeTillMinimal: 5
   MinimalIntensity: 2.8
-  spotLight: {fileID: 4513256501107404388}
+  ThrowHeight: 0.88
+  SpotLight: {fileID: 4513256501107404388}
+  Sprite: {fileID: 4513256502529880252}
+--- !u!114 &3740948222551738931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513256501509852610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fde926989ae8504fadee3e218ed009e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightDistance: 3
+  precision: 10
 --- !u!1 &4513256502529880252
 GameObject:
   m_ObjectHideFlags: 0

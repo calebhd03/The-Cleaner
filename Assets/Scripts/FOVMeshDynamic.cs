@@ -6,8 +6,6 @@ public class FOVMeshDynamic : MonoBehaviour
 {
     public int sightDistance;
     public int precision;
-    public Material material;
-    public GameObject cube;
 
     private GameObject FOVMesh;
 
@@ -15,9 +13,8 @@ public class FOVMeshDynamic : MonoBehaviour
     {
 
         // Set up game object with mesh;
-        FOVMesh = new GameObject("FOVMesh", typeof(MeshFilter), typeof(MeshRenderer));
+        FOVMesh = new GameObject("FOVMesh", typeof(MeshFilter), typeof(MeshRenderer)); 
         FOVMesh.layer = 7;
-        FOVMesh.GetComponent<MeshRenderer>().material = material;
         
 
         UpdateFOVMeshValues();
@@ -83,7 +80,7 @@ public class FOVMeshDynamic : MonoBehaviour
         int nextVertice = 0;
         for(int i=0; i < triangles.Length; i+=3)
         {
-            if (i <= triangles.Length - 3)
+            if (i < triangles.Length - 3)
             {
                 triangles[i + 2] = nextVertice;
                 triangles[i + 1] = nextVertice + 1;
@@ -91,14 +88,14 @@ public class FOVMeshDynamic : MonoBehaviour
             }
             else
             {
-                triangles[i + 2] = 0;
-                triangles[i + 1] = nextVertice + 1;
+                triangles[i + 2] = nextVertice;
+                triangles[i + 1] = 0;
                 triangles[i] = vertices3D.Length - 1;
             }
-                //Debug.Log(triangles[i] + " triangles0 " + i);
-                //Debug.Log(triangles[i + 1] + " triangles1 " + i + 1);
-                //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
-                nextVertice += 1;
+            //Debug.Log(triangles[i] + " triangles0 " + i);
+            //Debug.Log(triangles[i + 1] + " triangles1 " + i + 1);
+            //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
+            nextVertice += 1;
         }
 
         // Create the mesh
@@ -107,7 +104,6 @@ public class FOVMeshDynamic : MonoBehaviour
         FOVMesh.GetComponent<MeshFilter>().mesh.uv = uv;
         //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateNormals();
         //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateBounds();
-        FOVMesh.GetComponent <MeshRenderer>().material = material;
 
     }
 }

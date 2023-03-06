@@ -31,11 +31,11 @@ public class Interactable : MonoBehaviour
             targetPosition = startingPosition;
 
         float elapsedTime = 0;
-        while (elapsedTime < doorManager.duration)
+        while (elapsedTime < 1)
         {
             transform.position = Vector3.Lerp(currentPosition, targetPosition, elapsedTime);
-            elapsedTime += Time.deltaTime;
             yield return null;
+            elapsedTime += Time.deltaTime * (1/doorManager.duration);
         }
 
     }
