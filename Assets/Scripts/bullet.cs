@@ -23,7 +23,7 @@ public class bullet : MonoBehaviour
         // the 'Target' component
         if (other.CompareTag("Enemy"))
         {
-            Target target = other.gameObject.GetComponent<Target>();
+            BasicEnemy target = other.gameObject.GetComponent<BasicEnemy>();
             target.Hit(damage);
             Destroy(gameObject); // Deletes the round
         }

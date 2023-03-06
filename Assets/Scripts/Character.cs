@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
@@ -11,6 +12,7 @@ public class Character : MonoBehaviour
     public GameObject Model;
     public GameObject GlowCharge;
     public GameObject CameraPivot;
+    public GameObject EnemyManager;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -30,6 +32,7 @@ public class Character : MonoBehaviour
     private int CurrentGlowCharges;
     private int MaxHealth;
     private CameraMainScript PivotScript;
+    private EnemyManager EnemyManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +40,7 @@ public class Character : MonoBehaviour
         isInvincible = false;
         MaxHealth = Health;
         CurrentGlowCharges = MaxGlowCharges;
+        EnemyManagerScript = EnemyManager.GetComponent<EnemyManager>();
 
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
@@ -64,6 +68,7 @@ public class Character : MonoBehaviour
                 Health--;
                 TookDamage();
             }
+            target.GetComponent<BasicEnemy>().HitPlayer();
         }
     }
 
@@ -119,11 +124,14 @@ public class Character : MonoBehaviour
 
         //Cheack if Dead
         if(Health <= 0) {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         //Make invincible
-        StartCoroutine(BecomeTemporarilyInvincible());
+        else
+        {
+            StartCoroutine(BecomeTemporarilyInvincible());
+        }
     }
 
     private IEnumerator BecomeTemporarilyInvincible()
