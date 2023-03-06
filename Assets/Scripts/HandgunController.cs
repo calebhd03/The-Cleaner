@@ -13,6 +13,9 @@ public class HandgunController : MonoBehaviour
         Reloading
     }
 
+    public GameObject CameraPivot;
+    private CameraMainScript PivotScript;
+
     [Header("Magazine")]
     public GameObject bullet;
     public GameObject Player;
@@ -31,7 +34,6 @@ public class HandgunController : MonoBehaviour
 
     private ShootState shootState = ShootState.Ready;
     private Vector3 worldPosition;
-    Plane plane = new Plane(Vector3.up, 0);
 
     // The next time that the gun is able to shoot at
     private float nextShootTime = 0;
@@ -39,6 +41,7 @@ public class HandgunController : MonoBehaviour
     void Start() 
     {
         remainingAmmunition = ammunition;
+        PivotScript = CameraPivot.GetComponent<CameraMainScript>();
     }
 
     void Update() 
@@ -65,14 +68,7 @@ public class HandgunController : MonoBehaviour
     ///Points gun at mouse world position
     public void pointGunAtMouse()
     {
-        float distance;
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (plane.Raycast(ray, out distance))
-        {
-            worldPosition = ray.GetPoint(distance);
-        }
-        worldPosition.y = Player.transform.position.y;
-        transform.LookAt(worldPosition, Vector3.up);
+        transform.LookAt(PivotScript.getMousePostition(), Vector3.up);
     }
 
     /// Attempts to fire the gun

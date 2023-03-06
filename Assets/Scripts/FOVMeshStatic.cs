@@ -1,36 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FOVMeshDynamic1 : MonoBehaviour
+public class FOVMeshStatic : MonoBehaviour
 {
     public int sightDistance;
     public int precision;
-    //public Material material;
-    public GameObject cube;
-    public Texture2D Knob;
 
     private GameObject FOVMesh;
-    private Sprite mySprite;
-    private SpriteRenderer sr;
 
     void Start()
     {
 
         // Set up game object with mesh;
-        mySprite = Sprite.Create(Knob, new Rect(0.0f, 0.0f, Knob.width, Knob.height), new Vector2(0.5f, 0.5f), 100.0f);
-
-        this.GetComponent<SpriteRenderer>().sprite = mySprite;
-        this.GetComponent<SpriteMask>().sprite = mySprite;
-
+        FOVMesh = new GameObject("FOVMesh", typeof(MeshFilter), typeof(MeshRenderer));
+        transform.parent = FOVMesh.transform;
+        FOVMesh.layer = 7;
+        
 
         UpdateFOVMeshValues();
-    }
-
-    void Update()
-    {
-        //UpdateFOVMeshValues();
     }
 
     void UpdateFOVMeshValues()
@@ -49,7 +37,7 @@ public class FOVMeshDynamic1 : MonoBehaviour
             Vector3 dir = new Vector3(transform.position.x * x, 0, transform.position.z * z);
             Ray r = new Ray(transform.position, dir);
             //Debug.Log(r + " Ray " + i);
-            Debug.DrawRay(transform.position, dir, Color.green, 20f);
+            //Debug.DrawRay(transform.position, dir, Color.green, 20f);
 
             RaycastHit hit;
 
@@ -70,6 +58,8 @@ public class FOVMeshDynamic1 : MonoBehaviour
 
             
             //Debug.Log(vertices3D[i] + " Vertice " + i);
+            //GameObject Cube = Instantiate(cube);
+            //Cube.transform.position = vertices3D[i - 1];
         }
         vertices3D[precision] = transform.position;
         //Debug.Log(vertices3D[precision] + " Vertice " + precision);
@@ -78,10 +68,7 @@ public class FOVMeshDynamic1 : MonoBehaviour
         Vector2[] uv = new Vector2[vertices3D.Length];
         for(int i = 0; i < vertices3D.Length; i++)
         {
-            uv[i].x = vertices3D[i].x;
-            uv[i].y = vertices3D[i].z;
-            GameObject Cube = Instantiate(cube);
-            Cube.transform.position = uv[i];
+            uv[i] = vertices3D[i];
         }
 
 
@@ -108,8 +95,9 @@ public class FOVMeshDynamic1 : MonoBehaviour
         }
 
         // Create the mesh
-        mySprite.OverrideGeometry(uv, mySprite.triangles);
-        //FOVMesh.transform.position = transform.position;
+        FOVMesh.GetComponent<MeshFilter>().mesh.vertices = vertices3D;
+        FOVMesh.GetComponent<MeshFilter>().mesh.triangles = triangles;
+        FOVMesh.GetComponent<MeshFilter>().mesh.uv = uv;
 
     }
 }
