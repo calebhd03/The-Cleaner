@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightDistance: 3
-  precision: 10
+  precision: 24
 --- !u!1 &4513256502529880252
 GameObject:
   m_ObjectHideFlags: 0

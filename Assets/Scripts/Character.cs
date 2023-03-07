@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
         {
             if(!isInvincible)
             {
-                Health--;
+                Health-= target.GetComponent<BasicEnemy>().Damage;
                 TookDamage();
             }
             target.GetComponent<BasicEnemy>().HitPlayer();
