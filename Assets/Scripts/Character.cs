@@ -26,6 +26,11 @@ public class Character : MonoBehaviour
     public float ThrowDuration;
     public float GlowChargeRechargeDelay;
 
+    [Header("Sounds")]
+    public AudioClip footstepSound;
+    public AudioClip damageTakenSound;
+    public AudioClip deathSound;
+
     private Vector3 moveInput3D;
     private bool isInvincible;
     private Rigidbody rb;
@@ -33,6 +38,7 @@ public class Character : MonoBehaviour
     private int MaxHealth;
     private CameraMainScript PivotScript;
     private EnemyManager EnemyManagerScript;
+    private AudioSource SoundSource;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +50,7 @@ public class Character : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
+        SoundSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -56,6 +63,7 @@ public class Character : MonoBehaviour
     {
         Vector2 moveInput = value.Get<Vector2>();
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
+        //SoundSource.PlayOneShot(footstepSound, .2f);
     }
 
     void OnTriggerEnter(Collider other) 
@@ -123,13 +131,16 @@ public class Character : MonoBehaviour
         //Update UI
 
         //Cheack if Dead
-        if(Health <= 0) {
+        if(Health <= 0)
+        {
+            //SoundSource.PlayOneShot(deathSound, .2f);
             gameObject.SetActive(false);
         }
 
         //Make invincible
         else
         {
+           // SoundSource.PlayOneShot(damageTakenSound, .2f);
             StartCoroutine(BecomeTemporarilyInvincible());
         }
     }
