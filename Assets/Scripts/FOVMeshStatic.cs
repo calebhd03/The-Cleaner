@@ -102,7 +102,7 @@ public class FOVMeshStatic : MonoBehaviour
     //Sets the FOVmesh as a child of this object
     void createFOVMesh(Vector3[] vertices3D, Vector2[] uv, int[] triangles)
     {
-        //Creats the emtpy GameObject that holds the FOVMesh
+        //Creats the empty GameObject that holds the FOVMesh
         FOVMesh = new GameObject("StaticFOVMesh", typeof(MeshFilter), typeof(MeshRenderer));
         
         //Assigns the layer to the FOV layer
