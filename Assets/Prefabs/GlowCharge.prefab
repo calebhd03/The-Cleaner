@@ -144,7 +144,7 @@ MonoBehaviour:
   TimeAtFullCharge: 120
   TimeTillMinimal: 5
   MinimalIntensity: 2.8
-  ThrowHeight: 0.88
+  ThrowHeight: 1.46
   SpotLight: {fileID: 4513256501107404388}
   Sprite: {fileID: 4513256502529880252}
 --- !u!114 &3740948222551738931
