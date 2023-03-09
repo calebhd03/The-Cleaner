@@ -18,7 +18,7 @@ public class CameraMainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Player.transform.position;
+
     }
 
     public Vector3 getMousePostition()
