@@ -20,7 +20,7 @@ public class FOVMeshDynamic : MonoBehaviour
         UpdateFOVMeshValues();
     }
 
-    void Update()
+    void LateUpdate()
     {
         UpdateFOVMeshValues();
     }
