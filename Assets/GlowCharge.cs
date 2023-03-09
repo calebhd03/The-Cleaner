@@ -66,7 +66,7 @@ public class GlowCharge : MonoBehaviour
         }
 
         Sprite.transform.localScale = startingScale;
-        GetComponent<FOVMeshStatic>().CreateStaticFOVMeshValues();
+        GetComponent<FOVMeshStatic>().UpdateFOVMeshValues();
     }
 
     // Update is called once per frame

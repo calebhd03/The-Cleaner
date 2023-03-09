@@ -63,7 +63,7 @@ public class Character : MonoBehaviour
     {
         Vector2 moveInput = value.Get<Vector2>();
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
-        //SoundSource.PlayOneShot(footstepSound, .2f);
+        SoundSource.PlayOneShot(footstepSound, .2f);
     }
 
     void OnTriggerEnter(Collider other) 
@@ -133,14 +133,14 @@ public class Character : MonoBehaviour
         //Cheack if Dead
         if(Health <= 0)
         {
-            //SoundSource.PlayOneShot(deathSound, .2f);
+            SoundSource.PlayOneShot(deathSound, .2f);
             gameObject.SetActive(false);
         }
 
         //Make invincible
         else
         {
-           // SoundSource.PlayOneShot(damageTakenSound, .2f);
+            SoundSource.PlayOneShot(damageTakenSound, .2f);
             StartCoroutine(BecomeTemporarilyInvincible());
         }
     }

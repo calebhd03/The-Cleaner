@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.21979399, y: -0.5646681, z: 0.1590289, w: 0.7791163}
     speed: 2
-    m_Value: {x: 0.22009042, y: -0.5636477, z: 0.15874097, w: 0.7801685}
+    m_Value: {x: 0.21985207, y: -0.5648173, z: 0.15907092, w: 0.77932215}
   m_Size:
     m_Target: 10
     speed: 2
@@ -781,8 +781,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f093ffff
-      m_LastClickedID: -27664
+      m_SelectedIDs: 2a640000
+      m_LastClickedID: 25642
       m_ExpandedIDs: 30d2ffff92d3ffff32d4ffff46e4ffff54e4ffff44e5ffffbae5ffffc0eeffffaef8fffff8f8ffff38f9ffff00faffff8e630000f46300001c6400002a640000346400004e64000084640000ba640000be64000026650000d2650000fc6500003c66000082660000dc660000e466000012670000166700003067000082670000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1640,8 +1640,8 @@ MonoBehaviour:
     y: 0
     width: 464
     height: 1307
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1689,7 +1689,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 162
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

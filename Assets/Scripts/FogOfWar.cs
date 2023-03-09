@@ -60,7 +60,7 @@ public class FogOfWar : MonoBehaviour
             }
         }
         fogOfWarTexture.Apply();
-        CreateSprite();
+        //CreateSprite();
     }
 
     private void CreateSprite()
