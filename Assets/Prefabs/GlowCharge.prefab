@@ -141,12 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96da2f64d3bec894391d1d7d51b5cabc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeAtFullCharge: 120
-  TimeTillMinimal: 5
-  MinimalIntensity: 2.8
-  ThrowHeight: 1.46
   SpotLight: {fileID: 4513256501107404388}
   Sprite: {fileID: 4513256502529880252}
+  TimeAtFullCharge: 3
+  TimeTillMinimal: 5
+  MinimalIntensity: 2.8
+  ThrowHeight: 2
 --- !u!114 &3740948222551738931
 MonoBehaviour:
   m_ObjectHideFlags: 0

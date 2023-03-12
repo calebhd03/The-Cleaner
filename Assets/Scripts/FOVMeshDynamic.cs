@@ -29,8 +29,30 @@ public class FOVMeshDynamic : MonoBehaviour
     {
         //Create the Vector3 vertices
         Vector3[] vertices3D = new Vector3[precision + 1];
+        Vector2[] uv = new Vector2[vertices3D.Length];
         int[] triangles = new int[precision * 3];
 
+        //Gets the vertices
+        GetVertices(vertices3D);
+
+        //Finds the UVs from the vertices
+        FindVertices(vertices3D, uv);
+
+        //Finds the triangles needed from the vertices
+        FindTriangles(triangles, vertices3D);
+
+
+        // Create the mesh
+        FOVMesh.GetComponent<MeshFilter>().mesh.vertices = vertices3D;
+        FOVMesh.GetComponent<MeshFilter>().mesh.triangles = triangles;
+        FOVMesh.GetComponent<MeshFilter>().mesh.uv = uv;
+        //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateNormals();
+        //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateBounds();
+
+    }
+
+    private void GetVertices(Vector3[] vertices3D)
+    {
         float angle = 0;
         for (int i = 0; i < precision; i++)
         {
@@ -67,15 +89,18 @@ public class FOVMeshDynamic : MonoBehaviour
         }
         vertices3D[precision] = transform.position;
         //Debug.Log(vertices3D[precision] + " Vertice " + precision);
+    }
 
-        //Create UV
-        Vector2[] uv = new Vector2[vertices3D.Length];
+    private void FindVertices(Vector3[] vertices3D, Vector2[] uv)
+    {
         for (int i = 0; i < vertices3D.Length; i++)
         {
             uv[i] = vertices3D[i];
         }
+    }
 
-
+    private void FindTriangles(int[] triangles, Vector3[] vertices3D)
+    {
         // Use the triangulator to get indices for creating triangles
         int nextVertice = 0;
         for (int i = 0; i < triangles.Length; i += 3)
@@ -97,13 +122,5 @@ public class FOVMeshDynamic : MonoBehaviour
             //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
             nextVertice += 1;
         }
-
-        // Create the mesh
-        FOVMesh.GetComponent<MeshFilter>().mesh.vertices = vertices3D;
-        FOVMesh.GetComponent<MeshFilter>().mesh.triangles = triangles;
-        FOVMesh.GetComponent<MeshFilter>().mesh.uv = uv;
-        //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateNormals();
-        //FOVMesh.GetComponent<MeshFilter>().mesh.RecalculateBounds();
-
     }
 }

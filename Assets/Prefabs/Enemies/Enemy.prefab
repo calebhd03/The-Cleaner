@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 891631365649878239}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &849034108720486406
 Rigidbody:
@@ -124,7 +124,7 @@ MonoBehaviour:
   SpotingDistance: 4
   PassiveDistance: 6
   TimeInBetweenAttacks: 3
-  AttackWaitingDistance: 0
+  AttackWaitingDistance: 4
   IsReadyToAttack: 1
   isAngered: 0
   ambientSound: {fileID: 8300000, guid: 3568777d7621e7043857c6c4f83e0d86, type: 3}
