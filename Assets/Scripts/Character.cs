@@ -26,11 +26,6 @@ public class Character : MonoBehaviour
     public float ThrowDuration;
     public float GlowChargeRechargeDelay;
 
-    [Header("Sounds")]
-    public AudioClip footstepSound;
-    public AudioClip damageTakenSound;
-    public AudioClip deathSound;
-
     private Vector3 moveInput3D;
     private bool isInvincible;
     private Rigidbody rb;
@@ -39,6 +34,7 @@ public class Character : MonoBehaviour
     private CameraMainScript PivotScript;
     private EnemyManager EnemyManagerScript;
     private AudioSource SoundSource;
+    private AudioManager AudioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +47,7 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
         SoundSource = GetComponent<AudioSource>();
+        AudioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -63,7 +60,13 @@ public class Character : MonoBehaviour
     {
         Vector2 moveInput = value.Get<Vector2>();
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
-        SoundSource.PlayOneShot(footstepSound, .2f);
+
+        //Footstep Sound
+        if (moveInput.x > 0 || moveInput.y > 0)
+            SoundSource.enabled = true;
+        else
+            SoundSource.enabled = false;
+        
     }
 
     void OnTriggerEnter(Collider other) 
@@ -94,6 +97,7 @@ public class Character : MonoBehaviour
 
             CurrentGlowCharges--;
 
+            AudioManager.Play("GlowChargeThrow");
 
             GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
 
@@ -133,14 +137,14 @@ public class Character : MonoBehaviour
         //Cheack if Dead
         if(Health <= 0)
         {
-            SoundSource.PlayOneShot(deathSound, .2f);
+            AudioManager.Play("PlayerDeath");
             gameObject.SetActive(false);
         }
 
         //Make invincible
         else
         {
-            SoundSource.PlayOneShot(damageTakenSound, .2f);
+            AudioManager.Play("PlayerHit");
             StartCoroutine(BecomeTemporarilyInvincible());
         }
     }

@@ -34,6 +34,8 @@ public class HandgunController : MonoBehaviour
 
     private ShootState shootState = ShootState.Ready;
     private Vector3 worldPosition;
+    private AudioSource soundSource;
+    private AudioManager AudioManager;
 
     // The next time that the gun is able to shoot at
     private float nextShootTime = 0;
@@ -42,6 +44,8 @@ public class HandgunController : MonoBehaviour
     {
         remainingAmmunition = ammunition;
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
+
+        AudioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update() 
@@ -84,6 +88,7 @@ public class HandgunController : MonoBehaviour
                 var localDirection = spawnedbullet.transform.rotation * Vector3.right;
                 spawnedbullet.GetComponent<Rigidbody>().velocity = localDirection * bulletSpeed;
 
+                AudioManager.Play("WeaponShoot");
             }
 
             remainingAmmunition--;
@@ -100,6 +105,8 @@ public class HandgunController : MonoBehaviour
     public void Reload() {
         // Checks that the gun is ready to be reloaded
         if(shootState == ShootState.Ready) {
+
+            AudioManager.Play("WeaponReload");
             nextShootTime = Time.time + reloadTime;
             shootState = ShootState.Reloading;
         }

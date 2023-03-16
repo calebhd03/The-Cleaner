@@ -64,7 +64,6 @@ public class BasicEnemy : MonoBehaviour
         //Start attack animation
 
         //Start light attack sound
-        SoundSource.PlayOneShot(lightAttackSound, .2f);
 
         //Used for attack delay
         IsReadyToAttack = false;
