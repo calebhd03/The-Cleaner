@@ -19,18 +19,11 @@ public class BasicEnemy : MonoBehaviour
     public bool IsReadyToAttack = true;
     public bool isAngered = false;
 
-    [Header("Sounds")]
-    public AudioClip ambientSound;
-    public AudioClip damageTakenSound;
-    public AudioClip deathSound;
-    public AudioClip heavyAttackSound;
-    public AudioClip lightAttackSound;
-    public AudioClip movementSound;
-
     private AudioSource SoundSource;
     private EnemyManager EnemyManager;
     private NavMeshAgent NavAgent;
     private GameObject Player;
+    private AudioManager AudioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +32,9 @@ public class BasicEnemy : MonoBehaviour
         NavAgent = GetComponent<NavMeshAgent>();
         SoundSource = GetComponent<AudioSource>();
         Player = GameObject.FindWithTag("Player");
+        AudioManager = GetComponent<AudioManager>();
+
+        SoundSource.enabled = false;
     }
     private void Update()
     {
@@ -86,7 +82,7 @@ public class BasicEnemy : MonoBehaviour
             //Start taken damage animation
 
             //Start damage taken sound
-            SoundSource.PlayOneShot(damageTakenSound, .2f);
+            AudioManager.Play("DamageTaken");
         }
     }
 
@@ -109,7 +105,7 @@ public class BasicEnemy : MonoBehaviour
         //Only do ambient sound 10% of the time
         if(Random.Range(0, 1) > .9)
             //idle Sound
-            SoundSource.PlayOneShot(ambientSound, .2f);
+            AudioManager.Play("Ambient");
     }
 
     //Enemy is no targeting player
@@ -159,6 +155,12 @@ public class BasicEnemy : MonoBehaviour
         {
             NavAgent.SetDestination(Player.transform.position);
         }
+
+        //FootstepSound
+        if (NavAgent.velocity.x > 0 || NavAgent.velocity.z > 0)
+            SoundSource.enabled = true;
+        else
+            SoundSource.enabled = false;
     }
 
     //Used for delaying attacks
@@ -172,7 +174,7 @@ public class BasicEnemy : MonoBehaviour
     IEnumerator EnemyDeath()
     {
         //Start enemy death sound
-        SoundSource.PlayOneShot(deathSound, .2f);
+        AudioManager.Play("Death");
 
         //Enemy death animation
         //Animation.Start();

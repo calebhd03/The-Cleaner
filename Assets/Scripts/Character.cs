@@ -39,15 +39,16 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isInvincible = false;
-        MaxHealth = Health;
-        CurrentGlowCharges = MaxGlowCharges;
         EnemyManagerScript = EnemyManager.GetComponent<EnemyManager>();
-
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
         SoundSource = GetComponent<AudioSource>();
         AudioManager = FindObjectOfType<AudioManager>();
+
+        isInvincible = false;
+        MaxHealth = Health;
+        CurrentGlowCharges = MaxGlowCharges;
+        SoundSource.enabled = false;
     }
 
     // Update is called once per frame
@@ -144,7 +145,7 @@ public class Character : MonoBehaviour
         //Make invincible
         else
         {
-            AudioManager.Play("PlayerHit");
+            AudioManager.Play("PlayerDamageTaken");
             StartCoroutine(BecomeTemporarilyInvincible());
         }
     }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 602457460}
   - component: {fileID: 1006401146}
   - component: {fileID: 5575507423852905578}
+  - component: {fileID: 9204880269730429531}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 891631365649878239}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &849034108720486406
 Rigidbody:
@@ -127,12 +128,6 @@ MonoBehaviour:
   AttackWaitingDistance: 4
   IsReadyToAttack: 1
   isAngered: 0
-  ambientSound: {fileID: 8300000, guid: 3568777d7621e7043857c6c4f83e0d86, type: 3}
-  damageTakenSound: {fileID: 8300000, guid: 807b9ab3c06114c47bb44925ae229337, type: 3}
-  deathSound: {fileID: 8300000, guid: 456d746ca4c354e4b892e5385d7287d4, type: 3}
-  heavyAttackSound: {fileID: 8300000, guid: 9d05651c23df7be4a9a49f5de6227a2e, type: 3}
-  lightAttackSound: {fileID: 8300000, guid: 35774eac286cb854abf919f053062de3, type: 3}
-  movementSound: {fileID: 8300000, guid: 66d6bf72e4b64a949833d78a33cc3d64, type: 3}
 --- !u!82 &5575507423852905578
 AudioSource:
   m_ObjectHideFlags: 0
@@ -145,9 +140,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.192
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -229,6 +224,55 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9204880269730429531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705481135547910613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e88b8340c08ef488ee03f353b831db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainAudioManager: 0
+  sounds:
+  - name: Ambient
+    clip: {fileID: 8300000, guid: 3568777d7621e7043857c6c4f83e0d86, type: 3}
+    volume: 0.241
+    pitch: 1.5
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DamageTaken
+    clip: {fileID: 8300000, guid: 7b35d6884821a08488528c43bd92bdce, type: 3}
+    volume: 0.241
+    pitch: 1.5
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: 456d746ca4c354e4b892e5385d7287d4, type: 3}
+    volume: 0.241
+    pitch: 1.5
+    spatialBlend: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HeavyAttack
+    clip: {fileID: 8300000, guid: 9d05651c23df7be4a9a49f5de6227a2e, type: 3}
+    volume: 0.241
+    pitch: 1.5
+    spatialBlend: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: LightAttack
+    clip: {fileID: 8300000, guid: 35774eac286cb854abf919f053062de3, type: 3}
+    volume: 0.241
+    pitch: 1.5
+    spatialBlend: 0.8
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &8546638308654476050
 GameObject:
   m_ObjectHideFlags: 0
