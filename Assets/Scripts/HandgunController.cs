@@ -15,6 +15,7 @@ public class HandgunController : MonoBehaviour
 
     public GameObject CameraPivot;
     private CameraMainScript PivotScript;
+    public GameObject AudioManagerObj;
 
     [Header("Magazine")]
     public GameObject bullet;
@@ -45,7 +46,7 @@ public class HandgunController : MonoBehaviour
         remainingAmmunition = ammunition;
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
 
-        AudioManager = FindObjectOfType<AudioManager>();
+        AudioManager = AudioManagerObj.GetComponent<AudioManager>();
     }
 
     void Update() 

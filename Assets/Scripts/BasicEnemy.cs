@@ -82,6 +82,7 @@ public class BasicEnemy : MonoBehaviour
             //Start taken damage animation
 
             //Start damage taken sound
+            Debug.Log("PLAY DAAMAGE");
             AudioManager.Play("DamageTaken");
         }
     }
@@ -123,7 +124,7 @@ public class BasicEnemy : MonoBehaviour
         }
 
         //Start walk sound
-        SoundSource.loop = true;
+        SoundSource.enabled = true;
 
         EnemyAttack();
     }

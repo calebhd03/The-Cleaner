@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public GameObject GlowCharge;
     public GameObject CameraPivot;
     public GameObject EnemyManager;
+    public GameObject AudioManagerObj;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -43,7 +44,7 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
         SoundSource = GetComponent<AudioSource>();
-        AudioManager = FindObjectOfType<AudioManager>();
+        AudioManager = AudioManagerObj.GetComponent<AudioManager>();
 
         isInvincible = false;
         MaxHealth = Health;
@@ -153,7 +154,6 @@ public class Character : MonoBehaviour
     private IEnumerator BecomeTemporarilyInvincible()
     {
         isInvincible = true;
-        Debug.Log("--------Invincible");
         for (float i = 0; i < InvincibleTime; i += invincibilityDeltaTime)
         {
             // Alternate between 0 and 1 scale to simulate flashing
