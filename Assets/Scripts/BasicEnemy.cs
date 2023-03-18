@@ -24,6 +24,7 @@ public class BasicEnemy : MonoBehaviour
     private NavMeshAgent NavAgent;
     private GameObject Player;
     private AudioManager AudioManager;
+    private GameManager GameManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class BasicEnemy : MonoBehaviour
         NavAgent = GetComponent<NavMeshAgent>();
         SoundSource = GetComponent<AudioSource>();
         Player = GameObject.FindWithTag("Player");
+        GameManagerScript = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         AudioManager = GetComponent<AudioManager>();
 
         SoundSource.enabled = false;
@@ -71,6 +73,7 @@ public class BasicEnemy : MonoBehaviour
     {
         //Enemy Takes Damage from the parameter
         health -= damage;
+        GameManagerScript.bulletsHit++;
 
         //Check if enemy died
         if (health <= 0)
@@ -176,6 +179,7 @@ public class BasicEnemy : MonoBehaviour
     {
         //Start enemy death sound
         AudioManager.Play("Death");
+        GameManagerScript.totalScuttleKilled++;
 
         //Enemy death animation
         //Animation.Start();

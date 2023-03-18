@@ -37,6 +37,7 @@ public class Character : MonoBehaviour
     private EnemyManager EnemyManagerScript;
     private AudioSource SoundSource;
     private AudioManager AudioManager;
+    private GameManager GameManagerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class Character : MonoBehaviour
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
         SoundSource = GetComponent<AudioSource>();
         AudioManager = AudioManagerObj.GetComponent<AudioManager>();
+        GameManagerScript = GameObject.FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
 
         isInvincible = false;
         MaxHealth = Health;
@@ -88,6 +90,7 @@ public class Character : MonoBehaviour
 
     void OnFire()
     {
+        GameManagerScript.bulletsFired++;
         Gun.GetComponent<HandgunController>().Shoot();
     }
 
@@ -99,7 +102,7 @@ public class Character : MonoBehaviour
                 StartCoroutine(GlowChargeRecharge());
 
             CurrentGlowCharges--;
-
+            GameManagerScript.glowChargesThrown++;
             AudioManager.Play("GlowChargeThrow");
 
             GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
@@ -145,7 +148,8 @@ public class Character : MonoBehaviour
         //Cheack if Dead
         if(Health <= 0)
         {
-            AudioManager.Play("PlayerDeath");
+            AudioManager.Play("PlayerDeath"); 
+            GameManagerScript.deaths++;
             gameObject.SetActive(false);
         }
 
