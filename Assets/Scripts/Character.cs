@@ -14,6 +14,7 @@ public class Character : MonoBehaviour
     public GameObject CameraPivot;
     public GameObject EnemyManager;
     public GameObject AudioManagerObj;
+    public PauseMenu PauseScript;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -122,6 +123,11 @@ public class Character : MonoBehaviour
 
             spawnedGlowCharge.GetComponent<GlowCharge>().CreateGlowCharge(EndingPosition, ThrowDuration);
         }
+    }
+
+    void OnPause()
+    {
+        PauseScript.toggle();
     }
 
     IEnumerator GlowChargeRecharge()
