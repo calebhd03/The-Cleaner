@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,18 +48,33 @@ public class GameManager : MonoBehaviour
 
         CalculateScore();
 
+        ChangeText();
+
         ChangeScoreSlider();
     }
 
-    public void CalculateScore()
+    void CalculateScore()
     {
         finalScore = (float)(totalScuttleKilled) / totalEnemies;
-        Debug.Log(finalScore + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
+
+    void ChangeText()
+    {
+        double totalSeconds = endingTime- startingTime;
+        float minutes = TimeSpan.FromSeconds(totalSeconds).Minutes;
+        float secs = TimeSpan.FromSeconds(totalSeconds).Seconds;
+        //string.Format("{1:00}:{2:00}", minutes, secs
+        timeText.text = timeText.text + totalSeconds;
+        enemiesKilledText.text = enemiesKilledText.text + totalScuttleKilled + "/" + totalEnemies;
+        deathText.text = deathText.text + deaths;
+        accuracyText.text = accuracyText.text + ((float)bulletsHit/bulletsFired) + "%";
+        glowChargesText.text = glowChargesText.text + glowChargesThrown;
+}
 
     void ChangeScoreSlider()
     {
         //Start anim for stats popup
+        finalScreenCanvas.GetComponent<Animator>().SetTrigger("TextPopUp");
 
         //lerp to score
         StartCoroutine(MovingSlider());
@@ -73,7 +89,6 @@ public class GameManager : MonoBehaviour
             float value = Mathf.Lerp(0, finalScore, time);
             LetterSlider.value = value;
 
-            Debug.Log(value);
 
             if(value >= nextThreshold)
             {
@@ -84,6 +99,9 @@ public class GameManager : MonoBehaviour
             yield return null;
             time += Time.deltaTime;
         }
+
+        LetterSlider.value = finalScore;
+        ChangeScoreLetter(finalScore);
     }
 
 
