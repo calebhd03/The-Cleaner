@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d04d2cc7b2964e8e3c4247798df22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraPivot: {fileID: 0}
+  AudioManagerObj: {fileID: 0}
   bullet: {fileID: 3769056849220426353, guid: f58421bf12c164141a0514ead97f7fb0, type: 3}
   Player: {fileID: 0}
   muzzle: {fileID: 0}
@@ -57,7 +59,6 @@ MonoBehaviour:
   bulletSpeed: 0
   damage: 0
   maxbulletVariation: 1.9
-  worldPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1596452215302418323
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

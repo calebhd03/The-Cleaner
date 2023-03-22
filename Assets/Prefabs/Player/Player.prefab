@@ -146,7 +146,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,6 +314,8 @@ MonoBehaviour:
   GlowCharge: {fileID: 4513256501509852610, guid: 12bf16fe3d283594ba1727998c89bdd9, type: 3}
   CameraPivot: {fileID: 0}
   EnemyManager: {fileID: 0}
+  AudioManagerObj: {fileID: 0}
+  PauseScript: {fileID: 0}
   MovementSpeed: 5
   Health: 5
   InvincibleTime: 2
@@ -322,9 +324,6 @@ MonoBehaviour:
   ThrowDistance: 0
   ThrowDuration: 0
   GlowChargeRechargeDelay: 0
-  footstepSound: {fileID: 8300000, guid: 852effdc2128a124f983ba06bfe07873, type: 3}
-  damageTakenSound: {fileID: 8300000, guid: 05d8583661d7ab84a930de02501db223, type: 3}
-  deathSound: {fileID: 8300000, guid: 68b9c78032376c04a922ab32bf74582c, type: 3}
 --- !u!114 &469790045
 MonoBehaviour:
   m_ObjectHideFlags: 0
