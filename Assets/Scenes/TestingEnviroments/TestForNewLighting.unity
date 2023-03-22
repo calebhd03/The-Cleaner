@@ -6485,6 +6485,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2241099115175794892, guid: 063d529290585da4eb3eaa5d29f83330, type: 3}
+      propertyPath: m_Color.a
+      value: 0.99607843
+      objectReference: {fileID: 0}
     - target: {fileID: 2241099115175794893, guid: 063d529290585da4eb3eaa5d29f83330, type: 3}
       propertyPath: m_Name
       value: Fog

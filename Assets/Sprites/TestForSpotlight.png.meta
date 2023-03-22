@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e2fa104f5a8de03419a5b741bdb48d78
+guid: ed62a30b93385ef439a2ca50c4eaa874
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,12 +44,12 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.49476796, y: 0.40121368}
-  spritePixelsToUnits: 300
-  spriteBorder: {x: 39, y: 26, z: 42, w: 57}
+  spritePivot: {x: 0.48631707, y: 0.50872314}
+  spritePixelsToUnits: 3000
+  spriteBorder: {x: 740, y: 263, z: 787, w: 272}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -107,22 +107,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TestGun_1
+      name: TestForSpotlight_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 26
-        width: 100
-        height: 61
-      alignment: 9
-      pivot: {x: -2.3319144, y: 0.49218}
+        x: 5
+        y: 0
+        width: 527
+        height: 496
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35f9be95895fb4543a059467063dd5b6
-      internalID: 1531445792
+      spriteID: 95480983b2fcec646976746df2b0be62
+      internalID: 630701039
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TestGun_0: -2143681518
-      TestGun_1: 1531445792
+      TestForSpotlight_0: 630701039
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
