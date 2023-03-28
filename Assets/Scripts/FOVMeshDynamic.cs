@@ -6,6 +6,7 @@ public class FOVMeshDynamic : MonoBehaviour
 {
     public int sightDistance;
     public int precision;
+    public GameObject cube;
 
     private GameObject FOVMesh;
 
@@ -60,10 +61,10 @@ public class FOVMeshDynamic : MonoBehaviour
             float z = Mathf.Cos(angle);
             angle += 2 * Mathf.PI / precision;
 
-            Vector3 dir = new Vector3(transform.position.x * x, 0, transform.position.z * z);
+            Vector3 dir = new Vector3(x * sightDistance, 0, z * sightDistance);
             Ray r = new Ray(transform.position, dir);
             //Debug.Log(r + " Ray " + i);
-            //Debug.DrawRay(transform.position, dir, Color.green, 20f);
+            //Debug.DrawRay(transform.position, dir, Color.green, 2f);
 
             RaycastHit hit;
 
@@ -107,19 +108,19 @@ public class FOVMeshDynamic : MonoBehaviour
         {
             if (i < triangles.Length - 3)
             {
+                triangles[i] = nextVertice + 1;
+                triangles[i + 1] = vertices3D.Length - 1;
                 triangles[i + 2] = nextVertice;
-                triangles[i + 1] = nextVertice + 1;
-                triangles[i] = vertices3D.Length - 1;
             }
             else
             {
+                triangles[i] = 0;
+                triangles[i + 1] = vertices3D.Length - 1;
                 triangles[i + 2] = nextVertice;
-                triangles[i + 1] = 0;
-                triangles[i] = vertices3D.Length - 1;
             }
             //Debug.Log(triangles[i] + " triangles0 " + i);
-            //Debug.Log(triangles[i + 1] + " triangles1 " + i + 1);
-            //Debug.Log(triangles[i + 2] + " triangles2 " + i + 2);
+            //Debug.Log(triangles[i + 1] + " triangles1 " + (i + 1));
+            //Debug.Log(triangles[i + 2] + " triangles2 " + (i + 2));
             nextVertice += 1;
         }
     }
