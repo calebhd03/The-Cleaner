@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         startingTime = Time.time;
         totalEnemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        finalScreenCanvas.SetActive(false);
         //LetterSlider = finalScreenCanvas.GetComponent<Slider>();
     }
     private void OnTriggerEnter()
@@ -44,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     public void levelOver()
     {
+        finalScreenCanvas.SetActive(true);
+
         endingTime = Time.time;
 
         CalculateScore();
@@ -64,10 +67,10 @@ public class GameManager : MonoBehaviour
         float minutes = TimeSpan.FromSeconds(totalSeconds).Minutes;
         float secs = TimeSpan.FromSeconds(totalSeconds).Seconds;
         //string.Format("{1:00}:{2:00}", minutes, secs
-        timeText.text = timeText.text + totalSeconds;
+        timeText.text = timeText.text + minutes + ":" + secs;
         enemiesKilledText.text = enemiesKilledText.text + totalScuttleKilled + "/" + totalEnemies;
         deathText.text = deathText.text + deaths;
-        accuracyText.text = accuracyText.text + ((float)bulletsHit/bulletsFired) + "%";
+        accuracyText.text = accuracyText.text + Mathf.Round(((float)bulletsHit/bulletsFired) * 100.0f) *.01f + "%";
         glowChargesText.text = glowChargesText.text + glowChargesThrown;
 }
 
@@ -125,6 +128,6 @@ public class GameManager : MonoBehaviour
         else
             letterText.text = "F";
 
-        Instantiate(letterParticle, letterText.transform.position, Quaternion.identity);
+        //Instantiate(letterParticle, letterText.transform.position, Quaternion.identity);
     }
 }
