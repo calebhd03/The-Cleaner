@@ -10,6 +10,7 @@ public class DeformSprite : MonoBehaviour
     private Rect buttonPos1;
     private Rect buttonPos2;
 
+    private Texture2D texture2D;
     private Vector2[] startingSV;
 
     void Start()
@@ -17,7 +18,7 @@ public class DeformSprite : MonoBehaviour
         spriteR = gameObject.GetComponent<SpriteRenderer>();
         spriteM = gameObject.GetComponent<SpriteMask>();
         // Create a blank Texture and Sprite to override later on.
-        var texture2D = new Texture2D(500, 500);
+        texture2D = new Texture2D(500, 500);
         spriteR.sprite = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), Vector2.zero, 100);
         spriteM.sprite = spriteR.sprite;
 
@@ -71,6 +72,24 @@ public class DeformSprite : MonoBehaviour
             Debug.DrawRay(transform.position, dir, Color.green, 1f);
 
             RaycastHit hit;
+            if (Physics.Raycast(r, out hit, sightDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            {
+                Vector3 wall = r.GetPoint(sightDistance);
+                float distance = Vector3.Distance(hit.transform.position, transform.position);
+                float percentOfSight = distance / sightDistance;
+                sv[i] *= percentOfSight;
+                Debug.Log("wall = " + wall + ": postition = " + transform.position);
+                Debug.Log("sv " + i + " = " + sv[i] + ": percent = " + percentOfSight + ": distance = " + distance);
+                //GameObject Cube = Instantiate(cube);
+                //Cube.transform.position = hit.transform.position; 
+            }
+            else
+            {
+                sv[i].x = texture2D.width;
+                sv[i].y = texture2D.height;
+                //GameObject Cube = Instantiate(cube);
+                //Cube.transform.position = vertices3D[i - 1];
+            }
 
             sv[i].x = Mathf.Clamp(
                 (o.vertices[i].x - o.bounds.center.x -
@@ -85,23 +104,6 @@ public class DeformSprite : MonoBehaviour
                 0.0f, o.rect.height);
 
 
-            if (Physics.Raycast(r, out hit, sightDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-            {
-                Vector3 wall = r.GetPoint(sightDistance);
-                float distance = Vector3.Distance(hit.transform.position, transform.position);
-                float percentOfSight = distance / sightDistance;
-                sv[i] *= percentOfSight;
-                Debug.Log("wall = " + wall + ": postition = " + transform.position);
-                Debug.Log("sv " + i + " = " + sv[i] + ": percent = " + percentOfSight + ": distance = " + distance);
-                //GameObject Cube = Instantiate(cube);
-                //Cube.transform.position = hit.transform.position; 
-            }
-            else
-            {
-
-                //GameObject Cube = Instantiate(cube);
-                //Cube.transform.position = vertices3D[i - 1];
-            }
 
         }
 
