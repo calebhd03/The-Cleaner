@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class FogProjector : MonoBehaviour
 {
@@ -11,13 +12,13 @@ public class FogProjector : MonoBehaviour
 
     private RenderTexture prevTexture;
     private RenderTexture currTexture;
-    private Projector projector;
+    private DecalProjector projector;
 
     private float blendAmount;
 
     private void Awake()
     {
-        projector = GetComponent<Projector>();
+        projector = GetComponent<DecalProjector>();
         projector.enabled = true;
 
         prevTexture = GenerateTexture();
