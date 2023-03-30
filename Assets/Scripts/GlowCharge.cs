@@ -36,7 +36,7 @@ public class GlowCharge : MonoBehaviour
     public void CreateGlowCharge(Vector3 EP, float TD)
     {
         EndingPosition = EP;
-        ThrowDuration= TD;
+        //ThrowDuration= TD;
     }
 
     //Once the TimeAtFullCharge has been reached reduce the intesity of the SpotLight
@@ -60,6 +60,8 @@ public class GlowCharge : MonoBehaviour
     {
         Vector3 startingPosition = transform.position;
         Vector3 startingScale = Sprite.transform.localScale;
+        Animation throwing = Sprite.GetComponent<Animation>();
+        ThrowDuration = throwing.clip.length;
 
         float elapsedTime = 0;
         while (elapsedTime < 1)
@@ -67,9 +69,12 @@ public class GlowCharge : MonoBehaviour
             //Moves towards target position
             transform.position = Vector3.Lerp(startingPosition, EndingPosition, elapsedTime);
             
+            /*
+
             //Changes the Scale based on a parabolic scale
             float target_Y = startingScale.y * elapsedTime + ThrowHeight * (1 - Mathf.Pow((Mathf.Abs(0.5f - elapsedTime) / 0.5f), 2));
             Sprite.transform.localScale = new Vector3(target_Y, target_Y, 1);
+            */
 
             //Deals with time
             yield return null;

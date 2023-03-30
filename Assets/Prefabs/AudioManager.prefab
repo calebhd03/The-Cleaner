@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2344470145631221320
 MonoBehaviour:
@@ -44,10 +44,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e88b8340c08ef488ee03f353b831db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainAudioManager: 1
   sounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: WeaponShoot
+    clip: {fileID: 8300000, guid: 60629a59040da8b40b383d9013536968, type: 3}
+    volume: 0.059
+    pitch: 1.57
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: WeaponReload
+    clip: {fileID: 8300000, guid: 163bf689d20195c44810d77d810e7706, type: 3}
+    volume: 0.221
+    pitch: 1.55
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDamageTaken
+    clip: {fileID: 8300000, guid: 07c21e398bdb4424c86389bd1e458b78, type: 3}
+    volume: 0.156
+    pitch: 1.64
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: GlowChargeThrow
+    clip: {fileID: 8300000, guid: 48d1b6d61632cea4baa5427d2084f8a2, type: 3}
+    volume: 0.08
+    pitch: 0.92
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 68b9c78032376c04a922ab32bf74582c, type: 3}
+    volume: 0.188
+    pitch: 1.61
+    spatialBlend: 0
     loop: 0
     source: {fileID: 0}

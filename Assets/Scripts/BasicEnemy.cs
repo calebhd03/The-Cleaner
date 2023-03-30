@@ -85,7 +85,6 @@ public class BasicEnemy : MonoBehaviour
             //Start taken damage animation
 
             //Start damage taken sound
-            Debug.Log("PLAY DAAMAGE");
             AudioManager.Play("DamageTaken");
         }
     }
@@ -107,7 +106,7 @@ public class BasicEnemy : MonoBehaviour
         }
 
         //Only do ambient sound 10% of the time
-        if(Random.Range(0, 1) > .9)
+        if(Random.Range(0, 100) > 90)
             //idle Sound
             AudioManager.Play("Ambient");
     }

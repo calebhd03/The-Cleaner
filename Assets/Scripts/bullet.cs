@@ -9,7 +9,6 @@ public class bullet : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("bulletSpeed = " + bulletSpeed);
         Destroy(gameObject, 5f);
     }
 
@@ -29,7 +28,6 @@ public class bullet : MonoBehaviour
         }
         else if (other.CompareTag("Interactable"))
         {
-            Debug.Log("Interactable");
             Button button = other.gameObject.GetComponent<Button>();
             button.Hit(damage);
             Destroy(gameObject); // Deletes the round
