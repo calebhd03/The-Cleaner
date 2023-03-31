@@ -3233,6 +3233,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edf6894a880522c4c8a8deb605ac2a3e, type: 3}
+--- !u!1 &453933139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 653400939984853055, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+  m_PrefabInstance: {fileID: 1341708546562471351}
+  m_PrefabAsset: {fileID: 0}
+--- !u!119 &453933143
+Projector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453933139}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.1
+  m_FarClipPlane: 100
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 10
+  m_Material: {fileID: 0}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &454287796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20327,6 +20351,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839559218, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 839559218, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022964182, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1422000227, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 31d0dcc6f2dd4e4408d18036a2c93862, type: 2}
+    - target: {fileID: 1719630347, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719630347, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_RenderShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719630347, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719630347, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_VolumeLayerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719630347, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_RequiresOpaqueTextureOption
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 535136926474439073, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1341708546241062163, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -20375,10 +20439,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: FogOfWar
       objectReference: {fileID: 0}
+    - target: {fileID: 1625860210615220104, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_OcclusionCulling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625860210615220104, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 653400939984853055, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 453933143}
   m_SourcePrefab: {fileID: 100100000, guid: ce2bf158fc2638744882fb87527b0a8a, type: 3}
 --- !u!1001 &1385686552952028636
 PrefabInstance:
