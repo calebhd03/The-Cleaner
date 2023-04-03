@@ -38,9 +38,10 @@ public class GameManager : MonoBehaviour
         finalScreenCanvas.SetActive(false);
         //LetterSlider = finalScreenCanvas.GetComponent<Slider>();
     }
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
-        levelOver();
+        if (other.CompareTag("Player")) 
+            levelOver();
     }
 
     public void levelOver()
