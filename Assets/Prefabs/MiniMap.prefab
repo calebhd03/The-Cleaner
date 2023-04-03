@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2255624841169448836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5844822036398898540}
+  m_Layer: 0
+  m_Name: CameraPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5844822036398898540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255624841169448836}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 588658918090412650}
+  m_Father: {fileID: 2526634712815340062}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &6854272158444853452
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,10 +60,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 588658918090412650}
   - {fileID: 2180876245803973540}
+  - {fileID: 5844822036398898540}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5282985454522852394
 PrefabInstance:
@@ -145,11 +177,23 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2526634712815340062}
+    m_TransformParent: {fileID: 5844822036398898540}
     m_Modifications:
+    - target: {fileID: 308350096, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114360, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_Name
       value: MiniMap Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287594810271114362, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287594810271114362, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_RootOrder
@@ -157,23 +201,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.158552
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -29.65555
+      value: 6.219
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.05071
+      value: -6.216
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92384416
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.38276884
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalRotation.y
@@ -185,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 45.011
       objectReference: {fileID: 0}
     - target: {fileID: 6287594810271114365, guid: 5a0ed753fc054f347a01e7561e9757d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
