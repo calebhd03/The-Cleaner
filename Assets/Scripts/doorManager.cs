@@ -14,8 +14,4 @@ public class doorManager : MonoBehaviour
     [HideInInspector] public Vector3 startingPosition;
     [HideInInspector] public Vector3 endingPosition;
 
-    public void buttonHit()
-    {
-        StartCoroutine(door.GetComponent<Interactable>().OpenDoor());
-    }
 }

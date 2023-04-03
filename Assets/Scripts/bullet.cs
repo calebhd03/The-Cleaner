@@ -32,8 +32,8 @@ public class bullet : MonoBehaviour
         }
         else if (other.CompareTag("Interactable"))
         {
-            Button button = other.gameObject.GetComponent<Button>();
-            button.Hit(damage);
+            Interactable door = other.gameObject.GetComponentInParent<Interactable>();
+            door.Hit();
             Destroy(gameObject); // Deletes the round
         }
     }

@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    private doorManager doorManager;
+    private Interactable doorManager;
 
     public void Start()
     {
-        doorManager = GetComponentInParent<doorManager>();
+        doorManager = GetComponentInParent<Interactable>();
     }
 
-    public void Hit(float damage)
+    public void hit()
     {
-        if (!doorManager.doorCanBeToggled)
-            if (!doorManager.Open)
-                doorManager.buttonHit();
-            else { }
-        else
-            doorManager.buttonHit();
+        //doorManager.DoorMove();
     }
 }

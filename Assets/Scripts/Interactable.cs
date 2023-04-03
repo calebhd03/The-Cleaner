@@ -5,37 +5,41 @@ using UnityEngine.UIElements;
 
 public class Interactable : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool DoorStartsOpen;
 
-    private doorManager doorManager;
-    private Vector3 endingPosition;
-    private Vector3 startingPosition;
-    
+    private Animator myDoor;
+    private bool openTrigger;
+    private bool closeTrigger;
+
     void Start()
     {
-        doorManager = GetComponentInParent<doorManager>();
-        startingPosition = transform.position;
-        endingPosition = doorManager.endingPositionObject.transform.position;
+        Animator myDoor = GetComponent<Animator>();
+        Debug.Log("door " + myDoor);
+
+        if(DoorStartsOpen)
+        {
+            openTrigger = false;
+        }
+        else
+        {
+            openTrigger = true;
+        }
     }
 
     //Toggles the door
-    public IEnumerator OpenDoor()
+    public void Hit()
     {
-        doorManager.Open = !doorManager.Open;
-        Vector3 targetPosition;
-        Vector3 currentPosition = transform.position;
-
-        if (doorManager.Open)
-            targetPosition = endingPosition;
-        else 
-            targetPosition = startingPosition;
-
-        float elapsedTime = 0;
-        while (elapsedTime < 1)
+        if (openTrigger)
         {
-            transform.position = Vector3.Lerp(currentPosition, targetPosition, elapsedTime);
-            yield return null;
-            elapsedTime += Time.deltaTime * (1/doorManager.duration);
+            GetComponent<Animator>().SetTrigger("DoorOpening");
+
+            openTrigger = false;
+        }
+        else
+        {
+            GetComponent<Animator>().SetTrigger("DoorClosing");
+
+            openTrigger = true;
         }
 
     }
