@@ -18,6 +18,10 @@ public class bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
+        if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject); // Deletes the round
+        }
         // Only attempts to inflict damage if the other game object has
         // the 'Target' component
         if (other.CompareTag("Enemy"))
@@ -31,10 +35,6 @@ public class bullet : MonoBehaviour
             Button button = other.gameObject.GetComponent<Button>();
             button.Hit(damage);
             Destroy(gameObject); // Deletes the round
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 }

@@ -89,6 +89,8 @@ public class HandgunController : MonoBehaviour
                 var localDirection = spawnedbullet.transform.rotation * Vector3.right;
                 spawnedbullet.GetComponent<Rigidbody>().velocity = localDirection * bulletSpeed;
 
+                muzzle.GetComponentInChildren<Animator>().SetTrigger("GunShot");
+                
                 AudioManager.Play("WeaponShoot");
             }
 
