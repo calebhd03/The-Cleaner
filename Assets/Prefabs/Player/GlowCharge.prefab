@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4513256501107404389}
   - component: {fileID: 4513256501107404390}
   - component: {fileID: 7881264791057995451}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4513256501107404388}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: -0}
+  m_LocalPosition: {x: 0, y: 0.674, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,8 +45,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.03184688, g: 1, b: 0, a: 1}
-  m_Intensity: 0.51
-  m_Range: 3.05
+  m_Intensity: 2.17
+  m_Range: 4.56
   m_SpotAngle: 36.5
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -129,10 +129,9 @@ GameObject:
   - component: {fileID: 4513256501509852636}
   - component: {fileID: 4513256501509852611}
   - component: {fileID: 3740948222551738931}
-  - component: {fileID: 534199780430094026}
   - component: {fileID: 1474352145121043273}
   - component: {fileID: 2981723258147079042}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GlowCharge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,10 +169,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpotLight: {fileID: 4513256501107404388}
   Sprite: {fileID: 4513256502529880252}
-  TimeAtFullCharge: 3
+  LightDecaysAfterTime: 0
+  TimeAtFullCharge: 10.4
   TimeTillMinimal: 5
-  MinimalIntensity: 2.8
-  ThrowHeight: 2
+  MinimalIntensity: 0.65
+  ThrowHeight: 4
+  ThrowPower: 1
+  MaxThrowDistance: 6
   throwDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &3740948222551738931
 MonoBehaviour:
@@ -188,22 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightDistance: 3
-  precision: 24
---- !u!114 &534199780430094026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4513256501509852610}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a737e935fa0a7ea4990306751a384916, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  timeMoving: 24.21
-  StartingForce: {x: 15.32, y: 2.16, z: 0}
+  precision: 0
 --- !u!54 &1474352145121043273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -263,7 +250,7 @@ GameObject:
   - component: {fileID: 4513256502529880253}
   - component: {fileID: 4513256502529880254}
   - component: {fileID: 289585695}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TestGlowStick_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

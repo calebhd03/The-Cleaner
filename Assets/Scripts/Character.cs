@@ -96,55 +96,50 @@ public class Character : MonoBehaviour
 
     void OnThrowGlowCharge()
     {
+        //If has extraGlowCharges
         if (CurrentGlowCharges > 0)
         {
+            //If at max glowCharges
             if (CurrentGlowCharges >= MaxGlowCharges)
                 StartCoroutine(GlowChargeRecharge());
 
+            //Remove number of glowCharges
             CurrentGlowCharges--;
             GameManagerScript.glowChargesThrown++;
+
+            //Play Audio
             AudioManager.Play("GlowChargeThrow");
 
-            GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
-
-            Ray r = new Ray(transform.position, PivotScript.getMousePostition() - transform.position);
-            RaycastHit hit;
+            //Calculate throwing direction of glowCharge
             Vector3 EndingPosition;
 
-            int layerMask = ~LayerMask.GetMask("IgnoreRaycast");
-            if (Physics.Raycast(r, out hit, ThrowDistance, layerMask))
-            {
-                Debug.Log("hit -> " + hit);
-                Debug.Log("Wall, Distance: " + Vector3.Distance(hit.transform.position, transform.position));
-                //EndingPosition = hit.transform.position;
-                EndingPosition = r.GetPoint(Vector3.Distance(hit.transform.position, transform.position) - 1f);
-            }
-            else
-            {
-
-                Debug.Log("No Wall");
-                EndingPosition = r.GetPoint(ThrowDistance);
-            }
-
-            Debug.Log("Ending Position: " + EndingPosition);
+            EndingPosition = PivotScript.getMousePostition() - transform.position;
             EndingPosition.y = transform.position.y;
-            Transform startingPosition = spawnedGlowCharge.transform;
 
-            spawnedGlowCharge.GetComponent<GlowCharge>().CreateGlowCharge(EndingPosition, ThrowDuration);
+            //Create glowcharge with its value
+            GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
+            spawnedGlowCharge.GetComponent<GlowCharge>().throwDirection = EndingPosition;
+            spawnedGlowCharge.GetComponent<GlowCharge>().DoneSettingUpCharge();
         }
-    }
-
-    void OnPause()
-    {
-        PauseScript.toggle();
     }
 
     IEnumerator GlowChargeRecharge()
     {
         yield return new WaitForSeconds(GlowChargeRechargeDelay);
+
+        //increase glowcharges
         CurrentGlowCharges++;
-        if(CurrentGlowCharges != MaxGlowCharges)
+
+        //Update UI Showing glowcharges
+
+        //If not at full glowCharges
+        if (CurrentGlowCharges != MaxGlowCharges)
             StartCoroutine(GlowChargeRecharge());
+    }
+
+    void OnPause()
+    {
+        PauseScript.toggle();
     }
 
     void TookDamage()

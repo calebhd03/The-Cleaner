@@ -9,40 +9,47 @@ public class GlowCharge : MonoBehaviour
     public GameObject SpotLight;
     public GameObject Sprite;
 
-    [Header("Numbers")]
+    [Header("Light Decay")]
+    public bool LightDecaysAfterTime;
     public float TimeAtFullCharge;
     public float TimeTillMinimal;
     public float MinimalIntensity;
-    public float ThrowHeight;
 
-    private float MaximumIntensity;
+    [Header("Throwing")]
+    public float ThrowHeight;
+    public float ThrowPower;
+    public float MaxThrowDistance;
+    public Vector3 throwDirection; //Set by player
+
     private Light lightComp;
-    private Vector3 EndingPosition;
-    private float ThrowDuration;
     private Rigidbody rb;
 
-    [SerializeField] private Vector3 throwDirection;
+    private float MaximumIntensity;
+    private bool HasNotStartedMoving = true;
+
+    private void Update()
+    {
+        //Check to make sure rb is set up
+        if(rb != null)
+        {
+            //Debug.Log("Velo: " + rb.velocity);
+        }    
+    }
 
     // Start is called before the first frame update
-    void Start()
+    public void DoneSettingUpCharge()
     {
         //Setting components 
         lightComp = SpotLight.GetComponent<Light>();
         MaximumIntensity = lightComp.intensity;
         rb = GetComponent<Rigidbody>();
 
+        //Start Light Decay
+        if(LightDecaysAfterTime)
+            StartCoroutine(FullCharge());
+
+        //Apply Physics throw
         ThrowGlowCharge();
-
-        StartCoroutine(FullCharge());
-        //StartCoroutine(ThrowCharge());
-    }
-
-    //Gets called by Player
-    public void CreateGlowCharge(Vector3 EP, float TD)
-    {
-        EndingPosition = EP;
-        //ThrowDuration= TD;
-
     }
 
     //Once the TimeAtFullCharge has been reached reduce the intesity of the SpotLight
@@ -53,7 +60,7 @@ public class GlowCharge : MonoBehaviour
         float elapsedTime = 0;
         while (elapsedTime < TimeTillMinimal)
         {
-            lightComp.intensity = Mathf.Lerp(MaximumIntensity, MinimalIntensity, elapsedTime);
+            lightComp.intensity = Mathf.Lerp(MaximumIntensity, MinimalIntensity, elapsedTime/TimeTillMinimal);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -62,44 +69,39 @@ public class GlowCharge : MonoBehaviour
 
     void ThrowGlowCharge()
     {
-        throwDirection = EndingPosition - transform.position;
-        throwDirection *= 3;
-        throwDirection.y = 2f;
-        Debug.Log("throwDirection " + throwDirection);
+        //Applys throw power
+        throwDirection *= ThrowPower;
 
+        //Clamps the throw power
+        throwDirection = Vector3.ClampMagnitude(throwDirection, MaxThrowDistance);
+
+        //Applies throw height
+        throwDirection.y = ThrowHeight;
+
+        //Throws the ball
         rb.AddForce(throwDirection, ForceMode.Impulse);
+
+        StartCoroutine(WhileMoving());
     }
 
-    //Moves the charge to the target position
-    //Moves the scale of the sprite to mimic being thrown
-    IEnumerator ThrowCharge()
+    IEnumerator WhileMoving()
     {
-        Vector3 startingPosition = transform.position;
-        Vector3 startingScale = Sprite.transform.localScale;
-        Animation throwing = Sprite.GetComponent<Animation>();
-        ThrowDuration = throwing.clip.length;
-
-        float elapsedTime = 0;
-        while (elapsedTime < 1)
+        //Wait for object to start moving
+        while(HasNotStartedMoving)
         {
-            //Moves towards target position
-            transform.position = Vector3.Lerp(startingPosition, EndingPosition, elapsedTime);
-            
-            /*
-
-            //Changes the Scale based on a parabolic scale
-            float target_Y = startingScale.y * elapsedTime + ThrowHeight * (1 - Mathf.Pow((Mathf.Abs(0.5f - elapsedTime) / 0.5f), 2));
-            Sprite.transform.localScale = new Vector3(target_Y, target_Y, 1);
-            */
-
-            //Deals with time
             yield return null;
-            elapsedTime += Time.deltaTime * (1f / ThrowDuration);
         }
 
-        Sprite.transform.localScale = startingScale;
+        //Check if still moving
+        while (rb.velocity != Vector3.zero)
+        {
+            Debug.Log("still moving: " + rb.velocity);
+            yield return null;
+        }
 
-        //Creates the FOV object that deals with the FogOfWar
-        GetComponent<FOVMeshStatic>().UpdateFOVMeshValues();
+        //Removes the ability to move
+        rb.isKinematic = true;
+        rb.detectCollisions = false;
+        GetComponent<Collider>().enabled = false;
     }
 }
