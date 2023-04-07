@@ -114,13 +114,19 @@ public class Character : MonoBehaviour
             int layerMask = ~LayerMask.GetMask("IgnoreRaycast");
             if (Physics.Raycast(r, out hit, ThrowDistance, layerMask))
             {
-                EndingPosition = hit.transform.position;
+                Debug.Log("hit -> " + hit);
+                Debug.Log("Wall, Distance: " + Vector3.Distance(hit.transform.position, transform.position));
+                //EndingPosition = hit.transform.position;
+                EndingPosition = r.GetPoint(Vector3.Distance(hit.transform.position, transform.position) - 1f);
             }
             else
             {
+
+                Debug.Log("No Wall");
                 EndingPosition = r.GetPoint(ThrowDistance);
             }
 
+            Debug.Log("Ending Position: " + EndingPosition);
             EndingPosition.y = transform.position.y;
             Transform startingPosition = spawnedGlowCharge.transform;
 

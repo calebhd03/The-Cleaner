@@ -1,8 +1,7 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class GlowCharge : MonoBehaviour
 {
@@ -20,6 +19,9 @@ public class GlowCharge : MonoBehaviour
     private Light lightComp;
     private Vector3 EndingPosition;
     private float ThrowDuration;
+    private Rigidbody rb;
+
+    [SerializeField] private Vector3 throwDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +29,12 @@ public class GlowCharge : MonoBehaviour
         //Setting components 
         lightComp = SpotLight.GetComponent<Light>();
         MaximumIntensity = lightComp.intensity;
+        rb = GetComponent<Rigidbody>();
+
+        ThrowGlowCharge();
 
         StartCoroutine(FullCharge());
-        StartCoroutine(ThrowCharge());
+        //StartCoroutine(ThrowCharge());
     }
 
     //Gets called by Player
@@ -37,6 +42,7 @@ public class GlowCharge : MonoBehaviour
     {
         EndingPosition = EP;
         //ThrowDuration= TD;
+
     }
 
     //Once the TimeAtFullCharge has been reached reduce the intesity of the SpotLight
@@ -52,6 +58,16 @@ public class GlowCharge : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    void ThrowGlowCharge()
+    {
+        throwDirection = EndingPosition - transform.position;
+        throwDirection *= 3;
+        throwDirection.y = 2f;
+        Debug.Log("throwDirection " + throwDirection);
+
+        rb.AddForce(throwDirection, ForceMode.Impulse);
     }
 
     //Moves the charge to the target position
