@@ -9,12 +9,10 @@ public class Interactable : MonoBehaviour
 
     private Animator myDoor;
     private bool openTrigger;
-    private bool closeTrigger;
 
     void Start()
     {
         Animator myDoor = GetComponent<Animator>();
-        Debug.Log("door " + myDoor);
 
         if(DoorStartsOpen)
         {
