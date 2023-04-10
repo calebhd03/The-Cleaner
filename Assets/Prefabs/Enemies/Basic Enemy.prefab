@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5575507423852905578}
   - component: {fileID: 9204880269730429531}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Basic Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ NavMeshAgent:
   m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LightAttack
     clip: {fileID: 8300000, guid: 35774eac286cb854abf919f053062de3, type: 3}
-    volume: 0.241
+    volume: 0
     pitch: 1.5
     spatialBlend: 0.8
     loop: 0
@@ -297,14 +297,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8546638308654476050}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
   m_LocalPosition: {x: 0, y: 0.557, z: -0.527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1012312140175832994}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0}
 --- !u!212 &7784770794717034914
 SpriteRenderer:
   m_ObjectHideFlags: 0

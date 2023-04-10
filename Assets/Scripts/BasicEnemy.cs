@@ -10,6 +10,7 @@ public class BasicEnemy : MonoBehaviour
     [Header("Enemy Numbers")]
     public float health;
     public int Damage;
+    public bool isDead = false;
 
     [Header ("Targeting")]
     public float SpotingDistance;
@@ -176,6 +177,9 @@ public class BasicEnemy : MonoBehaviour
     //Called when enemy dies
     IEnumerator EnemyDeath()
     {
+        //Set death bool
+        isDead = true;
+
         //Start enemy death sound
         AudioManager.Play("Death");
         GameManagerScript.totalScuttleKilled++;

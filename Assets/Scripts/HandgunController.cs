@@ -73,7 +73,9 @@ public class HandgunController : MonoBehaviour
     ///Points gun at mouse world position
     public void pointGunAtMouse()
     {
-        transform.LookAt(PivotScript.getMousePostition(), Vector3.up);
+        Vector3 mousePosition = PivotScript.getMousePostition();
+        mousePosition.y = transform.position.y;
+        transform.LookAt(mousePosition, Vector3.up);
     }
 
     /// Attempts to fire the gun
