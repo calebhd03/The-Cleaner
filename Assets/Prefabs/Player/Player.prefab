@@ -446,6 +446,8 @@ MonoBehaviour:
   EnemyManager: {fileID: 0}
   AudioManagerObj: {fileID: 0}
   PauseScript: {fileID: 0}
+  healthBar: {fileID: 0}
+  GlowChargeUI: {fileID: 0}
   MovementSpeed: 5
   Health: 5
   InvincibleTime: 2
@@ -461,7 +463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3307537927455303145}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a24bc809ac36ec643b12ae9208cf1df4, type: 3}
   m_Name: 
@@ -681,7 +683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003108507138994424, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.045
+      value: 0.194
       objectReference: {fileID: 0}
     - target: {fileID: 1003108507138994424, guid: abc6c0f279994f74e91cdc2d5198668a, type: 3}
       propertyPath: m_LocalPosition.z

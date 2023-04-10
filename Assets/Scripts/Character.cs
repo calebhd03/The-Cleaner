@@ -15,6 +15,8 @@ public class Character : MonoBehaviour
     public GameObject EnemyManager;
     public GameObject AudioManagerObj;
     public PauseMenu PauseScript;
+    public healthBarScript healthBar;
+    public GlowChargeUI GlowChargeUI;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -50,7 +52,11 @@ public class Character : MonoBehaviour
         GameManagerScript = GameObject.FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
 
         isInvincible = false;
+        
+        //Set up health
         MaxHealth = Health;
+        healthBar.SetMaxHealth(MaxHealth);
+
         CurrentGlowCharges = MaxGlowCharges;
         SoundSource.enabled = false;
     }
@@ -103,6 +109,10 @@ public class Character : MonoBehaviour
             if (CurrentGlowCharges >= MaxGlowCharges)
                 StartCoroutine(GlowChargeRecharge());
 
+            //Update UI
+            else
+                GlowChargeUI.GlowChargeUsedUI(CurrentGlowCharges);
+            
             //Remove number of glowCharges
             CurrentGlowCharges--;
             GameManagerScript.glowChargesThrown++;
@@ -125,12 +135,24 @@ public class Character : MonoBehaviour
 
     IEnumerator GlowChargeRecharge()
     {
-        yield return new WaitForSeconds(GlowChargeRechargeDelay);
+        float time = 0f;
+        while(time < GlowChargeRechargeDelay)
+        {
+            yield return null;
+            time += Time.deltaTime; 
+            
+            GlowChargeUI.SetGlowChargeCooldownUI(time / GlowChargeRechargeDelay, CurrentGlowCharges);
+
+
+        }
+        //yield return new WaitForSeconds(GlowChargeRechargeDelay);
+
 
         //increase glowcharges
         CurrentGlowCharges++;
 
         //Update UI Showing glowcharges
+        GlowChargeUI.SetGlowChargeRecharged(CurrentGlowCharges);
 
         //If not at full glowCharges
         if (CurrentGlowCharges != MaxGlowCharges)
@@ -145,9 +167,10 @@ public class Character : MonoBehaviour
     void TookDamage()
     {
         //Update UI
+        healthBar.SetHealth(Health);
 
         //Cheack if Dead
-        if(Health <= 0)
+        if (Health <= 0)
         {
             AudioManager.Play("PlayerDeath"); 
             GameManagerScript.deaths++;
