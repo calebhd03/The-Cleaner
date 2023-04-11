@@ -54,7 +54,7 @@ public class WaveSpawner : MonoBehaviour
         {
             foreach (Vector3 point in SpawnPoints)
             {
-                GameObject newEnemy = Instantiate(BasicEnemy, point, Quaternion.identity, Enemies.transform);
+                GameObject newEnemy = Instantiate(BasicEnemy, point, Quaternion.Euler(new Vector3(0,-45,0)), Enemies.transform);
 
                 //makes it so they always persue the player
                 newEnemy.GetComponent<BasicEnemy>().isAlwaysAngry = true;
