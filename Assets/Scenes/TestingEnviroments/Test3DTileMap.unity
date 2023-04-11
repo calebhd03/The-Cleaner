@@ -851,6 +851,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1234973298939258320, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: bbb47f348a57c4644999cdd472c5e6aa, type: 2}
     - target: {fileID: 3307537927455303145, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -900,6 +904,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4492385178000996704, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: DashSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492385178000996704, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 534247332}
@@ -923,6 +931,14 @@ PrefabInstance:
       propertyPath: AudioManagerObj
       value: 
       objectReference: {fileID: 1263814578}
+    - target: {fileID: 4492385178000996704, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: DashRechargeTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492385178000996704, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: DashInvincibleTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7338571795320255158, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
       propertyPath: CameraPivot
       value: 
@@ -931,6 +947,10 @@ PrefabInstance:
       propertyPath: AudioManagerObj
       value: 
       objectReference: {fileID: 1263814578}
+    - target: {fileID: 8302477474599210767, guid: 951ce0d4d78983e46beb066715156ef9, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5485,6 +5505,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 713269653}
     m_Modifications:
+    - target: {fileID: 3146566842574996963, guid: edf6894a880522c4c8a8deb605ac2a3e, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 3146566842574996964, guid: edf6894a880522c4c8a8deb605ac2a3e, type: 3}
       propertyPath: m_RootOrder
       value: -1

@@ -82,6 +82,8 @@ public class GlowCharge : MonoBehaviour
         rb.AddForce(throwDirection, ForceMode.Impulse);
 
         StartCoroutine(WhileMoving());
+
+        rb.isKinematic= true;
     }
 
     IEnumerator WhileMoving()

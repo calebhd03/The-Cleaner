@@ -24,6 +24,13 @@ public class Character : MonoBehaviour
     public float InvincibleTime;
     public float invincibilityDeltaTime;
 
+    [Header("I Dash")]
+    public float DashRechargeTime;
+    public float DashInvincibleTime;
+    public float DashSpeed;
+    public bool IsDashing = false;
+
+
     [Header("Glow Charges")]
     public int MaxGlowCharges;
     public float ThrowDistance;
@@ -64,7 +71,15 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+        if (IsDashing)
+        {
+
+            //rb.MovePosition(rb.position + moveInput3D * MovementSpeed * DashSpeed * Time.fixedDeltaTime);
+            IsDashing= false;
+        }
+
+        else
+            rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
     }
 
     void OnMove(InputValue value)
@@ -181,15 +196,33 @@ public class Character : MonoBehaviour
         else
         {
             AudioManager.Play("PlayerDamageTaken");
-            StartCoroutine(BecomeTemporarilyInvincible());
+            StartCoroutine(BecomeTemporarilyInvincible(InvincibleTime));
         }
     }
 
-    private IEnumerator BecomeTemporarilyInvincible()
+    void OnDash()
+    {
+        
+        Vector3 DashDirection = new Vector3(moveInput3D.x * 10f, 2f, moveInput3D.z * 10f);
+
+        Debug.Log("DashDirection " + DashDirection);
+        //rb.isKinematic = false;
+
+        rb.AddForce(DashDirection, ForceMode.Impulse);
+        
+
+        IsDashing= true;
+        StartCoroutine(BecomeTemporarilyInvincible(DashInvincibleTime));
+
+        //rb.isKinematic = true;
+    }
+
+    private IEnumerator BecomeTemporarilyInvincible(float timeInvincible)
     {
         isInvincible = true;
-        for (float i = 0; i < InvincibleTime; i += invincibilityDeltaTime)
+        for (float i = 0; i < timeInvincible; i += invincibilityDeltaTime)
         {
+
             // Alternate between 0 and 1 scale to simulate flashing
             if (Model.transform.localScale == Vector3.one)
             {
