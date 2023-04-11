@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 3049152348756412076}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3146566842574996963
 MeshFilter:
@@ -148,6 +148,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bef446d561db2a64e8c7139c42f5b26a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ccd2ed1882edafc48ad54ac0f4a87a07, type: 2}
+    - target: {fileID: -7511558181221131132, guid: bef446d561db2a64e8c7139c42f5b26a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c1efdb250637cb48b8c7c978b19a635, type: 2}
+    - target: {fileID: -7511558181221131132, guid: bef446d561db2a64e8c7139c42f5b26a, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6ff11fd7ba979034d81c82fc405f61c8, type: 2}
     - target: {fileID: 919132149155446097, guid: bef446d561db2a64e8c7139c42f5b26a, type: 3}
       propertyPath: m_Name
       value: Wall_No_Light
