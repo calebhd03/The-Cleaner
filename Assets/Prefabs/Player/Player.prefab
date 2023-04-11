@@ -372,7 +372,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -383,7 +383,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3307537927455303145}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: bbb47f348a57c4644999cdd472c5e6aa, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -452,6 +452,12 @@ MonoBehaviour:
   Health: 5
   InvincibleTime: 2
   invincibilityDeltaTime: 0.15
+  DashRechargeTime: 1
+  DashInvincibleTime: 0.2
+  DashSpeed: 6.59
+  DashGraceTime: 0.2
+  IsDashing: 0
+  CanDash: 1
   MaxGlowCharges: 3
   ThrowDistance: 5
   ThrowDuration: 1

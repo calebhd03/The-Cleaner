@@ -28,7 +28,9 @@ public class Character : MonoBehaviour
     public float DashRechargeTime;
     public float DashInvincibleTime;
     public float DashSpeed;
+    public float DashGraceTime;
     public bool IsDashing = false;
+    public bool CanDash = true;
 
 
     [Header("Glow Charges")]
@@ -38,7 +40,7 @@ public class Character : MonoBehaviour
     public float GlowChargeRechargeDelay;
 
     private Vector3 moveInput3D;
-    private bool isInvincible;
+    private bool isInvincible = false;
     private Rigidbody rb;
     private int CurrentGlowCharges;
     private int MaxHealth;
@@ -56,7 +58,6 @@ public class Character : MonoBehaviour
         AudioManager = AudioManagerObj.GetComponent<AudioManager>();
         GameManagerScript = GameObject.FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
 
-        isInvincible = false;
         
         //Set up health
         MaxHealth = Health;
@@ -69,15 +70,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (IsDashing)
+        if (IsDashing == false)
         {
-
-            //rb.MovePosition(rb.position + moveInput3D * MovementSpeed * DashSpeed * Time.fixedDeltaTime);
-            IsDashing= false;
-        }
-
-        else
             rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+        }
     }
 
     void OnMove(InputValue value)
@@ -90,6 +86,7 @@ public class Character : MonoBehaviour
             SoundSource.enabled = true;
         else
             SoundSource.enabled = false;
+        
         
     }
 
@@ -200,19 +197,34 @@ public class Character : MonoBehaviour
 
     void OnDash()
     {
-        
-        Vector3 DashDirection = new Vector3(moveInput3D.x * 10f, 2f, moveInput3D.z * 10f);
+        if(CanDash)
+            StartCoroutine(Dash());
+    }
 
-        Debug.Log("DashDirection " + DashDirection);
-        //rb.isKinematic = false;
-
-        rb.AddForce(DashDirection, ForceMode.Impulse);
-        
-
+    IEnumerator Dash()
+    {
+        //Disable playermovement
+        CanDash =false;
         IsDashing= true;
-        StartCoroutine(BecomeTemporarilyInvincible(DashInvincibleTime));
+        rb.isKinematic = false;
 
-        //rb.isKinematic = true;
+        //find and apply the dash direction
+        Vector3 DashDirection = new Vector3(moveInput3D.x * DashSpeed, 0f, moveInput3D.z * DashSpeed);
+        rb.AddForce(DashDirection, ForceMode.Impulse);
+
+
+        //Make player invincible
+        StartCoroutine(BecomeTemporarilyInvincible(DashInvincibleTime + DashGraceTime));
+        yield return new WaitForSeconds(DashInvincibleTime);
+
+        //Reinable player movement
+        IsDashing = false;
+        rb.isKinematic = true;
+
+        //Dash Recharge
+        yield return new WaitForSeconds(DashRechargeTime - DashInvincibleTime);
+        CanDash = true;
+
     }
 
     private IEnumerator BecomeTemporarilyInvincible(float timeInvincible)

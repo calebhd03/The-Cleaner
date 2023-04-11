@@ -83,7 +83,6 @@ public class GlowCharge : MonoBehaviour
 
         StartCoroutine(WhileMoving());
 
-        rb.isKinematic= true;
     }
 
     IEnumerator WhileMoving()
