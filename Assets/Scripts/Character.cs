@@ -12,7 +12,6 @@ public class Character : MonoBehaviour
     public GameObject Model;
     public GameObject GlowCharge;
     public GameObject CameraPivot;
-    public GameObject EnemyManager;
     public GameObject AudioManagerObj;
     public PauseMenu PauseScript;
     public healthBarScript healthBar;
@@ -206,7 +205,7 @@ public class Character : MonoBehaviour
         //Disable playermovement
         CanDash =false;
         IsDashing= true;
-        rb.isKinematic = false;
+        //rb.isKinematic = false;
 
         //find and apply the dash direction
         Vector3 DashDirection = new Vector3(moveInput3D.x * DashSpeed, 0f, moveInput3D.z * DashSpeed);
@@ -219,7 +218,8 @@ public class Character : MonoBehaviour
 
         //Reinable player movement
         IsDashing = false;
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
+        rb.velocity = Vector3.zero;
 
         //Dash Recharge
         yield return new WaitForSeconds(DashRechargeTime - DashInvincibleTime);

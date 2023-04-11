@@ -15,7 +15,7 @@ public class HandgunController : MonoBehaviour
 
     public GameObject CameraPivot;
     private CameraMainScript PivotScript;
-    public GameObject AudioManagerObj;
+    public AudioManager AudioManager;
 
     [Header("Magazine")]
     public GameObject bullet;
@@ -36,7 +36,6 @@ public class HandgunController : MonoBehaviour
     private ShootState shootState = ShootState.Ready;
     private Vector3 worldPosition;
     private AudioSource soundSource;
-    private AudioManager AudioManager;
 
     // The next time that the gun is able to shoot at
     private float nextShootTime = 0;
@@ -46,7 +45,6 @@ public class HandgunController : MonoBehaviour
         remainingAmmunition = ammunition;
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
 
-        AudioManager = AudioManagerObj.GetComponent<AudioManager>();
     }
 
     void Update() 

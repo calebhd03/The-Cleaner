@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321702495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.261, z: 0}
+  m_LocalPosition: {x: 0, y: 2.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,8 +45,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.963731, b: 0.75, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Intensity: 8.19
+  m_Range: 3.91
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -347,7 +347,7 @@ Transform:
   - {fileID: 2135623473755161063}
   - {fileID: 1321702496}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8302477474599210767
 Rigidbody:
@@ -443,12 +443,11 @@ MonoBehaviour:
   Model: {fileID: 1124097788736031244}
   GlowCharge: {fileID: 4513256501509852610, guid: 12bf16fe3d283594ba1727998c89bdd9, type: 3}
   CameraPivot: {fileID: 0}
-  EnemyManager: {fileID: 0}
   AudioManagerObj: {fileID: 0}
   PauseScript: {fileID: 0}
   healthBar: {fileID: 0}
   GlowChargeUI: {fileID: 0}
-  MovementSpeed: 5
+  MovementSpeed: 7
   Health: 5
   InvincibleTime: 2
   invincibilityDeltaTime: 0.15
