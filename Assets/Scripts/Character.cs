@@ -43,7 +43,6 @@ public class Character : MonoBehaviour
     private int CurrentGlowCharges;
     private int MaxHealth;
     private CameraMainScript PivotScript;
-    private EnemyManager EnemyManagerScript;
     private AudioSource SoundSource;
     private AudioManager AudioManager;
     private GameManager GameManagerScript;
@@ -51,7 +50,6 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyManagerScript = EnemyManager.GetComponent<EnemyManager>();
         rb = GetComponent<Rigidbody>();
         PivotScript = CameraPivot.GetComponent<CameraMainScript>();
         SoundSource = GetComponent<AudioSource>();

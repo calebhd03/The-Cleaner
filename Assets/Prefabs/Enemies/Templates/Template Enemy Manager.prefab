@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1653003753062065092, guid: bc5d7a43a9eeaae45b81e1848667220d, type: 3}
       propertyPath: m_Name
-      value: Test Level Enemes Variant
+      value: Template Enemy Manager
       objectReference: {fileID: 0}
     - target: {fileID: 1653003753062065095, guid: bc5d7a43a9eeaae45b81e1848667220d, type: 3}
       propertyPath: m_RootOrder

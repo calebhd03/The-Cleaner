@@ -29,16 +29,25 @@ public class Interactable : MonoBehaviour
     {
         if (openTrigger)
         {
-            GetComponent<Animator>().SetTrigger("DoorOpening");
-
-            openTrigger = false;
+            OpenDoor();
         }
         else
         {
-            GetComponent<Animator>().SetTrigger("DoorClosing");
-
-            openTrigger = true;
+            CloseDoor();
         }
 
+    }
+
+    public void OpenDoor()
+    {
+        GetComponent<Animator>().SetTrigger("DoorOpening");
+
+        openTrigger = false;
+    }
+    public void CloseDoor()
+    {
+        GetComponent<Animator>().SetTrigger("DoorClosing");
+
+        openTrigger = true;
     }
 }

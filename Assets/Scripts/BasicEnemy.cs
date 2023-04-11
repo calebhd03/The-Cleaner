@@ -11,6 +11,7 @@ public class BasicEnemy : MonoBehaviour
     public float health;
     public int Damage;
     public bool isDead = false;
+    public bool isAlwaysAngry = false;
 
     [Header ("Targeting")]
     public float SpotingDistance;
@@ -45,7 +46,16 @@ public class BasicEnemy : MonoBehaviour
         float Distance = Vector3.Distance(Player.transform.position, transform.position);
 
         //Check if player is out of enemies PassiveDistance
-        if (isAngered)
+        if(isAlwaysAngry)
+        {
+            //Start walk sound
+            SoundSource.enabled = true;
+
+            EnemyAttack();
+
+        }
+
+        else if (isAngered)
         {
             Passived(Distance);
         }
@@ -189,6 +199,8 @@ public class BasicEnemy : MonoBehaviour
         yield return new WaitForSeconds(0f/*Animation.length*/);
 
         //Remove the enemy from the scene
+        Transform parent = transform.parent;
+        parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
         this.gameObject.SetActive(false);
     }
 }

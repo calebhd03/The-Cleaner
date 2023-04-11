@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    public GameObject Enemies;
+
+    public bool WaveSpawningRoom;
+    public Interactable NextDoor;
+    public List<Interactable> Doors;
+
+
+    private bool firstTimeEntering = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        despawnEnemies();
+        deactivateEnemies();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +26,15 @@ public class RoomManager : MonoBehaviour
         //if player leave room
         if (other.CompareTag("Player"))
         {
-            spawnEnemies();
+            if (firstTimeEntering && WaveSpawningRoom)
+            {
+                GetComponent<WaveSpawner>().waveSpawnEnemies();
+                closeAllDoors();
+                firstTimeEntering= false;
+            }
+
+            else
+                activateEnemies();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -24,26 +42,43 @@ public class RoomManager : MonoBehaviour
         //if player leave room
         if(other.CompareTag("Player"))
         {
-            despawnEnemies();
+            deactivateEnemies();
         }
     }
 
-    void spawnEnemies()
+    void activateEnemies()
     {
+        Transform EChild = Enemies.transform;
+
         //Set all enemy active
-        foreach (Transform child in transform)
+        foreach (Transform child in EChild)
         {
             if(child.GetComponent<BasicEnemy>().isDead != true)
                 child.gameObject.SetActive(true);
         }
     }
 
-    void despawnEnemies()
+    void deactivateEnemies()
     {
+        Transform EChild = Enemies.transform;
+
         //Set all enemy inactive
-        foreach (Transform child in transform)
+        foreach (Transform child in EChild)
         {
             child.gameObject.SetActive(false);
         }
+    }
+
+    void closeAllDoors()
+    {
+        foreach (Interactable door in Doors) 
+        { 
+            door.CloseDoor();
+        }    
+    }
+
+    public void openNextDoor()
+    {
+        NextDoor.OpenDoor();
     }
 }
