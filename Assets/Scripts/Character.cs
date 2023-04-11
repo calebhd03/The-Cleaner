@@ -72,6 +72,8 @@ public class Character : MonoBehaviour
         if (IsDashing == false)
         {
             rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+
+            rb.velocity = Vector3.zero;
         }
     }
 
@@ -219,7 +221,6 @@ public class Character : MonoBehaviour
         //Reinable player movement
         IsDashing = false;
         //rb.isKinematic = true;
-        rb.velocity = Vector3.zero;
 
         //Dash Recharge
         yield return new WaitForSeconds(DashRechargeTime - DashInvincibleTime);
