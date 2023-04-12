@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class FOVSpriteGenerator : MonoBehaviour
 {
