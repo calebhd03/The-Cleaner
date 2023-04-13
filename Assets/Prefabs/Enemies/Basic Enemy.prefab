@@ -122,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   Damage: 1
+  isDead: 0
+  isAlwaysAngry: 0
   SpotingDistance: 4
   PassiveDistance: 6
   TimeInBetweenAttacks: 3
@@ -137,7 +139,7 @@ AudioSource:
   m_GameObject: {fileID: 705481135547910613}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1593766629565525365, guid: 43ce8035fc165ec4188dca13efe20c9f, type: 2}
   m_audioClip: {fileID: 8300000, guid: 66d6bf72e4b64a949833d78a33cc3d64, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.071
@@ -237,6 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainAudioManager: 0
+  MixerName: MainMixer
+  GroupName: Enemy
   sounds:
   - name: Ambient
     clip: {fileID: 8300000, guid: 3568777d7621e7043857c6c4f83e0d86, type: 3}

@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static System.TimeZoneInfo;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
+using System;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -13,6 +12,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsMenu;
     public Animator transition;
     public float transitionTime = 1f;
+
+    public String MixerName;
+
+    private float playerVolume = 0f;
+    private float enemyVolume = 0f;
 
     public void toggle()
     {
@@ -29,8 +33,22 @@ public class PauseMenu : MonoBehaviour
         Background.SetActive(false);
         OptionsMenu.SetActive(false);
 
-        Time.timeScale = 1f;
+        //turn on sounds
+        //Load AudioMixer
+        AudioMixer audioMixer = null;
+        audioMixer = Resources.Load<AudioMixer>(MixerName);
 
+        if (audioMixer == null)
+            Debug.LogWarning("Mixer " + this.gameObject + " not found");
+
+        else
+        {
+            //Change volume dBs
+            audioMixer.SetFloat("PlayerVolume", playerVolume);
+            audioMixer.SetFloat("EnemyVolume", enemyVolume);
+        }
+
+        Time.timeScale = 1f;
         IsGamePaused = false;
     }
 
@@ -39,9 +57,27 @@ public class PauseMenu : MonoBehaviour
         PauseMenuUI.SetActive(true);
         Background.SetActive(true);
 
-        Time.timeScale = 0f;
 
-        IsGamePaused= true;
+        //turn off sounds
+        //Load AudioMixer
+        AudioMixer audioMixer = null;
+        audioMixer = Resources.Load<AudioMixer>(MixerName);
+
+        if (audioMixer == null)
+            Debug.LogWarning("Mixer " + this.gameObject + " not found");
+
+        else
+        {
+            //Change volume dBs
+            audioMixer.GetFloat("PlayerVolume", out playerVolume);
+            audioMixer.GetFloat("EnemyVolume", out enemyVolume);
+            audioMixer.SetFloat("PlayerVolume", -80);
+            audioMixer.SetFloat("EnemyVolume", -80);
+        }
+
+        //Resume Gameplay
+        Time.timeScale = 0f;
+        IsGamePaused = true;
     }
     public void Menu()
     {

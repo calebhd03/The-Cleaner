@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour
 {
     public bool MainAudioManager;
 
+    public String MixerName;
+    public String GroupName;
+
     public Sound[] sounds;
 
     public static AudioManager instance;
@@ -39,6 +42,25 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.spatialBlend = s.spatialBlend;
             s.source.playOnAwake = false;
+
+
+            //Load AudioMixer
+            AudioMixer audioMixer = null;
+            audioMixer = Resources.Load<AudioMixer>(MixerName);
+
+            if(audioMixer == null )
+                Debug.LogWarning("Mixer " + this.gameObject + " not found");
+            
+            else
+            {
+                //Find AudioMixerGroup you want to load
+                AudioMixerGroup[] audioMixGroup = audioMixer.FindMatchingGroups(GroupName);
+
+                //Assign the AudioMixerGroup to AudioSource (Use first index)
+                s.source.outputAudioMixerGroup = audioMixGroup[0];
+            }
+
+            
         }
     }
 
