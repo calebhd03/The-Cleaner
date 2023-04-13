@@ -5,16 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Samples/Universal RP/14.0.6/URP Package Samples/Shaders/Lit/Lit.unity
-    guid: 9acd9e0559b154c41b9864a33e171300
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BuildScenes/StartMenuScene.unity
     guid: afb67f85c59876141af20ef0552510e7
   - enabled: 1
     path: Assets/Scenes/BuildScenes/Level 01.unity
     guid: 4e38a509d81e5af4faf7eb99f29cf339
-  - enabled: 0
-    path: Assets/Scenes/TestingEnviroments/TestForIsometric3D.unity
-    guid: c9820e8e7cbcfec4492fca0dc3d8aafc
   m_configObjects: {}
