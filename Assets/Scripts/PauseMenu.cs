@@ -43,23 +43,7 @@ public class PauseMenu : MonoBehaviour
         Background.SetActive(false);
         OptionsMenu.SetActive(false);
 
-        //turn on sounds
-        //Load AudioMixer
-        AudioMixer audioMixer = null;
-        audioMixer = Resources.Load<AudioMixer>(MixerName);
-
-        if (audioMixer == null)
-            Debug.LogWarning("Mixer " + this.gameObject + " not found");
-
-        else
-        {
-            //Change volume dBs
-            audioMixer.SetFloat("PlayerVolume", playerVolume);
-            audioMixer.SetFloat("EnemyVolume", enemyVolume);
-        }
-
-        //Enable character movement
-        character.EnablePlayerInput();
+        character.SwitchToPlayer();
 
         //Resume Gameplay
         Time.timeScale = 1f;
@@ -70,27 +54,6 @@ public class PauseMenu : MonoBehaviour
     {
         PauseMenuUI.SetActive(true);
         Background.SetActive(true);
-
-
-        //turn off sounds
-        //Load AudioMixer
-        AudioMixer audioMixer = null;
-        audioMixer = Resources.Load<AudioMixer>(MixerName);
-
-        if (audioMixer == null)
-            Debug.LogWarning("Mixer " + this.gameObject + " not found");
-
-        else
-        {
-            //Change volume dBs
-            audioMixer.GetFloat("PlayerVolume", out playerVolume);
-            audioMixer.GetFloat("EnemyVolume", out enemyVolume);
-            audioMixer.SetFloat("PlayerVolume", -80);
-            audioMixer.SetFloat("EnemyVolume", -80);
-        }
-
-        //Disable character movement
-        character.DisablePlayerInput();
 
         //Pause Gameplay
         Time.timeScale = 0f;

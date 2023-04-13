@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class Character : MonoBehaviour
     private AudioSource SoundSource;
     private AudioManager AudioManager;
     private GameManager GameManagerScript;
+    private float playerVolume;
+    private float enemyVolume;
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +84,7 @@ public class Character : MonoBehaviour
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
 
         //Footstep Sound
-        if (moveInput.x > 0 || moveInput.y > 0)
+        if (moveInput.x != 0 || moveInput.y != 0)
             SoundSource.enabled = true;
         else
             SoundSource.enabled = false;
@@ -169,7 +173,52 @@ public class Character : MonoBehaviour
 
     void OnPause()
     {
+        SwitchToUI();
         PauseScript.toggle();
+    }
+
+    public void SwitchToUI()
+    {
+        //turn off sounds
+        //Load AudioMixer
+        AudioMixer audioMixer = null;
+        audioMixer = Resources.Load<AudioMixer>("MainMixer");
+
+        if (audioMixer == null)
+            Debug.LogWarning("Mixer " + this.gameObject + " not found");
+
+        else
+        {
+            //Change volume dBs
+            audioMixer.GetFloat("PlayerVolume", out playerVolume);
+            audioMixer.GetFloat("EnemyVolume", out enemyVolume);
+            audioMixer.SetFloat("PlayerVolume", -80);
+            audioMixer.SetFloat("EnemyVolume", -80);
+        }
+
+        DisablePlayerInput();
+    }
+
+    public void SwitchToPlayer()
+    {
+        //turn on sounds
+        //Load AudioMixer
+        AudioMixer audioMixer = null;
+        audioMixer = Resources.Load<AudioMixer>("MainMixer");
+
+        if (audioMixer == null)
+            Debug.LogWarning("Mixer " + this.gameObject + " not found");
+
+        else
+        {
+            //Change volume dBs
+            audioMixer.SetFloat("PlayerVolume", playerVolume);
+            audioMixer.SetFloat("EnemyVolume", enemyVolume);
+        }
+
+        //Enable character movement
+        EnablePlayerInput();
+
     }
 
     public void EnablePlayerInput()
@@ -193,9 +242,7 @@ public class Character : MonoBehaviour
         //Cheack if Dead
         if (Health <= 0)
         {
-            AudioManager.Play("PlayerDeath"); 
-            GameManagerScript.deaths++;
-            gameObject.SetActive(false);
+            Died();
         }
 
         //Make invincible
@@ -204,6 +251,19 @@ public class Character : MonoBehaviour
             AudioManager.Play("PlayerDamageTaken");
             StartCoroutine(BecomeTemporarilyInvincible(InvincibleTime));
         }
+    }
+    void Died()
+    {
+
+        AudioManager.Play("PlayerDeath");
+        GameManagerScript.deaths++;
+        Time.timeScale = 0f;
+        Model.SetActive(false);
+        SwitchToUI();
+        //play death animation
+        //play death particle
+
+        GameManagerScript.levelOver();
     }
 
     void OnDash()

@@ -1,12 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Animator transition;
+    public Character characterScript;
+
     public GameObject finalScreenCanvas;
     public Slider LetterSlider;
     public TextMeshProUGUI letterText;
@@ -55,6 +58,28 @@ public class GameManager : MonoBehaviour
         ChangeText();
 
         ChangeScoreSlider();
+    }
+
+    public void RestartLevel()
+    {
+        StartCoroutine(LoadLevel());
+    }
+
+    IEnumerator LoadLevel()
+    {
+        //play animation
+        transition.SetTrigger("Start");
+
+        //wait
+        yield return new WaitForSecondsRealtime(1f);
+
+        SceneManager.LoadScene("Level 01");
+
+        //load scene
+        Time.timeScale = 1f;
+
+        //Reinable player input
+        characterScript.SwitchToPlayer();
     }
 
     void CalculateScore()

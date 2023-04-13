@@ -396,7 +396,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1.88}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.68, z: 0}
 --- !u!114 &977346629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   invincibilityDeltaTime: 0.15
   DashRechargeTime: 1
   DashInvincibleTime: 0.2
-  DashSpeed: 6.59
+  DashSpeed: 15
   DashGraceTime: 0.2
   IsDashing: 0
   CanDash: 1
