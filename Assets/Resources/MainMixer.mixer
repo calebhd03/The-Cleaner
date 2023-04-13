@@ -82,8 +82,12 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: b92c072bb6866744fb2894e4f137511f
+    name: EnemyVolume
   - guid: 310a797321105724d903b8116058dcda
     name: Volume
+  - guid: d1a66939650a8224cb09fee85e83010c
+    name: PlayerVolume
   m_AudioMixerGroupViews:
   - guids:
     - 280db3bdd1dc37e49a7f2d227e96885b
