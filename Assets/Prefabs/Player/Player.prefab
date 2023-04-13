@@ -448,7 +448,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   GlowChargeUI: {fileID: 0}
   MovementSpeed: 7
-  Health: 5
+  Health: 6
   InvincibleTime: 2
   invincibilityDeltaTime: 0.15
   DashRechargeTime: 1
@@ -485,7 +485,7 @@ AudioSource:
   m_GameObject: {fileID: 3307537927455303145}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4451656253947487395, guid: 43ce8035fc165ec4188dca13efe20c9f, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7443cdc0af408c944ada88b37769c467, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.128
