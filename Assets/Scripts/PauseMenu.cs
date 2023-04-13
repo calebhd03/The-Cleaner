@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.TextCore.Text;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject Background;
     public GameObject OptionsMenu;
     public Animator transition;
+    public Character character;
     public float transitionTime = 1f;
 
     public String MixerName;
@@ -18,13 +20,21 @@ public class PauseMenu : MonoBehaviour
     private float playerVolume = 0f;
     private float enemyVolume = 0f;
 
-    public void toggle()
+    //returns true if paused
+    //returns false if resume
+    public bool toggle()
     {
         Debug.Log("PAUSED");
         if (IsGamePaused)
+        {
             Resume();
+            return false;
+        }
         else
+        {
             Pause();
+            return true;
+        }
     }
 
     public void Resume()
@@ -48,6 +58,10 @@ public class PauseMenu : MonoBehaviour
             audioMixer.SetFloat("EnemyVolume", enemyVolume);
         }
 
+        //Enable character movement
+        character.EnablePlayerInput();
+
+        //Resume Gameplay
         Time.timeScale = 1f;
         IsGamePaused = false;
     }
@@ -75,7 +89,10 @@ public class PauseMenu : MonoBehaviour
             audioMixer.SetFloat("EnemyVolume", -80);
         }
 
-        //Resume Gameplay
+        //Disable character movement
+        character.DisablePlayerInput();
+
+        //Pause Gameplay
         Time.timeScale = 0f;
         IsGamePaused = true;
     }

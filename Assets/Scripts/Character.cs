@@ -172,6 +172,19 @@ public class Character : MonoBehaviour
         PauseScript.toggle();
     }
 
+    public void EnablePlayerInput()
+    {
+        PlayerInput input = GetComponent<PlayerInput>();
+        input.actions.FindActionMap("Player").Enable();
+        input.actions.FindActionMap("UI").Disable();
+    }
+    public void DisablePlayerInput()
+    {
+        PlayerInput input = GetComponent<PlayerInput>();
+        input.actions.FindActionMap("Player").Disable();
+        input.actions.FindActionMap("UI").Enable();
+    }
+
     void TookDamage()
     {
         //Update UI
