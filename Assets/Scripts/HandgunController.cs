@@ -11,6 +11,7 @@ public class HandgunController : MonoBehaviour
     public GameObject CameraPivot;
     private CameraMainScript PivotScript;
     public AudioManager AudioManager;
+    public GameObject ShootParticle;
 
     [Header("Magazine")]
     public GameObject bullet;
@@ -84,6 +85,11 @@ public class HandgunController : MonoBehaviour
                 var localDirection = spawnedbullet.transform.rotation * Vector3.right;
                 spawnedbullet.GetComponent<Rigidbody>().velocity = localDirection * bulletSpeed;
 
+
+                //Spawn particle
+                Instantiate(ShootParticle, muzzle.transform);
+
+                //Plays animation
                 muzzle.GetComponentInChildren<Animator>().SetTrigger("GunShot");
                 
                 AudioManager.Play("WeaponShoot");
