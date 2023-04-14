@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 public class Character : MonoBehaviour
 {
     [Header("Game Objects")]
-    public GameObject Gun;
+    public HandgunController HandgunController;
     public GameObject Model;
     public GameObject GlowCharge;
     public GameObject CameraPivot;
@@ -109,7 +109,12 @@ public class Character : MonoBehaviour
     void OnFire()
     {
         GameManagerScript.bulletsFired++;
-        Gun.GetComponent<HandgunController>().Shoot();
+        HandgunController.Shoot();
+    }
+
+    void OnReload()
+    {
+        HandgunController.Reload();
     }
 
     void OnThrowGlowCharge()

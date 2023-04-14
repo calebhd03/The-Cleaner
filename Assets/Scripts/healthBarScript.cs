@@ -1,27 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class healthBarScript : MonoBehaviour
 {
-    public Image fill;
-    public Slider slider;
-    public Gradient gradient;
+    public List<Image> healthImages = new List<Image>();
 
 
     public void SetMaxHealth(float health)
     {
-        slider.maxValue = health;
-        slider.value = health;
-
-        fill.color = gradient.Evaluate(1f);
+        foreach (Image image in healthImages)
+        {
+            Color color = image.color;
+            image.color = new Color(color.r, color.g, color.b, 1f);
+        }
     }
 
     public void SetHealth(float health)
     {
-        slider.value = health;
-        
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        if (health < 0)
+            return;
+
+        for(int i = healthImages.Count-1; i>=health; i--)
+        {
+            Color color = healthImages[i].color;
+            healthImages[i].color = new Color(color.r, color.g, color.b, 0f);
+        }
     }
 }

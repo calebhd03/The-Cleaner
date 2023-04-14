@@ -94,7 +94,6 @@ public class BasicEnemy : MonoBehaviour
     //Enemy has made collided with player
     public void HitPlayer()
     {
-        Debug.Log("HIT");
         //Start light attack sound
 
         //Used for attack delay
