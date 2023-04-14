@@ -1,10 +1,13 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BasicEnemy : MonoBehaviour
 {
+    public Collider AttackBox;
+
     [Header("Enemy Numbers")]
     public float health;
     public int Damage;
@@ -42,42 +45,65 @@ public class BasicEnemy : MonoBehaviour
     }
     private void Update()
     {
-        //Finds the distance betweent the player and the enemy
-        float Distance = Vector3.Distance(Player.transform.position, transform.position);
-
-        //Check if player is out of enemies PassiveDistance
-        if(isAlwaysAngry)
+        
+        if (isDead != true)
         {
-            Angered(Distance);
-        }
+            //Finds the distance betweent the player and the enemy
+            float Distance = Vector3.Distance(Player.transform.position, transform.position);
 
-        else
-        {
-            CheckIfPassiveOrAngry(Distance);
 
-            if (isAngered)
+            //Check if player is out of enemies PassiveDistance
+            if (isAlwaysAngry)
             {
                 Angered(Distance);
             }
+
             else
             {
-                Passived(Distance);
+                CheckIfPassiveOrAngry(Distance);
+
+                if (isAngered)
+                {
+                    Angered(Distance);
+                }
+                else
+                {
+                    Passived(Distance);
+                }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Animator.SetBool("Attack", true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Animator.SetBool("Attack", false);
         }
 
     }
 
-
     //Enemy has made collided with player
     public void HitPlayer()
     {
-        //Start attack animation
-
+        Debug.Log("HIT");
         //Start light attack sound
 
         //Used for attack delay
         IsReadyToAttack = false;
+        //Start attack animation
+
         StartCoroutine(ReadyToAttackDelay());
+
+        //Animator.SetBool("Attack", false);
     }
 
     //Enemy has been hit by weapon
@@ -90,7 +116,7 @@ public class BasicEnemy : MonoBehaviour
         //Check if enemy died
         if (health <= 0)
         {
-            StartCoroutine(EnemyDeath());
+            EnemyDeath();
         }
         else
         {
@@ -135,8 +161,7 @@ public class BasicEnemy : MonoBehaviour
             AudioManager.Play("Ambient");
 
         //Stop walk animation
-        Animator.SetBool("WithinRange", false);
-        Debug.Log("Not Withing Range");
+        Animator.SetBool("Moving", false);
     }
 
     //Enemy is no targeting player
@@ -147,18 +172,25 @@ public class BasicEnemy : MonoBehaviour
         //Start walk sound
         SoundSource.enabled = true;
 
-        //Start walk animation
-        Animator.SetBool("WithinRange", true);
-        Debug.Log("Withing Range");
 
         //Set animator direction
-        Vector3 direction = NavAgent.destination - transform.position;
-        Animator.SetFloat("MoveX", NavAgent.velocity.x);
+        Vector3 direction = Vector3.ClampMagnitude(NavAgent.velocity, 1);
+        Animator.SetFloat("MoveX", direction.x);
         Animator.SetFloat("MoveZ", direction.z);
-        Debug.Log("Direction " + direction);
+        
+        //Checks if enemy is not moving
+        if(direction.x == 0 && direction.z == 0) 
+        { 
+           Animator.SetBool("Moving", false);
+        }
+        else
+        {
+            //Start walk animation
+            Animator.SetBool("Moving", true);
+        }
     }
 
-    void AttackPlayer(Vector3 targetPosition)
+    void WaitingForPlayer(Vector3 targetPosition)
     {
         //Play attack animation
 
@@ -177,7 +209,7 @@ public class BasicEnemy : MonoBehaviour
             Ray r = new Ray(Player.transform.position, dir);
             Vector3 targetPosition = r.GetPoint(AttackWaitingDistance);
 
-            AttackPlayer(targetPosition);
+            WaitingForPlayer(targetPosition);
         }
 
         //Enemy is attacking player
@@ -202,7 +234,7 @@ public class BasicEnemy : MonoBehaviour
     }
 
     //Called when enemy dies
-    IEnumerator EnemyDeath()
+    void EnemyDeath()
     {
         //Set death bool
         isDead = true;
@@ -212,12 +244,15 @@ public class BasicEnemy : MonoBehaviour
         GameManagerScript.totalScuttleKilled++;
 
         //Enemy death animation
-        //Animation.Start();
-        yield return new WaitForSeconds(0f/*Animation.length*/);
+        Animator.SetBool("Died", true);
+
+        //Stop the NavMeshAgent
+        NavAgent.isStopped = true;
 
         //Remove the enemy from the scene
         Transform parent = transform.parent;
         parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
-        this.gameObject.SetActive(false);
+        Destroy(GetComponent<Collider>());
+        //this.gameObject.SetActive(false);
     }
 }
