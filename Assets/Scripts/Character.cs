@@ -72,9 +72,10 @@ public class Character : MonoBehaviour
     {
         if (IsDashing == false)
         {
-            rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+            //rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+            //rb.AddForce(moveInput3D * MovementSpeed * Time.fixedDeltaTime, ForceMode.Impulse);
 
-            rb.velocity = Vector3.zero;
+            rb.velocity = moveInput3D * MovementSpeed;
         }
     }
 
