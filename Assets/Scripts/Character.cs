@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 public class Character : MonoBehaviour
 {
     [Header("Game Objects")]
-    public GameObject Gun;
+    public HandgunController HandgunController;
     public GameObject Model;
     public GameObject GlowCharge;
     public GameObject CameraPivot;
@@ -72,9 +72,10 @@ public class Character : MonoBehaviour
     {
         if (IsDashing == false)
         {
-            rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+            //rb.MovePosition(rb.position + moveInput3D * MovementSpeed * Time.fixedDeltaTime);
+            //rb.AddForce(moveInput3D * MovementSpeed * Time.fixedDeltaTime, ForceMode.Impulse);
 
-            rb.velocity = Vector3.zero;
+            rb.velocity = moveInput3D * MovementSpeed;
         }
     }
 
@@ -109,7 +110,12 @@ public class Character : MonoBehaviour
     void OnFire()
     {
         GameManagerScript.bulletsFired++;
-        Gun.GetComponent<HandgunController>().Shoot();
+        HandgunController.Shoot();
+    }
+
+    void OnReload()
+    {
+        HandgunController.Reload();
     }
 
     void OnThrowGlowCharge()

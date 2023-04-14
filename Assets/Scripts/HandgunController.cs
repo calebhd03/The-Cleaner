@@ -12,6 +12,7 @@ public class HandgunController : MonoBehaviour
     private CameraMainScript PivotScript;
     public AudioManager AudioManager;
     public GameObject ShootParticle;
+    public AmmoBarScript ammobar;
 
     [Header("Magazine")]
     public GameObject bullet;
@@ -55,8 +56,10 @@ public class HandgunController : MonoBehaviour
             case ShootState.Reloading:
                 // If the gun has finished reloading...
                 if(Time.time > nextShootTime) {
+                    //Gun is ready to reload
                     remainingAmmunition = ammunition;
                     shootState = ShootState.Ready;
+                    ammobar.SetReload();
                 }
                 break;
         }
@@ -91,12 +94,18 @@ public class HandgunController : MonoBehaviour
 
                 //Plays animation
                 muzzle.GetComponentInChildren<Animator>().SetTrigger("GunShot");
-                
+
+                //Plays audio
                 AudioManager.Play("WeaponShoot");
             }
 
             remainingAmmunition--;
-            if(remainingAmmunition > 0) {
+
+            //Remove UI
+            ammobar.SetAmmo(remainingAmmunition);
+
+            //Wait for firerate
+            if (remainingAmmunition > 0) {
                 nextShootTime = Time.time + (1 / fireRate);
                 shootState = ShootState.Shooting;
             } else {

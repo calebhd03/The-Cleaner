@@ -17,9 +17,6 @@ public class PauseMenu : MonoBehaviour
 
     public String MixerName;
 
-    private float playerVolume = 0f;
-    private float enemyVolume = 0f;
-
     //returns true if paused
     //returns false if resume
     public bool toggle()

@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class BasicEnemy : MonoBehaviour
 {
+    public Collider AttackBox;
+
     [Header("Enemy Numbers")]
     public float health;
     public int Damage;
@@ -24,6 +26,7 @@ public class BasicEnemy : MonoBehaviour
     private GameObject Player;
     private AudioManager AudioManager;
     private GameManager GameManagerScript;
+    private Animator Animator;
 
     // Start is called before the first frame update
     void Start()
@@ -34,46 +37,70 @@ public class BasicEnemy : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         GameManagerScript = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         AudioManager = GetComponent<AudioManager>();
+        Animator = GetComponent<Animator>();
 
         SoundSource.enabled = false;
     }
     private void Update()
     {
-        //Finds the distance betweent the player and the enemy
-        float Distance = Vector3.Distance(Player.transform.position, transform.position);
-
-        //Check if player is out of enemies PassiveDistance
-        if(isAlwaysAngry)
+        
+        if (isDead != true)
         {
-            //Start walk sound
-            SoundSource.enabled = true;
+            //Finds the distance betweent the player and the enemy
+            float Distance = Vector3.Distance(Player.transform.position, transform.position);
 
-            EnemyAttack();
 
+            //Check if player is out of enemies PassiveDistance
+            if (isAlwaysAngry)
+            {
+                Angered(Distance);
+            }
+
+            else
+            {
+                CheckIfPassiveOrAngry(Distance);
+
+                if (isAngered)
+                {
+                    Angered(Distance);
+                }
+                else
+                {
+                    Passived(Distance);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            Animator.SetBool("Attack", true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Animator.SetBool("Attack", false);
         }
 
-        else if (isAngered)
-        {
-            Passived(Distance);
-        }
-
-        //Check if player is inside of enemies SpotingDistance
-        else if (!isAngered && Distance < SpotingDistance)
-        {
-            Angered(Distance);
-        }
     }
 
     //Enemy has made collided with player
     public void HitPlayer()
     {
-        //Start attack animation
-
         //Start light attack sound
 
         //Used for attack delay
         IsReadyToAttack = false;
+        //Start attack animation
+
         StartCoroutine(ReadyToAttackDelay());
+
+        //Animator.SetBool("Attack", false);
     }
 
     //Enemy has been hit by weapon
@@ -86,7 +113,7 @@ public class BasicEnemy : MonoBehaviour
         //Check if enemy died
         if (health <= 0)
         {
-            StartCoroutine(EnemyDeath());
+            EnemyDeath();
         }
         else
         {
@@ -97,11 +124,9 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-
-    //Enemy is no longer targeting player
-    private void Passived(float Distance)
+    private void CheckIfPassiveOrAngry(float Distance)
     {
-        if(Distance > PassiveDistance)
+        if (Distance > PassiveDistance)
         {
             //Reassign enemy booleans
             isAngered = false;
@@ -110,19 +135,9 @@ public class BasicEnemy : MonoBehaviour
             //Stop the NavMeshAgent
             NavAgent.isStopped = true;
 
-            //Start idle animation
         }
 
-        //Only do ambient sound 10% of the time
-        if(Random.Range(0, 100) > 90)
-            //idle Sound
-            AudioManager.Play("Ambient");
-    }
-
-    //Enemy is no targeting player
-    private void Angered(float Distance)
-    {
-        if (Distance > PassiveDistance)
+        else if(Distance < SpotingDistance)
         {
             //Reassign enemy booleans
             isAngered = true;
@@ -130,16 +145,49 @@ public class BasicEnemy : MonoBehaviour
             //Start the NavMeshAgent
             NavAgent.isStopped = false;
 
-            //Start walk animation
         }
+    }
+
+    //Enemy Animation
+    //Enemy is no longer targeting player
+    private void Passived(float Distance)
+    {
+        //Only do ambient sound 10% of the time
+        if (Random.Range(0, 100) > 90)
+            //idle Sound
+            AudioManager.Play("Ambient");
+
+        //Stop walk animation
+        Animator.SetBool("Moving", false);
+    }
+
+    //Enemy is no targeting player
+    private void Angered(float Distance)
+    {
+        EnemyAttack();
 
         //Start walk sound
         SoundSource.enabled = true;
 
-        EnemyAttack();
+
+        //Set animator direction
+        Vector3 direction = Vector3.ClampMagnitude(NavAgent.velocity, 1);
+        Animator.SetFloat("MoveX", direction.x);
+        Animator.SetFloat("MoveZ", direction.z);
+        
+        //Checks if enemy is not moving
+        if(direction.x == 0 && direction.z == 0) 
+        { 
+           Animator.SetBool("Moving", false);
+        }
+        else
+        {
+            //Start walk animation
+            Animator.SetBool("Moving", true);
+        }
     }
 
-    void AttackPlayer(Vector3 targetPosition)
+    void WaitingForPlayer(Vector3 targetPosition)
     {
         //Play attack animation
 
@@ -158,7 +206,7 @@ public class BasicEnemy : MonoBehaviour
             Ray r = new Ray(Player.transform.position, dir);
             Vector3 targetPosition = r.GetPoint(AttackWaitingDistance);
 
-            AttackPlayer(targetPosition);
+            WaitingForPlayer(targetPosition);
         }
 
         //Enemy is attacking player
@@ -166,6 +214,7 @@ public class BasicEnemy : MonoBehaviour
         {
             NavAgent.SetDestination(Player.transform.position);
         }
+
 
         //FootstepSound
         if (NavAgent.velocity.x > 0 || NavAgent.velocity.z > 0)
@@ -182,7 +231,7 @@ public class BasicEnemy : MonoBehaviour
     }
 
     //Called when enemy dies
-    IEnumerator EnemyDeath()
+    void EnemyDeath()
     {
         //Set death bool
         isDead = true;
@@ -192,12 +241,15 @@ public class BasicEnemy : MonoBehaviour
         GameManagerScript.totalScuttleKilled++;
 
         //Enemy death animation
-        //Animation.Start();
-        yield return new WaitForSeconds(0f/*Animation.length*/);
+        Animator.SetBool("Died", true);
+
+        //Stop the NavMeshAgent
+        NavAgent.isStopped = true;
 
         //Remove the enemy from the scene
         Transform parent = transform.parent;
         parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
-        this.gameObject.SetActive(false);
+        Destroy(GetComponent<Collider>());
+        //this.gameObject.SetActive(false);
     }
 }
