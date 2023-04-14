@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,6 +25,7 @@ public class BasicEnemy : MonoBehaviour
     private GameObject Player;
     private AudioManager AudioManager;
     private GameManager GameManagerScript;
+    private Animator Animator;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class BasicEnemy : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         GameManagerScript = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         AudioManager = GetComponent<AudioManager>();
+        Animator = GetComponent<Animator>();
 
         SoundSource.enabled = false;
     }
@@ -45,24 +48,25 @@ public class BasicEnemy : MonoBehaviour
         //Check if player is out of enemies PassiveDistance
         if(isAlwaysAngry)
         {
-            //Start walk sound
-            SoundSource.enabled = true;
-
-            EnemyAttack();
-
-        }
-
-        else if (isAngered)
-        {
-            Passived(Distance);
-        }
-
-        //Check if player is inside of enemies SpotingDistance
-        else if (!isAngered && Distance < SpotingDistance)
-        {
             Angered(Distance);
         }
+
+        else
+        {
+            CheckIfPassiveOrAngry(Distance);
+
+            if (isAngered)
+            {
+                Angered(Distance);
+            }
+            else
+            {
+                Passived(Distance);
+            }
+        }
+
     }
+
 
     //Enemy has made collided with player
     public void HitPlayer()
@@ -97,11 +101,9 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-
-    //Enemy is no longer targeting player
-    private void Passived(float Distance)
+    private void CheckIfPassiveOrAngry(float Distance)
     {
-        if(Distance > PassiveDistance)
+        if (Distance > PassiveDistance)
         {
             //Reassign enemy booleans
             isAngered = false;
@@ -110,19 +112,9 @@ public class BasicEnemy : MonoBehaviour
             //Stop the NavMeshAgent
             NavAgent.isStopped = true;
 
-            //Start idle animation
         }
 
-        //Only do ambient sound 10% of the time
-        if(Random.Range(0, 100) > 90)
-            //idle Sound
-            AudioManager.Play("Ambient");
-    }
-
-    //Enemy is no targeting player
-    private void Angered(float Distance)
-    {
-        if (Distance > PassiveDistance)
+        else if(Distance < SpotingDistance)
         {
             //Reassign enemy booleans
             isAngered = true;
@@ -130,13 +122,40 @@ public class BasicEnemy : MonoBehaviour
             //Start the NavMeshAgent
             NavAgent.isStopped = false;
 
-            //Start walk animation
         }
+    }
+
+    //Enemy Animation
+    //Enemy is no longer targeting player
+    private void Passived(float Distance)
+    {
+        //Only do ambient sound 10% of the time
+        if (Random.Range(0, 100) > 90)
+            //idle Sound
+            AudioManager.Play("Ambient");
+
+        //Stop walk animation
+        Animator.SetBool("WithinRange", false);
+        Debug.Log("Not Withing Range");
+    }
+
+    //Enemy is no targeting player
+    private void Angered(float Distance)
+    {
+        EnemyAttack();
 
         //Start walk sound
         SoundSource.enabled = true;
 
-        EnemyAttack();
+        //Start walk animation
+        Animator.SetBool("WithinRange", true);
+        Debug.Log("Withing Range");
+
+        //Set animator direction
+        Vector3 direction = NavAgent.destination - transform.position;
+        Animator.SetFloat("MoveX", NavAgent.velocity.x);
+        Animator.SetFloat("MoveZ", direction.z);
+        Debug.Log("Direction " + direction);
     }
 
     void AttackPlayer(Vector3 targetPosition)
@@ -166,6 +185,7 @@ public class BasicEnemy : MonoBehaviour
         {
             NavAgent.SetDestination(Player.transform.position);
         }
+
 
         //FootstepSound
         if (NavAgent.velocity.x > 0 || NavAgent.velocity.z > 0)
