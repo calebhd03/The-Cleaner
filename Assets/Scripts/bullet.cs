@@ -7,6 +7,7 @@ public class bullet : MonoBehaviour
     public float damage; 
     public float bulletSpeed;
 
+
     void Awake()
     {
         Destroy(gameObject, 5f);
@@ -32,8 +33,8 @@ public class bullet : MonoBehaviour
         }
         else if (other.CompareTag("Interactable"))
         {
-            Interactable door = other.gameObject.GetComponentInParent<Interactable>();
-            door.Hit();
+            Button button = other.gameObject.GetComponent<Button>();
+            button.hit();
             Destroy(gameObject); // Deletes the round
         }
     }

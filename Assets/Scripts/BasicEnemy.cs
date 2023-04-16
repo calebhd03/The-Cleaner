@@ -39,6 +39,7 @@ public class BasicEnemy : MonoBehaviour
         AudioManager = GetComponent<AudioManager>();
         Animator = GetComponent<Animator>();
 
+        GameManagerScript.totalEnemies++;
         SoundSource.enabled = false;
     }
     private void Update()

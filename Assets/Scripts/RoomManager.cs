@@ -7,6 +7,8 @@ public class RoomManager : MonoBehaviour
 {
     public GameObject Enemies;
 
+    public GameManager gameManager;
+
     public bool WaveSpawningRoom;
     public Interactable NextDoor;
     public List<Interactable> Doors;
@@ -42,7 +44,7 @@ public class RoomManager : MonoBehaviour
         //if player leave room
         if(other.CompareTag("Player"))
         {
-            deactivateEnemies();
+            //deactivateEnemies();
         }
     }
 

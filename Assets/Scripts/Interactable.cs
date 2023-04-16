@@ -4,6 +4,8 @@ public class Interactable : MonoBehaviour
 {
     public bool DoorStartsOpen;
 
+    public Light doorLight;
+
     private Animator myDoor;
     private bool openTrigger;
 
@@ -39,11 +41,15 @@ public class Interactable : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("DoorOpening");
 
+        doorLight.color = Color.green;
+
         openTrigger = false;
     }
     public void CloseDoor()
     {
         GetComponent<Animator>().SetTrigger("DoorClosing");
+
+        doorLight.color = Color.red;
 
         openTrigger = true;
     }

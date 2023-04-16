@@ -25,13 +25,6 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        foreach (Vector3 point in SpawnPoints)
-        {
-            Gizmos.DrawSphere(point, .5f);
-        }
-    }
     // Update is called once per frame
     void Update()
     {
