@@ -9,8 +9,9 @@ public class WaveSpawner : MonoBehaviour
     public GameObject BasicEnemy;
     public GameObject WaveSpawnerObj;
     public GameObject Enemies;
+    public GameManager GameManager;
     public int NumberOfWavesLeft;
-    public int RemainingEnemies;
+    public int RemainingEnemies = 0;
     public List<Vector3> SpawnPoints;
 
     
@@ -25,12 +26,6 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void updateRemainingEnemies()
     {
         RemainingEnemies--;
@@ -43,7 +38,7 @@ public class WaveSpawner : MonoBehaviour
 
     public void waveSpawnEnemies()
     {
-        if(NumberOfWavesLeft >= 0)
+        if(NumberOfWavesLeft > 0)
         {
             foreach (Vector3 point in SpawnPoints)
             {
@@ -54,8 +49,9 @@ public class WaveSpawner : MonoBehaviour
                 newEnemy.GetComponent<BasicEnemy>().isAngered = true;
             }
 
-            RemainingEnemies += SpawnPoints.Count;
+            RemainingEnemies = SpawnPoints.Count;
             NumberOfWavesLeft--;
+            GameManager.totalEnemies += SpawnPoints.Count;
         }
         else
         {

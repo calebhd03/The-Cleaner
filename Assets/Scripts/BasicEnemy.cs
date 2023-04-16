@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BasicEnemy : MonoBehaviour
 {
@@ -28,19 +29,19 @@ public class BasicEnemy : MonoBehaviour
     private GameManager GameManagerScript;
     private Animator Animator;
 
+    private bool PlayAmbient = true;
+
     // Start is called before the first frame update
     void Start()
     {
         EnemyManager = transform.parent.GetComponent<EnemyManager>();
         NavAgent = GetComponent<NavMeshAgent>();
-        SoundSource = GetComponent<AudioSource>();
         Player = GameObject.FindWithTag("Player");
         GameManagerScript = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
         AudioManager = GetComponent<AudioManager>();
         Animator = GetComponent<Animator>();
 
-        GameManagerScript.totalEnemies++;
-        SoundSource.enabled = false;
+        //GameManagerScript.totalEnemies++;
     }
     private void Update()
     {
@@ -70,7 +71,11 @@ public class BasicEnemy : MonoBehaviour
                     Passived(Distance);
                 }
             }
+
         }
+
+        if(PlayAmbient)
+            StartCoroutine(PlayAmbientSound());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,18 +95,26 @@ public class BasicEnemy : MonoBehaviour
 
     }
 
+    IEnumerator PlayAmbientSound()
+    {
+        PlayAmbient = false;
+        yield return new WaitForSeconds(Random.Range(5f, 15f));
+
+        if(!isDead)
+        {
+            AudioManager.Play("Ambient");
+            PlayAmbient = true;
+        }
+    }
+
     //Enemy has made collided with player
     public void HitPlayer()
     {
-        //Start light attack sound
-
         //Used for attack delay
         IsReadyToAttack = false;
-        //Start attack animation
 
         StartCoroutine(ReadyToAttackDelay());
 
-        //Animator.SetBool("Attack", false);
     }
 
     //Enemy has been hit by weapon
@@ -119,10 +132,21 @@ public class BasicEnemy : MonoBehaviour
         else
         {
             //Start taken damage animation
+            Animator.SetBool("Hit", true);
 
             //Start damage taken sound
             AudioManager.Play("DamageTaken");
+
+            StartCoroutine(WaitAnimationLength("Hit", false));
         }
+    }
+
+    IEnumerator WaitAnimationLength(string boolName, bool boolState)
+    {
+        float time = Animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(time);
+
+        Animator.SetBool(boolName, boolState);
     }
 
     private void CheckIfPassiveOrAngry(float Distance)
@@ -153,11 +177,6 @@ public class BasicEnemy : MonoBehaviour
     //Enemy is no longer targeting player
     private void Passived(float Distance)
     {
-        //Only do ambient sound 10% of the time
-        if (Random.Range(0, 100) > 90)
-            //idle Sound
-            AudioManager.Play("Ambient");
-
         //Stop walk animation
         Animator.SetBool("Moving", false);
     }
@@ -166,9 +185,6 @@ public class BasicEnemy : MonoBehaviour
     private void Angered(float Distance)
     {
         EnemyAttack();
-
-        //Start walk sound
-        SoundSource.enabled = true;
 
 
         //Set animator direction
@@ -215,13 +231,6 @@ public class BasicEnemy : MonoBehaviour
         {
             NavAgent.SetDestination(Player.transform.position);
         }
-
-
-        //FootstepSound
-        if (NavAgent.velocity.x > 0 || NavAgent.velocity.z > 0)
-            SoundSource.enabled = true;
-        else
-            SoundSource.enabled = false;
     }
 
     //Used for delaying attacks
@@ -250,7 +259,9 @@ public class BasicEnemy : MonoBehaviour
         //Remove the enemy from the scene
         Transform parent = transform.parent;
         parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
+
         Destroy(GetComponent<Collider>());
-        //this.gameObject.SetActive(false);
+        Destroy(GetComponent<NavMeshAgent>());
+
     }
 }
