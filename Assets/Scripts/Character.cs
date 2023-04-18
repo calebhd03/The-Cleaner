@@ -15,6 +15,8 @@ public class Character : MonoBehaviour
     public PauseMenu PauseScript;
     public healthBarScript healthBar;
     public GlowChargeUI GlowChargeUI;
+    public Animator BodyAnimator;
+    public Animator ThrowAnimator;
 
     [Header("Player Numbers")]
     public float MovementSpeed;

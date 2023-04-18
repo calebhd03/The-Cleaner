@@ -13,6 +13,7 @@ public class HandgunController : MonoBehaviour
     public AudioManager AudioManager;
     public GameObject ShootParticle;
     public AmmoBarScript ammobar;
+    public Animator GunAnimator;
 
     [Header("Magazine")]
     public GameObject bullet;
@@ -73,6 +74,8 @@ public class HandgunController : MonoBehaviour
         Vector3 mousePosition = PivotScript.getMousePostition();
         mousePosition.y = transform.position.y;
         transform.LookAt(mousePosition, Vector3.up);
+        GunAnimator.SetFloat("MousePosition", transform.rotation.eulerAngles.y);
+        Debug.Log(transform.rotation.eulerAngles.y);
     }
 
     /// Attempts to fire the gun
