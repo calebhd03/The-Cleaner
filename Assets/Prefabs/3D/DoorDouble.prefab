@@ -741,6 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 763799897093972109}
+  pointLight: {fileID: 813003187}
   lerpTime: 0.4
 --- !u!65 &6174991937930136095
 BoxCollider:

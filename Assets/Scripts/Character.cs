@@ -271,6 +271,8 @@ public class Character : MonoBehaviour
         //Update UI
         healthBar.SetHealth(Health);
 
+        GameManagerScript.damageTaken++;
+
         //Cheack if Dead
         if (Health <= 0)
         {

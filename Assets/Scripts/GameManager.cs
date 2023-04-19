@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI glowChargesText;
     public ParticleSystem letterParticle;
 
+    [Header("Target numbers")]
+    public float expectedTimeTaken;
+    public float expectedHitsTaken;
+
+    [Header("Score Readout")]
     public int totalScuttleKilled = 0;
     public int totalEnemies = 0;
     public int bulletsFired = 0;
@@ -49,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     public void levelOver()
     {
+        characterScript.SwitchToUI();
+
         finalScreenCanvas.SetActive(true);
 
         endingTime = Time.time;
@@ -84,7 +91,22 @@ public class GameManager : MonoBehaviour
 
     void CalculateScore()
     {
-        finalScore = (float)(totalScuttleKilled) / totalEnemies;
+        float enemyScorePercentage = .4f;
+        float hitsScorePercentage = .4f;
+        float timeScorePercentage = .2f;
+
+        float enemiesScore = (float)(totalScuttleKilled) / totalEnemies * enemyScorePercentage;
+        enemiesScore = Mathf.Clamp(enemiesScore, 0f, enemyScorePercentage);
+
+        float damageScore = expectedHitsTaken / damageTaken * hitsScorePercentage;
+        damageScore = Mathf.Clamp(damageScore, 0f, hitsScorePercentage);
+
+        float timeScore = (float)expectedTimeTaken/ (endingTime - startingTime) * timeScorePercentage;
+        timeScore = Mathf.Clamp(timeScore, 0f, timeScorePercentage);
+
+        Debug.Log("e " + enemiesScore + " d " + damageScore + " t " + timeScore);
+
+        finalScore = enemiesScore + damageScore + timeScore;
     }
 
     void ChangeText()
