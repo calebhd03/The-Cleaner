@@ -250,7 +250,7 @@ public class BasicEnemy : MonoBehaviour
         GameManagerScript.totalScuttleKilled++;
 
         //Enemy death animation
-        Animator.SetBool("Died", true);
+        Animator.SetTrigger("Died");
 
         //Stop the NavMeshAgent
         NavAgent.isStopped = true;
