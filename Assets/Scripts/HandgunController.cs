@@ -74,8 +74,12 @@ public class HandgunController : MonoBehaviour
         Vector3 mousePosition = PivotScript.getMousePostition();
         mousePosition.y = transform.position.y;
         transform.LookAt(mousePosition, Vector3.up);
-        GunAnimator.SetFloat("MousePosition", transform.rotation.eulerAngles.y);
-        Debug.Log(transform.rotation.eulerAngles.y);
+        //GunAnimator.SetFloat("MousePosition", transform.rotation.eulerAngles.y);
+
+        if (transform.rotation.eulerAngles.y < 180)
+            GunAnimator.SetTrigger("Right");
+        else
+            GunAnimator.SetTrigger("Left");
     }
 
     /// Attempts to fire the gun

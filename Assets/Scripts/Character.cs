@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public GlowChargeUI GlowChargeUI;
     public Animator BodyAnimator;
     public Animator ThrowAnimator;
+    public GameObject ThrowingArm;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -50,6 +51,7 @@ public class Character : MonoBehaviour
     private GameManager GameManagerScript;
     private float playerVolume;
     private float enemyVolume;
+    private bool throwRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -86,13 +88,24 @@ public class Character : MonoBehaviour
         Vector2 moveInput = value.Get<Vector2>();
         moveInput3D = new Vector3(moveInput.x, 0, moveInput.y);
 
-        //Footstep Sound
+        //Movement Animation
         if (moveInput.x != 0 || moveInput.y != 0)
-            SoundSource.enabled = true;
+        {
+            BodyAnimator.SetBool("IsMoving", true);
+
+            //throw direction
+            if (moveInput.x > 0)
+                throwRight = true;
+            else
+                throwRight = false;
+        }
         else
-            SoundSource.enabled = false;
-        
-        
+            BodyAnimator.SetBool("IsMoving", false);
+
+        //Movement Direction
+        if(moveInput.x != 0)
+            BodyAnimator.SetFloat("MoveX", moveInput.x);
+
     }
 
     void OnTriggerEnter(Collider other) 
@@ -125,33 +138,44 @@ public class Character : MonoBehaviour
         //If has extraGlowCharges
         if (CurrentGlowCharges > 0)
         {
-            //If at max glowCharges
-            if (CurrentGlowCharges >= MaxGlowCharges)
-                StartCoroutine(GlowChargeRecharge());
+            //Throw GlowCharge Animation
 
-            //Update UI
+            if (throwRight)
+                ThrowAnimator.SetTrigger("ThrowRight");
             else
-                GlowChargeUI.GlowChargeUsedUI(CurrentGlowCharges);
-            
-            //Remove number of glowCharges
-            CurrentGlowCharges--;
-            GameManagerScript.glowChargesThrown++;
-
-            //Play Audio
-            AudioManager.Play("GlowChargeThrow");
-
-            //Calculate throwing direction of glowCharge
-            Vector3 EndingPosition;
-
-            EndingPosition = PivotScript.getMousePostition() - transform.position;
-            EndingPosition.y = transform.position.y;
-
-            //Create glowcharge with its value
-            GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
-            spawnedGlowCharge.GetComponent<GlowCharge>().throwDirection = EndingPosition;
-            spawnedGlowCharge.GetComponent<GlowCharge>().DoneSettingUpCharge();
+                ThrowAnimator.SetTrigger("ThrowLeft");
         }
     }
+
+    public void ThrowCharge()
+    {
+        //If at max glowCharges
+        if (CurrentGlowCharges >= MaxGlowCharges)
+            StartCoroutine(GlowChargeRecharge());
+
+        //Update UI
+        else
+            GlowChargeUI.GlowChargeUsedUI(CurrentGlowCharges);
+
+        //Remove number of glowCharges
+        CurrentGlowCharges--;
+        GameManagerScript.glowChargesThrown++;
+
+        //Play Audio
+        AudioManager.Play("GlowChargeThrow");
+
+
+        //Calculate throwing direction of glowCharge
+        Vector3 EndingPosition;
+        EndingPosition = PivotScript.getMousePostition() - transform.position;
+        EndingPosition.y = transform.position.y;
+
+        //Create glowcharge with its value
+        GameObject spawnedGlowCharge = Instantiate(GlowCharge, transform.position, transform.rotation);
+        spawnedGlowCharge.GetComponent<GlowCharge>().throwDirection = EndingPosition;
+        spawnedGlowCharge.GetComponent<GlowCharge>().DoneSettingUpCharge();
+    }
+
 
     IEnumerator GlowChargeRecharge()
     {
