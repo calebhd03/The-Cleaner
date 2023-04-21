@@ -20,6 +20,11 @@ public class BasicEnemy : MonoBehaviour
     public bool IsReadyToAttack = true;
     public bool isAngered = false;
 
+    [Header("Scut Lord")]
+    public bool isScutlord;
+    public float numberOfSpawnedProjectiles;
+    public GameObject projectile;
+
     private AudioSource SoundSource;
     private EnemyManager EnemyManager;
     private NavMeshAgent NavAgent;
@@ -44,7 +49,7 @@ public class BasicEnemy : MonoBehaviour
     }
     private void Update()
     {
-        
+
         if (isDead != true)
         {
             //Finds the distance betweent the player and the enemy
@@ -110,8 +115,6 @@ public class BasicEnemy : MonoBehaviour
     public void HitPlayer()
     {
         //Used for attack delay
-        IsReadyToAttack = false;
-
         StartCoroutine(ReadyToAttackDelay());
 
     }
@@ -183,8 +186,15 @@ public class BasicEnemy : MonoBehaviour
     //Enemy is no targeting player
     private void Angered(float Distance)
     {
-        EnemyAttack();
+        if (isScutlord)
+        {
+            ScutlordAttack();
+        }
 
+        else
+        {
+            EnemyAttack();
+        }
 
         //Set animator direction
         Vector3 direction = Vector3.ClampMagnitude(NavAgent.velocity, 1);
@@ -232,9 +242,34 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
+    void ScutlordAttack()
+    {
+        if (IsReadyToAttack)
+        {
+            float angle = 0;
+            for (int i = 0; i < numberOfSpawnedProjectiles; i++)
+            {
+                float x = Mathf.Sin(angle);
+                float z = Mathf.Cos(angle);
+                angle += 2 * Mathf.PI / numberOfSpawnedProjectiles;
+
+                Vector3 dir = new Vector3(x, 0, z);
+
+                GameObject pro = Instantiate(projectile, transform.position, Quaternion.identity);
+                pro.GetComponent<ScutlordProjectile>().direction= dir;
+            }
+
+            StartCoroutine(ReadyToAttackDelay());
+        }
+
+        //move towards player
+        NavAgent.SetDestination(Player.transform.position);
+    }
+
     //Used for delaying attacks
     IEnumerator ReadyToAttackDelay()
     {
+        IsReadyToAttack = false;
         yield return new WaitForSeconds(TimeInBetweenAttacks);
         IsReadyToAttack = true;
     }

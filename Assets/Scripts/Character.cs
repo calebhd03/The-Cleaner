@@ -266,7 +266,7 @@ public class Character : MonoBehaviour
         input.actions.FindActionMap("UI").Enable();
     }
 
-    void TookDamage()
+    public void TookDamage()
     {
         //Update UI
         healthBar.SetHealth(Health);

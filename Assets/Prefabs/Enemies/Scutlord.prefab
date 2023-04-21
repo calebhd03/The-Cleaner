@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 602457460}
   - component: {fileID: 254696109}
   - component: {fileID: 1006401146}
+  - component: {fileID: 2105732525}
   - component: {fileID: 9204880269730429531}
   m_Layer: 0
   m_Name: Scutlord
@@ -31,12 +32,12 @@ Transform:
   m_GameObject: {fileID: 705481135547910613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 891631365649878239}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &849034108720486406
 Rigidbody:
@@ -96,7 +97,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4.76
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0
@@ -118,7 +119,7 @@ Animator:
   m_GameObject: {fileID: 705481135547910613}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 36f2e2a6cd6c8ff46921643b003e535a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4ba23bcd7447cf44098b6db199519845, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,16 +142,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackBox: {fileID: 0}
-  health: 2
+  health: 20
   Damage: 1
   isDead: 0
-  isAlwaysAngry: 0
+  isAlwaysAngry: 1
   SpotingDistance: 4
   PassiveDistance: 6
-  TimeInBetweenAttacks: 3
+  TimeInBetweenAttacks: 7
   AttackWaitingDistance: 4
   IsReadyToAttack: 1
   isAngered: 0
+  isScutlord: 1
+  numberOfSpawnedProjectiles: 10
+  projectile: {fileID: 1816315012040393243, guid: cd70d63da81cf294480e69ff23a8d3d2, type: 3}
+--- !u!114 &2105732525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705481135547910613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb51775fff5b5646a4eb2afea667396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9204880269730429531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,14 +242,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8546638308654476050}
-  m_LocalRotation: {x: 0.6532815, y: 0.2705982, z: -0.2705982, w: 0.6532815}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.0016326909, y: 0.027, z: -0.0016288757}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1012312140175832994}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -45}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &7784770794717034914
 SpriteRenderer:
   m_ObjectHideFlags: 0

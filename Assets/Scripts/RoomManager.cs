@@ -1,13 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
     public GameObject Enemies;
-
-    public GameManager gameManager;
 
     public bool WaveSpawningRoom;
     public Interactable NextDoor;
@@ -28,15 +24,14 @@ public class RoomManager : MonoBehaviour
         //if player leave room
         if (other.CompareTag("Player"))
         {
+            activateEnemies();
+
             if (firstTimeEntering && WaveSpawningRoom)
             {
-                GetComponent<WaveSpawner>().waveSpawnEnemies();
+                StartCoroutine(GetComponent<WaveSpawner>().waveSpawnEnemies());
                 closeAllDoors();
                 firstTimeEntering= false;
             }
-
-            else
-                activateEnemies();
         }
     }
     private void OnTriggerExit(Collider other)

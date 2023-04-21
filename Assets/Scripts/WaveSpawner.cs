@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -12,6 +10,7 @@ public class WaveSpawner : MonoBehaviour
     public GameManager GameManager;
     public int NumberOfWavesLeft;
     public int RemainingEnemies = 0;
+    public float TimeInBetweenEnemySpawns;
     public List<Vector3> SpawnPoints;
 
     
@@ -24,6 +23,21 @@ public class WaveSpawner : MonoBehaviour
         {
             SpawnPoints.Add(child.position);
         }
+
+        Shuffle(SpawnPoints);
+    }
+
+    void Shuffle(IList<Vector3> ts)
+    {
+        var count = ts.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i)
+        {
+            var r = UnityEngine.Random.Range(i, count);
+            var tmp = ts[i];
+            ts[i] = ts[r];
+            ts[r] = tmp;
+        }
     }
 
     public void updateRemainingEnemies()
@@ -32,21 +46,25 @@ public class WaveSpawner : MonoBehaviour
 
         if(RemainingEnemies <= 0 )
         {
-            waveSpawnEnemies();
+            StartCoroutine(waveSpawnEnemies());
         }
     }
 
-    public void waveSpawnEnemies()
+    public IEnumerator waveSpawnEnemies()
     {
         if(NumberOfWavesLeft > 0)
         {
             foreach (Vector3 point in SpawnPoints)
             {
+                Debug.Log("Spawned Enemy");
+
                 GameObject newEnemy = Instantiate(BasicEnemy, point, Quaternion.Euler(new Vector3(0,-45,0)), Enemies.transform);
 
                 //makes it so they always persue the player
                 newEnemy.GetComponent<BasicEnemy>().isAlwaysAngry = true;
                 newEnemy.GetComponent<BasicEnemy>().isAngered = true;
+
+                yield return new WaitForSeconds(TimeInBetweenEnemySpawns);
             }
 
             RemainingEnemies = SpawnPoints.Count;
