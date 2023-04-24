@@ -56,7 +56,7 @@ public class WaveSpawner : MonoBehaviour
         {
             foreach (Vector3 point in SpawnPoints)
             {
-                Debug.Log("Spawned Enemy");
+                //Debug.Log("Spawned Enemy");
 
                 GameObject newEnemy = Instantiate(BasicEnemy, point, Quaternion.Euler(new Vector3(0,-45,0)), Enemies.transform);
 
@@ -64,15 +64,16 @@ public class WaveSpawner : MonoBehaviour
                 newEnemy.GetComponent<BasicEnemy>().isAlwaysAngry = true;
                 newEnemy.GetComponent<BasicEnemy>().isAngered = true;
 
+                RemainingEnemies++; 
+                GameManager.totalEnemies++;
                 yield return new WaitForSeconds(TimeInBetweenEnemySpawns);
             }
 
-            RemainingEnemies = SpawnPoints.Count;
             NumberOfWavesLeft--;
-            GameManager.totalEnemies += SpawnPoints.Count;
         }
         else
         {
+            Debug.Log("Room Finished");
             GetComponent<RoomManager>().openNextDoor();
         }
     }

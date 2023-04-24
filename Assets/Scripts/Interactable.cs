@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -5,6 +7,7 @@ public class Interactable : MonoBehaviour
     public bool DoorStartsOpen;
 
     public Light doorLight;
+    public GameObject Pulser;
 
     private Animator myDoor;
     private bool openTrigger;
@@ -52,5 +55,18 @@ public class Interactable : MonoBehaviour
         doorLight.color = Color.red;
 
         openTrigger = true;
+    }
+
+    public IEnumerator Pulse()
+    {
+        GameObject pulse = null;
+        for (int i = 0; i < 3; i++)
+        {
+            Destroy(pulse);
+            Debug.Log("Spawned Pulse");
+            pulse = Instantiate(Pulser, transform.position, Quaternion.identity, transform);
+            pulse.transform.position = new Vector3(pulse.transform.position.x, 2, pulse.transform.position.z);
+            yield return new WaitForSeconds(3f);
+        }
     }
 }

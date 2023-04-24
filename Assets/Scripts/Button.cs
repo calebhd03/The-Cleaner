@@ -7,13 +7,13 @@ public class Button : MonoBehaviour
 {
     public GameObject particle;
 
-    private Interactable doorManager;
+    private Interactable doorInteractable;
     private bool broken = true;
 
 
     public void Start()
     {
-        doorManager = GetComponentInParent<Interactable>();
+        doorInteractable = GetComponentInParent<Interactable>();
     }
 
     public void hit()
@@ -29,6 +29,7 @@ public class Button : MonoBehaviour
             broken= true;
         }
 
-        doorManager.Hit();
+        Debug.Log("Button hit " + transform);
+        doorInteractable.Hit();
     }
 }

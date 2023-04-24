@@ -70,6 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoorStartsOpen: 0
+  doorLight: {fileID: 0}
+  Pulser: {fileID: 3385429255957284258, guid: 48dc7d5495e13984683b4f3c6cd17d0b, type: 3}
 --- !u!1 &653515982686020901
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3468653d11606c49b1b4c2adfa9debc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particle: {fileID: 0}
 --- !u!1 &4055144431393696986
 GameObject:
   m_ObjectHideFlags: 0
