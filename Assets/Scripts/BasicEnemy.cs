@@ -45,7 +45,8 @@ public class BasicEnemy : MonoBehaviour
         AudioManager = GetComponent<AudioManager>();
         Animator = GetComponent<Animator>();
 
-        //GameManagerScript.totalEnemies++;
+        if (isScutlord)
+            GetComponent<Scutlord>().SetMaxHealth(health);
     }
     private void Update()
     {
@@ -125,7 +126,6 @@ public class BasicEnemy : MonoBehaviour
         //Enemy Takes Damage from the parameter
         health -= damage;
         GameManagerScript.bulletsHit++;
-
         //Check if enemy died
         if (health <= 0)
         {
@@ -141,6 +141,9 @@ public class BasicEnemy : MonoBehaviour
 
             StartCoroutine(WaitAnimationLength("Hit", false));
         }
+
+        if (isScutlord)
+            GetComponent<Scutlord>().Hit(health);
     }
 
     IEnumerator WaitAnimationLength(string boolName, bool boolState)
@@ -293,6 +296,9 @@ public class BasicEnemy : MonoBehaviour
         //Remove the enemy from the scene
         Transform parent = transform.parent;
         parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
+
+        if (isScutlord)
+            GetComponent<Scutlord>().Death();
 
         Destroy(GetComponent<Collider>());
         Destroy(GetComponent<NavMeshAgent>());

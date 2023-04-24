@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Scutlord : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ScutlordHealthBar healthBar;
+
+    public void Hit(float health)
     {
-        
+        healthBar.SetHealth((int) health);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMaxHealth(float health)
     {
-        
+        healthBar.SetMaxHealth((int) health);
+    }
+
+    public void Death()
+    {
+        Destroy(healthBar.gameObject);
     }
 }
