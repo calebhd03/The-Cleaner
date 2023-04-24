@@ -6,7 +6,7 @@ using UnityEngine;
 public class Shake : MonoBehaviour
 {
     public CinemachineVirtualCamera cinemachineVirtualCamera;
-    private float shakeTime;
+    private float shakeTime = 0;
 
     public void Update()
     {
