@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1006401146}
   - component: {fileID: 2105732525}
   - component: {fileID: 9204880269730429531}
+  - component: {fileID: 1833994317}
   m_Layer: 0
   m_Name: Scutlord
   m_TagString: Enemy
@@ -218,6 +219,20 @@ MonoBehaviour:
     spatialBlend: 0.8
     loop: 0
     source: {fileID: 0}
+--- !u!114 &1833994317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705481135547910613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc01f04f0f5cc4442a3ab52f636b8a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intesity: 5
+  time: 0.2
 --- !u!1 &8546638308654476050
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +306,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 19e354a324ebad64ea1425e042c41e18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb9eafa4ecba74e46b8c5dca65de405c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
