@@ -132,7 +132,9 @@ MonoBehaviour:
   Background: {fileID: 3325868499644425649}
   OptionsMenu: {fileID: 4062051960240432363}
   transition: {fileID: 0}
+  character: {fileID: 0}
   transitionTime: 1
+  MixerName: 
 --- !u!1 &4062051958284999870
 GameObject:
   m_ObjectHideFlags: 0
