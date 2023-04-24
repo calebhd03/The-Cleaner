@@ -61,6 +61,11 @@ public class PauseMenu : MonoBehaviour
         StartCoroutine(LoadLevel(0));
     }
 
+    public void Restart()
+    {
+        StartCoroutine(LoadLevel(1));
+    }
+
     IEnumerator LoadLevel(int levelIndex)
     {
         //play animation
@@ -73,4 +78,5 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(levelIndex);
     }
+ 
 }
