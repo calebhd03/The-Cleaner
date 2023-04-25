@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7923408732bbe99478c011829bef0189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackBox: {fileID: 0}
+  bloodParticle: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
   health: 2
   Damage: 1
   isDead: 0
@@ -151,6 +151,9 @@ MonoBehaviour:
   AttackWaitingDistance: 4
   IsReadyToAttack: 1
   isAngered: 0
+  isScutlord: 0
+  numberOfSpawnedProjectiles: 0
+  projectile: {fileID: 0}
 --- !u!114 &9204880269730429531
 MonoBehaviour:
   m_ObjectHideFlags: 0

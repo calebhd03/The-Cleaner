@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7923408732bbe99478c011829bef0189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackBox: {fileID: 0}
+  bloodParticle: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
   health: 20
   Damage: 1
   isDead: 0

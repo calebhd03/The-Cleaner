@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public Animator BodyAnimator;
     public Animator ThrowAnimator;
     public GameObject ThrowingArm;
+    public GameObject bloodParticle;
 
     [Header("Player Numbers")]
     public float MovementSpeed;
@@ -272,6 +273,9 @@ public class Character : MonoBehaviour
         healthBar.SetHealth(Health);
 
         GameManagerScript.damageTaken++;
+
+        //Blood Particle
+        Instantiate(bloodParticle, new Vector3(transform.position.x, .2f, transform.position.z), Quaternion.identity);
 
         //Cheack if Dead
         if (Health <= 0)

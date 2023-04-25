@@ -623,6 +623,7 @@ MonoBehaviour:
   BodyAnimator: {fileID: 1113045694}
   ThrowAnimator: {fileID: 933309438}
   ThrowingArm: {fileID: 933309435}
+  bloodParticle: {fileID: 100000, guid: bc98890f6028f444eaa7789bde5e2eeb, type: 3}
   MovementSpeed: 8
   Health: 6
   InvincibleTime: 2

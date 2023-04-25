@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class BasicEnemy : MonoBehaviour
 {
-    public Collider AttackBox;
+    public GameObject bloodParticle;
 
     [Header("Enemy Numbers")]
     public float health;
@@ -126,6 +126,10 @@ public class BasicEnemy : MonoBehaviour
         //Enemy Takes Damage from the parameter
         health -= damage;
         GameManagerScript.bulletsHit++;
+
+        //Damage Particle
+        Instantiate(bloodParticle, new Vector3(transform.position.x, .2f, transform.position.z), Quaternion.identity);
+
         //Check if enemy died
         if (health <= 0)
         {
