@@ -63,10 +63,8 @@ public class Character : MonoBehaviour
         AudioManager = AudioManagerObj.GetComponent<AudioManager>();
         GameManagerScript = GameObject.FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
 
-        
         //Set up health
-        MaxHealth = Health;
-        healthBar.SetMaxHealth(MaxHealth);
+        HealthToMax();
 
         CurrentGlowCharges = MaxGlowCharges;
         SoundSource.enabled = false;
@@ -265,6 +263,12 @@ public class Character : MonoBehaviour
         PlayerInput input = GetComponent<PlayerInput>();
         input.actions.FindActionMap("Player").Disable();
         input.actions.FindActionMap("UI").Enable();
+    }
+
+    public void HealthToMax()
+    {
+        MaxHealth = Health;
+        healthBar.SetMaxHealth(MaxHealth);
     }
 
     public void TookDamage()
