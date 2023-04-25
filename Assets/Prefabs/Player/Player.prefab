@@ -628,7 +628,7 @@ MonoBehaviour:
   Health: 6
   InvincibleTime: 2
   invincibilityDeltaTime: 0.15
-  DashRechargeTime: 1
+  DashRechargeTime: 5
   DashInvincibleTime: 0.2
   DashSpeed: 15
   DashGraceTime: 0.2

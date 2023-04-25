@@ -32,7 +32,7 @@ Transform:
   - {fileID: 3385429256443136902}
   - {fileID: 3385429256157564218}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7159782630444889856
 MonoBehaviour:
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorScaleSize: 0.5
+  lifeTime: 1
 --- !u!1 &3385429256157564217
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +59,7 @@ GameObject:
   - component: {fileID: 3385429256157564218}
   - component: {fileID: 3385429256157564220}
   - component: {fileID: 3385429256157564219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3385429256443136902}
   - component: {fileID: 3385429256443136904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
