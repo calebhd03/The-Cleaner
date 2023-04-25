@@ -68,6 +68,8 @@ public class Character : MonoBehaviour
 
         CurrentGlowCharges = MaxGlowCharges;
         SoundSource.enabled = false;
+
+        SwitchToPlayer();
     }
 
     // Update is called once per frame
