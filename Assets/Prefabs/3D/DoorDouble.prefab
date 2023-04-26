@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainAudioManager: 0
   MixerName: 
-  GroupName: 
+  GroupName: Player
   sounds:
   - name: DoorOpen
     clip: {fileID: 8300000, guid: 3708f37e23d82c54d921535d61174b91, type: 3}

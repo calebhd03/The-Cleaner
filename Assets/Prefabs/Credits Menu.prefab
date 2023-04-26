@@ -284,7 +284,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -492,8 +492,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 157.8112, y: -13.1}
-  m_SizeDelta: {x: 200.8823, y: -77.0408}
+  m_AnchoredPosition: {x: -13.423, y: -14.7}
+  m_SizeDelta: {x: 543.3451, y: 150.3898}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8924548568596726908
 CanvasRenderer:
@@ -523,27 +523,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nate - Producer
+  m_text: 'Nate Cowan - Producer, Level Design
 
-    Galo - Level Design
+    Caleb Deters - Programming
 
-    Rima - Character Art
+    Rima
+    Cunningham - Character Concept Art, 2D Animation
 
-    Vica
-    - Enemy Art
+    Victoria Torres - Enemy
+    Concept Art, 2D Animation
 
-    Nick - Enviroment Art
+    Nicholas Landry - 3D Enviroment and Prop Art
 
-    Carlos - Prop Art
+    Carlos
+    Diaz - 3D Prop Art
 
-    Caleb - Programming
+    Sheikh Islam - Sound Design
 
-    Sheik
-    - Sound Design
+    Max Willis - QA Testing
 
-    Alex - QA Testing
-
-'
+    Galo
+    Domaica - Project Lead, Level and Enemy Design'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a702267e42ee6c84e8a2cbc25f11cc86, type: 2}
   m_sharedMaterial: {fileID: 1523139710662235529, guid: a702267e42ee6c84e8a2cbc25f11cc86, type: 2}
@@ -570,13 +570,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 9.5
+  m_fontSizeBase: 9.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
