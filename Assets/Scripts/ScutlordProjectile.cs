@@ -21,7 +21,7 @@ public class ScutlordProjectile : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            other.GetComponent<Character>().Health--;
+            other.GetComponent<Character>().checkIfLosingHealth(null);
             other.GetComponent<Character>().TookDamage();
         }
 

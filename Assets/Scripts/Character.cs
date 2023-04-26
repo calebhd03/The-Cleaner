@@ -115,13 +115,19 @@ public class Character : MonoBehaviour
         GameObject target = other.gameObject;
         if(target.CompareTag("Enemy"))
         {
-            if(!isInvincible)
-            {
-                Health-= target.GetComponent<BasicEnemy>().Damage;
-                TookDamage();
-            }
-            target.GetComponent<BasicEnemy>().HitPlayer();
+            checkIfLosingHealth(target.GetComponent<BasicEnemy>());
         }
+    }
+
+    public void checkIfLosingHealth(BasicEnemy target)
+    {
+        if (!isInvincible)
+        {
+            Health--;
+            TookDamage();
+        }
+        target.GetComponent<BasicEnemy>().HitPlayer();
+
     }
 
     void OnFire()
