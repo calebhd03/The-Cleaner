@@ -5,6 +5,7 @@ using UnityEngine;
 public class Scutlord : MonoBehaviour
 {
     public ScutlordHealthBar healthBar;
+    public Interactable Door;
 
     public void Hit(float health)
     {
@@ -19,5 +20,6 @@ public class Scutlord : MonoBehaviour
     public void Death()
     {
         Destroy(healthBar.gameObject);
+        Door.OpenDoor();
     }
 }

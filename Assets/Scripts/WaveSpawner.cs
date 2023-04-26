@@ -24,11 +24,6 @@ public class WaveSpawner : MonoBehaviour
             SpawnPoints.Add(child.position);
         }
 
-        foreach (Transform child in Enemies.transform)
-        {
-            RemainingEnemies++;
-        }
-
         Shuffle(SpawnPoints);
     }
 

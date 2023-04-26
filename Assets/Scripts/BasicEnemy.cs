@@ -265,8 +265,11 @@ public class BasicEnemy : MonoBehaviour
 
     void ScutlordAttack()
     {
+
+        Debug.Log("Checking for attack");
         if (IsReadyToAttack)
         {
+            Debug.Log("ScuttLord Attack");
             float angle = 0;
             for (int i = 0; i < numberOfSpawnedProjectiles; i++)
             {
@@ -315,7 +318,9 @@ public class BasicEnemy : MonoBehaviour
 
         //Remove the enemy from the scene
         Transform parent = transform.parent;
-        parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
+
+        if (!isScutlord)
+            parent.GetComponentInParent<WaveSpawner>().updateRemainingEnemies();
 
         if (isScutlord)
             GetComponent<Scutlord>().Death();
