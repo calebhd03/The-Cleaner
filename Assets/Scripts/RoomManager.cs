@@ -6,8 +6,8 @@ public class RoomManager : MonoBehaviour
     public GameObject Enemies;
 
     public bool WaveSpawningRoom;
-    public Interactable NextDoor;
-    public List<Interactable> Doors;
+    public Interactable NextDoor = null;
+    public List<Interactable> Doors = null;
 
 
     private bool firstTimeEntering = true;

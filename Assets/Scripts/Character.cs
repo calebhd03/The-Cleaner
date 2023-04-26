@@ -64,6 +64,7 @@ public class Character : MonoBehaviour
         GameManagerScript = GameObject.FindAnyObjectByType<GameManager>().GetComponent<GameManager>();
 
         //Set up health
+        MaxHealth = Health;
         HealthToMax();
 
         CurrentGlowCharges = MaxGlowCharges;
