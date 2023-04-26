@@ -12,9 +12,13 @@ public class Interactable : MonoBehaviour
     private Animator myDoor;
     private bool openTrigger;
 
+    private AudioManager AudioManager;
+
     void Start()
     {
         Animator myDoor = GetComponent<Animator>();
+
+        AudioManager = GetComponent<AudioManager>();
 
         if(DoorStartsOpen)
         {
@@ -47,6 +51,8 @@ public class Interactable : MonoBehaviour
         doorLight.color = Color.green;
 
         openTrigger = false;
+
+        AudioManager.Play("DoorOpen");
     }
     public void CloseDoor()
     {
@@ -55,6 +61,8 @@ public class Interactable : MonoBehaviour
         doorLight.color = Color.red;
 
         openTrigger = true;
+
+        AudioManager.Play("DoorClose");
     }
 
     public IEnumerator Pulse()
