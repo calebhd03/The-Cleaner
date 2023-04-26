@@ -79,6 +79,6 @@ public class RoomManager : MonoBehaviour
         NextDoor.OpenDoor();
 
         //Spawn Pulser Above door
-        StartCoroutine(NextDoor.Pulse());
+        //StartCoroutine(NextDoor.Pulse());
     }
 }
