@@ -195,6 +195,7 @@ public class Character : MonoBehaviour
 
         //increase glowcharges
         CurrentGlowCharges++;
+        AudioManager.Play("GlowchargeCD");
 
         //Update UI Showing glowcharges
         GlowChargeUI.SetGlowChargeRecharged(CurrentGlowCharges);
@@ -322,6 +323,8 @@ public class Character : MonoBehaviour
         CanDash =false;
         IsDashing= true;
         //rb.isKinematic = false;
+
+        AudioManager.Play("CleanerDash");
 
         //find and apply the dash direction
         Vector3 DashDirection = new Vector3(moveInput3D.x * DashSpeed, 0f, moveInput3D.z * DashSpeed);

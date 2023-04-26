@@ -83,3 +83,17 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
     source: {fileID: 0}
+  - name: CleanerDash
+    clip: {fileID: 8300000, guid: 1faa252f1c7c06143b690ef006b3c26c, type: 3}
+    volume: 0.188
+    pitch: 1.61
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: GlowchargeCD
+    clip: {fileID: 8300000, guid: e3f93ff2bdfa703488bf6b30f171cc4b, type: 3}
+    volume: 0.188
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+    source: {fileID: 0}
