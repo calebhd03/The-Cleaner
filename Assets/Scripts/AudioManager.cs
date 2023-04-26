@@ -81,6 +81,16 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+    public float LengthOfClip(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return 0f;
+        }
+        return s.source.clip.length;
+    }
 
 }
 

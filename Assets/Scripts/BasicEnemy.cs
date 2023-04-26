@@ -32,6 +32,7 @@ public class BasicEnemy : MonoBehaviour
     private AudioManager AudioManager;
     private GameManager GameManagerScript;
     private Animator Animator;
+    private bool IsSoundPlaying = false;
 
     private bool PlayAmbient = true;
 
@@ -141,13 +142,26 @@ public class BasicEnemy : MonoBehaviour
             Animator.SetBool("Hit", true);
 
             //Start damage taken sound
-            AudioManager.Play("DamageTaken");
+            if (IsSoundPlaying == false)
+            {
+                AudioManager.Play("DamageTaken");
+                StartCoroutine(SoundPlaying("DamageTaken"));
+            }
 
             StartCoroutine(WaitAnimationLength("Hit", false));
         }
 
         if (isScutlord)
             GetComponent<Scutlord>().Hit(health);
+    }
+
+    IEnumerator SoundPlaying(string name)
+    {
+        IsSoundPlaying= true;
+
+        yield return new WaitForSeconds(AudioManager.LengthOfClip(name));
+
+        IsSoundPlaying = false;
     }
 
     IEnumerator WaitAnimationLength(string boolName, bool boolState)
