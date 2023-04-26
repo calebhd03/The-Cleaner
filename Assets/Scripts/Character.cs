@@ -270,7 +270,7 @@ public class Character : MonoBehaviour
 
     public void HealthToMax()
     {
-        MaxHealth = Health;
+        Health = MaxHealth;
         healthBar.SetMaxHealth(MaxHealth);
     }
 
