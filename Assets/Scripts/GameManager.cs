@@ -15,10 +15,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI letterText;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI enemiesKilledText;
-    public TextMeshProUGUI deathText;
     public TextMeshProUGUI accuracyText;
-    public TextMeshProUGUI glowChargesText;
-    public ParticleSystem letterParticle;
+    public TextMeshProUGUI HitsTakenText;
 
     [Header("Target numbers")]
     public float expectedTimeTaken;
@@ -117,9 +115,8 @@ public class GameManager : MonoBehaviour
         //string.Format("{1:00}:{2:00}", minutes, secs
         timeText.text = timeText.text + minutes + ":" + secs;
         enemiesKilledText.text = enemiesKilledText.text + totalScuttleKilled + "/" + totalEnemies;
-        deathText.text = deathText.text + deaths;
-        accuracyText.text = accuracyText.text + Mathf.Round(((float)bulletsHit/bulletsFired) * 100.0f) *.01f + "%";
-        glowChargesText.text = glowChargesText.text + glowChargesThrown;
+        accuracyText.text = accuracyText.text + Mathf.Round(((float)bulletsHit/bulletsFired) * 100.0f) + "%";
+        HitsTakenText.text = HitsTakenText.text + damageTaken;
 }
 
     void ChangeScoreSlider()
