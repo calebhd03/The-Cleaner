@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI enemiesKilledText;
     public TextMeshProUGUI accuracyText;
     public TextMeshProUGUI HitsTakenText;
+    public TextMeshProUGUI CompleteText;
 
     [Header("Target numbers")]
     public float expectedTimeTaken;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     public int glowChargesThrown = 0;
     public float startingTime;
     public float endingTime;
+    public bool win = false;
 
     public float finalScore;
 
@@ -46,8 +48,11 @@ public class GameManager : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
+        {
+            win = true;
             levelOver();
+        }
     }
 
     public void levelOver()
@@ -117,6 +122,15 @@ public class GameManager : MonoBehaviour
         enemiesKilledText.text = enemiesKilledText.text + totalScuttleKilled + "/" + totalEnemies;
         accuracyText.text = accuracyText.text + Mathf.Round(((float)bulletsHit/bulletsFired) * 100.0f) + "%";
         HitsTakenText.text = HitsTakenText.text + damageTaken;
+
+        if (win)
+        {
+            CompleteText.text = "Contract Cleared";
+        }
+        else
+        {
+            CompleteText.text = "Contract Failed";
+        }
 }
 
     void ChangeScoreSlider()
