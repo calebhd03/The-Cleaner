@@ -92,7 +92,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GlowchargeCD
     clip: {fileID: 8300000, guid: e3f93ff2bdfa703488bf6b30f171cc4b, type: 3}
-    volume: 0.188
+    volume: 0.1
     pitch: 1
     spatialBlend: 0
     loop: 0
