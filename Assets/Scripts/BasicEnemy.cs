@@ -308,7 +308,8 @@ public class BasicEnemy : MonoBehaviour
 
         //Start enemy death sound
         AudioManager.Play("Death");
-        GameManagerScript.totalScuttleKilled++;
+        if (!isScutlord)
+            GameManagerScript.totalScuttleKilled++;
 
         //Enemy death animation
         Animator.SetTrigger("Died");
