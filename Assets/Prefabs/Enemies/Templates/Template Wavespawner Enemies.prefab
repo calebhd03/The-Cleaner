@@ -1499,7 +1499,7 @@ Transform:
   m_Father: {fileID: 7781524595470983949}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2675198139532126079
+--- !u!1001 &1931573152056139282
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1580,10 +1580,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef8afef13f7b6d4a87fb6d39b399f22, type: 3}
---- !u!4 &3110934077321498845 stripped
+--- !u!4 &1495800956267407792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1012312140175832994, guid: 2ef8afef13f7b6d4a87fb6d39b399f22, type: 3}
-  m_PrefabInstance: {fileID: 2675198139532126079}
+  m_PrefabInstance: {fileID: 1931573152056139282}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5312800690886488928
 PrefabInstance:
@@ -1863,7 +1863,7 @@ PrefabInstance:
       addedObject: {fileID: 2231700062951493976}
     - targetCorrespondingSourceObject: {fileID: 8905808158986275658, guid: dc8e1d9103aea4747879f03958f5971c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3110934077321498845}
+      addedObject: {fileID: 1495800956267407792}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1848554688718018136, guid: dc8e1d9103aea4747879f03958f5971c, type: 3}
       insertIndex: -1
@@ -2101,11 +2101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1653003753062065092, guid: bc5d7a43a9eeaae45b81e1848667220d, type: 3}
       propertyPath: m_Name
-      value: WaveSpawner
+      value: Template Wavespawner Enemies
       objectReference: {fileID: 0}
     - target: {fileID: 1653003753062065095, guid: bc5d7a43a9eeaae45b81e1848667220d, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1653003753062065095, guid: bc5d7a43a9eeaae45b81e1848667220d, type: 3}
       propertyPath: m_LocalPosition.x
