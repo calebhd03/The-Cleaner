@@ -264,6 +264,8 @@ public class BasicEnemy : MonoBehaviour
 
                 GameObject pro = Instantiate(projectile, transform.position, Quaternion.identity);
                 pro.GetComponent<ScutlordProjectile>().direction= dir;
+
+                AudioManager.Play("ScutlordFire");
             }
 
             StartCoroutine(ReadyToAttackDelay());

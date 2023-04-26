@@ -359,23 +359,23 @@ MonoBehaviour:
   GroupName: Enemy
   sounds:
   - name: Ambient
-    clip: {fileID: 8300000, guid: 3568777d7621e7043857c6c4f83e0d86, type: 3}
-    volume: 0.241
-    pitch: 1.5
+    clip: {fileID: 8300000, guid: 5d8a5202c7d35d947a1c1b6b8072dcf3, type: 3}
+    volume: 1
+    pitch: 1
     spatialBlend: 1
     loop: 0
     source: {fileID: 0}
   - name: DamageTaken
-    clip: {fileID: 8300000, guid: 7b35d6884821a08488528c43bd92bdce, type: 3}
-    volume: 0.241
-    pitch: 1.5
+    clip: {fileID: 8300000, guid: e827ff74df8b31b47a93a7ea50f6ecf8, type: 3}
+    volume: 1
+    pitch: 1
     spatialBlend: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 8300000, guid: 456d746ca4c354e4b892e5385d7287d4, type: 3}
-    volume: 0.241
-    pitch: 1.5
+    clip: {fileID: 8300000, guid: 603a1a51a801e044798c375d08844d81, type: 3}
+    volume: 1
+    pitch: 1
     spatialBlend: 1
     loop: 0
     source: {fileID: 0}
@@ -390,6 +390,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 35774eac286cb854abf919f053062de3, type: 3}
     volume: 0
     pitch: 1.5
+    spatialBlend: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: ScutlordFire
+    clip: {fileID: 8300000, guid: 2ef948544b0e2b442ac12c12ff81c25a, type: 3}
+    volume: 0.5
+    pitch: 1
     spatialBlend: 0.8
     loop: 0
     source: {fileID: 0}
