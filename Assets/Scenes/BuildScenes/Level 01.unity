@@ -727,6 +727,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3948804660823931783, guid: 24fda80623c9c804389bae200ef89097, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6781837498653142757, guid: 24fda80623c9c804389bae200ef89097, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -403
@@ -2709,6 +2713,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1442160717}
     m_Modifications:
+    - target: {fileID: 6121971236925835603, guid: 5f378ddd82f72e34ebb538b705e5185c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6121971236925835603, guid: 5f378ddd82f72e34ebb538b705e5185c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.99
+      objectReference: {fileID: 0}
     - target: {fileID: 6121971237376923818, guid: 5f378ddd82f72e34ebb538b705e5185c, type: 3}
       propertyPath: m_Name
       value: Wall Colliders
