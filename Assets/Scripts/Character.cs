@@ -146,27 +146,29 @@ public class Character : MonoBehaviour
         //If has extraGlowCharges
         if (CurrentGlowCharges > 0)
         {
-            //Throw GlowCharge Animation
+            CurrentGlowCharges--;
 
+            //Throw GlowCharge Animation
             if (throwRight)
                 ThrowAnimator.SetTrigger("ThrowRight");
             else
                 ThrowAnimator.SetTrigger("ThrowLeft");
+
+            ThrowCharge();
         }
     }
 
     public void ThrowCharge()
     {
         //If at max glowCharges
-        if (CurrentGlowCharges >= MaxGlowCharges)
+        if (CurrentGlowCharges >= MaxGlowCharges-1)
             StartCoroutine(GlowChargeRecharge());
 
         //Update UI
         else
-            GlowChargeUI.GlowChargeUsedUI(CurrentGlowCharges);
+            GlowChargeUI.GlowChargeUsedUI(CurrentGlowCharges+1);
 
         //Remove number of glowCharges
-        CurrentGlowCharges--;
         GameManagerScript.glowChargesThrown++;
 
         //Play Audio
@@ -190,15 +192,13 @@ public class Character : MonoBehaviour
         float time = 0f;
         while(time < GlowChargeRechargeDelay)
         {
-            yield return null;
             time += Time.deltaTime; 
             
             GlowChargeUI.SetGlowChargeCooldownUI(time / GlowChargeRechargeDelay, CurrentGlowCharges);
+            yield return null;
 
 
         }
-        //yield return new WaitForSeconds(GlowChargeRechargeDelay);
-
 
         //increase glowcharges
         CurrentGlowCharges++;

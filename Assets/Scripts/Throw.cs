@@ -18,6 +18,6 @@ public class Throw : MonoBehaviour
 
     public void throwCharge()
     {
-        GetComponentInParent<Character>().ThrowCharge();
+       // GetComponentInParent<Character>().ThrowCharge();
     }
 }
