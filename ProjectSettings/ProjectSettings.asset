@@ -15,7 +15,7 @@ PlayerSettings:
   companyName: Rad Software
   productName: Dereliction Sweep
   defaultCursor: {fileID: 2800000, guid: 613e42b3876402b45b9f857b0108712d, type: 3}
-  cursorHotspot: {x: 250, y: 250}
+  cursorHotspot: {x: 16, y: 16}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
@@ -848,7 +848,7 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
-  selectedPlatform: 1
+  selectedPlatform: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
@@ -857,7 +857,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: TheCleaner
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -865,7 +865,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: TheCleaner
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Dereliction Sweep
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
